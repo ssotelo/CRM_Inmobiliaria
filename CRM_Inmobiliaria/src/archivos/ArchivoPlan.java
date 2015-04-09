@@ -9,19 +9,19 @@ import java.util.List;
 
 import com.csvreader.CsvWriter;
 
-import domain.CatalogoGeneral;
+import domain.Plan;
 
-public class ArchivoCatalogoGeneral {        
+public class ArchivoPlan {
 	private Date now = new Date();
 	private SimpleDateFormat formateador = new SimpleDateFormat("yyyyMMdd");
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
 
-	public void archivarCatalogosGenerales(List<CatalogoGeneral> cg) {
+	public void archivarPlanes(List<Plan> cg) {
 		
-		outFileDat = "C:/apps/eilcis_sieb_crmcatgeneral."+formateador.format(now)+".dat";
-		outFileCif = "C:/apps/eilcis_sieb_crmcatgeneral."+formateador.format(now)+".cif";
+		outFileDat = "C:/apps/eilcis_sieb_mktplanes."+formateador.format(now)+".dat";
+		outFileCif = "C:/apps/eilcis_sieb_mktplanes."+formateador.format(now)+".cif";
 		boolean alreadyExists = new File(outFileDat).exists();
         if(alreadyExists){
             File ficheroDatos = new File(outFileDat);
@@ -33,22 +33,20 @@ public class ArchivoCatalogoGeneral {
         	ficheroCifras.delete();
         }
         try{
-
         	CsvWriter salidaDat = new CsvWriter(new FileWriter(outFileDat, true), '^');
         	CsvWriter salidaCif = new CsvWriter(new FileWriter(outFileCif, true), '^');
-        	for(CatalogoGeneral cat : cg){
-            	System.out.println(cat.getRowId()+"^"+cat.getParRowId()+"^"+cat.getType()
-            			+"^"+cat.getSubtype()+"^"+cat.getVal()+"^"+cat.getName()
-            			+"^"+cat.getDescripcion());
-            	
+        	for(Plan cat : cg){
+            	System.out.println(cg);
             	salidaDat.write(cat.getRowId());
-            	salidaDat.write(cat.getParRowId());
-            	salidaDat.write(cat.getType());
-            	salidaDat.write(cat.getSubtype());
-            	salidaDat.write(cat.getVal());
-            	salidaDat.write(cat.getName());
+            	salidaDat.write(cat.getTipoPlan());
+            	salidaDat.write(cat.getNombre());
+            	salidaDat.write(cat.getAprobacion());
             	salidaDat.write(cat.getDescripcion());
-            	salidaDat.write(Integer.toString(cat.getOrden()));
+            	salidaDat.write(cat.getRegionId());
+            	salidaDat.write(cat.getFecIniPlan());
+            	salidaDat.write(cat.getFecFinPlan());
+            	salidaDat.write(cat.getFecUltAct());
+            	salidaDat.write(cat.getCodPlan());
             	salidaDat.endRecord();
             	cif++;
             }
