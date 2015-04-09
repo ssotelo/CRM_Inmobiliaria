@@ -1,8 +1,7 @@
 package domain;
 
 public class CampannaOferta {
-	// Modificar CampannaOferta
-	//modificaciondos
+
 	private String campannaId;
 	private String ofertaId;
 	private String producto;

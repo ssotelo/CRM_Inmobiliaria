@@ -9,19 +9,19 @@ import java.util.List;
 
 import com.csvreader.CsvWriter;
 
-import domain.CatalogoGeneral;
+import domain.CampannaOferta;
 
-public class ArchivoCatalogoGeneral {        
+public class ArchivoCampannaOferta {
 	private Date now = new Date();
 	private SimpleDateFormat formateador = new SimpleDateFormat("yyyyMMdd");
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
 
-	public void archivarCatalogosGenerales(List<CatalogoGeneral> cg) {
+	public void archivarCampannasOfertas(List<CampannaOferta> co) {
 		
-		outFileDat = "C:/apps/eilcis_sieb_crmcatgeneral."+formateador.format(now)+".dat";
-		outFileCif = "C:/apps/eilcis_sieb_crmcatgeneral."+formateador.format(now)+".cif";
+		outFileDat = "C:/apps/eilcis_sieb_mktcampanaoferta."+formateador.format(now)+".dat";
+		outFileCif = "C:/apps/eilcis_sieb_mktcampanaoferta."+formateador.format(now)+".cif";
 		boolean alreadyExists = new File(outFileDat).exists();
         if(alreadyExists){
             File ficheroDatos = new File(outFileDat);
@@ -36,19 +36,25 @@ public class ArchivoCatalogoGeneral {
 
         	CsvWriter salidaDat = new CsvWriter(new FileWriter(outFileDat, true), '^');
         	CsvWriter salidaCif = new CsvWriter(new FileWriter(outFileCif, true), '^');
-        	for(CatalogoGeneral cat : cg){
-            	System.out.println(cat.getRowId()+"^"+cat.getParRowId()+"^"+cat.getType()
-            			+"^"+cat.getSubtype()+"^"+cat.getVal()+"^"+cat.getName()
-            			+"^"+cat.getDescripcion());
-            	
-            	salidaDat.write(cat.getRowId());
-            	salidaDat.write(cat.getParRowId());
-            	salidaDat.write(cat.getType());
-            	salidaDat.write(cat.getSubtype());
-            	salidaDat.write(cat.getVal());
-            	salidaDat.write(cat.getName());
-            	salidaDat.write(cat.getDescripcion());
-            	salidaDat.write(Integer.toString(cat.getOrden()));
+        	for(CampannaOferta cat : co){
+            	System.out.println(co);
+            	salidaDat.write(cat.getCampannaId());
+            	salidaDat.write(cat.getOfertaId());
+            	salidaDat.write(cat.getProducto());
+            	salidaDat.write(cat.getMarca());
+            	salidaDat.write(cat.getGrupo());
+            	salidaDat.write(cat.getSeccion());
+            	salidaDat.write(cat.getDivision());
+            	salidaDat.write(cat.getExcProducto());
+            	salidaDat.write(cat.getExcMarca());
+            	salidaDat.write(cat.getExcGrupo());
+            	salidaDat.write(cat.getExcSeccion());
+            	salidaDat.write(cat.getExcDivision());
+            	salidaDat.write(cat.getFecIniOfer());
+            	salidaDat.write(cat.getFecUltAct());
+            	salidaDat.write(cat.getTratamientoId());
+            	salidaDat.write(cat.getTratamientoName());
+            	salidaDat.write(cat.getCodLivTrat());
             	salidaDat.endRecord();
             	cif++;
             }
