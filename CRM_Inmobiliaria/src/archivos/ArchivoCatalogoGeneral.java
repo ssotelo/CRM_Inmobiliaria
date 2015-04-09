@@ -17,7 +17,7 @@ public class ArchivoCatalogoGeneral {
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
-	//COMENTARIO SOBRE RAMA
+	//COMENTARIO SOBRE RAMA SSOTELO
 	public void archivarCatalogosGenerales(List<CatalogoGeneral> cg) {
 		
 		outFileDat = "C:/apps/eilcis_sieb_crmcatgeneral."+formateador.format(now)+".dat";
