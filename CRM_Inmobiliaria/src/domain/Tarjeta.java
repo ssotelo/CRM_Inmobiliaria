@@ -1,5 +1,5 @@
 package domain;
-
+//comentario
 public class Tarjeta {
 	private String codCliente;
 	private String descripcion;
