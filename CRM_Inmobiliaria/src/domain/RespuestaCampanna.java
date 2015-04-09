@@ -1,7 +1,7 @@
 package domain;
 
-public class RespuestaCampaña {
-	private String campanaId;
+public class RespuestaCampanna {
+	private String campannaId;
 	private String ofertaId;
 	private String tratamientoId;
 	private String clienteId;
@@ -10,12 +10,12 @@ public class RespuestaCampaña {
 	private String metodoRespuesta;
 	private String boleta;
 	private String fecUltAct;
-	public RespuestaCampaña(String campanaId, String ofertaId,
+	public RespuestaCampanna(String campannaId, String ofertaId,
 			String tratamientoId, String clienteId, String listaId,
 			String respuestaId, String metodoRespuesta, String boleta,
 			String fecUltAct) {
 		super();
-		this.campanaId = campanaId;
+		this.campannaId = campannaId;
 		this.ofertaId = ofertaId;
 		this.tratamientoId = tratamientoId;
 		this.clienteId = clienteId;
@@ -26,10 +26,10 @@ public class RespuestaCampaña {
 		this.fecUltAct = fecUltAct;
 	}
 	public String getCampanaId() {
-		return campanaId;
+		return campannaId;
 	}
 	public void setCampanaId(String campanaId) {
-		this.campanaId = campanaId;
+		this.campannaId = campanaId;
 	}
 	public String getOfertaId() {
 		return ofertaId;
@@ -81,7 +81,7 @@ public class RespuestaCampaña {
 	}
 	@Override
 	public String toString() {
-		return "RespuestaCampaña [campanaId=" + campanaId + ", ofertaId="
+		return "RespuestaCampaï¿½a [campanaId=" + campannaId + ", ofertaId="
 				+ ofertaId + ", tratamientoId=" + tratamientoId
 				+ ", clienteId=" + clienteId + ", listaId=" + listaId
 				+ ", respuestaId=" + respuestaId + ", metodoRespuesta="

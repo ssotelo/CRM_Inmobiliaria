@@ -1,13 +1,13 @@
 package domain;
 
-public class CampañaTienda {
+public class CampannaTienda {
 	private String campanaId;
 	private String tiendaId;
 	private String centroComercialId;
 	private String fecIniTda;
 	private String fecFinTda;
 	private String fecUltAct;
-	public CampañaTienda(String campanaId, String tiendaId,
+	public CampannaTienda(String campanaId, String tiendaId,
 			String centroComercialId, String fecIniTda, String fecFinTda,
 			String fecUltAct) {
 		super();
@@ -56,7 +56,7 @@ public class CampañaTienda {
 	}
 	@Override
 	public String toString() {
-		return "CampañaTienda [campanaId=" + campanaId + ", tiendaId="
+		return "CampannaTienda [campanaId=" + campanaId + ", tiendaId="
 				+ tiendaId + ", centroComercialId=" + centroComercialId
 				+ ", fecIniTda=" + fecIniTda + ", fecFinTda=" + fecFinTda
 				+ ", fecUltAct=" + fecUltAct + "]";

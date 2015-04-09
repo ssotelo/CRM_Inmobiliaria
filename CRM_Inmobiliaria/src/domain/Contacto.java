@@ -16,7 +16,7 @@ public class Contacto {
 	private String actualizacion;
 	private String activacion;
 	private String bienvenida;
-	private String campaña;
+	private String campanna;
 	private String seguros;
 	private String control;
 	private String clienteSensible;
@@ -28,7 +28,7 @@ public class Contacto {
 			String lealtadDH, String noInserto, String noSMS,
 			String noContactar, String promociones, String eventos,
 			String aperturas, String mercado, String actualizacion,
-			String activacion, String bienvenida, String campaña,
+			String activacion, String bienvenida, String campanna,
 			String seguros, String control, String clienteSensible,
 			String noLlamar, String noEmail, String noCorreoPostal,
 			String fecUltAct) {
@@ -48,7 +48,7 @@ public class Contacto {
 		this.actualizacion = actualizacion;
 		this.activacion = activacion;
 		this.bienvenida = bienvenida;
-		this.campaña = campaña;
+		this.campanna = campanna;
 		this.seguros = seguros;
 		this.control = control;
 		this.clienteSensible = clienteSensible;
@@ -147,11 +147,11 @@ public class Contacto {
 	public void setBienvenida(String bienvenida) {
 		this.bienvenida = bienvenida;
 	}
-	public String getCampaña() {
-		return campaña;
+	public String getCampanna() {
+		return campanna;
 	}
-	public void setCampaña(String campaña) {
-		this.campaña = campaña;
+	public void setCampanna(String campanna) {
+		this.campanna = campanna;
 	}
 	public String getSeguros() {
 		return seguros;
@@ -204,7 +204,7 @@ public class Contacto {
 				+ promociones + ", eventos=" + eventos + ", aperturas="
 				+ aperturas + ", mercado=" + mercado + ", actualizacion="
 				+ actualizacion + ", activacion=" + activacion
-				+ ", bienvenida=" + bienvenida + ", campaña=" + campaña
+				+ ", bienvenida=" + bienvenida + ", campanna=" + campanna
 				+ ", seguros=" + seguros + ", control=" + control
 				+ ", clienteSensible=" + clienteSensible + ", noLlamar="
 				+ noLlamar + ", noEmail=" + noEmail + ", noCorreoPostal="

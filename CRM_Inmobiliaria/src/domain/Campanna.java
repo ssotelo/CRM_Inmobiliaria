@@ -1,6 +1,6 @@
 package domain;
 
-public class Campaña {
+public class Campanna{
 	private String rowId;
 	private String name;
 	private String descripcion;
@@ -8,7 +8,7 @@ public class Campaña {
 	private String type;
 	private String mktgId;
 	private String prioridad;
-	private String campañaPadre;
+	private String campannaPadre;
 	private String status;
 	private String aprobacion;
 	private String planMktg;
@@ -20,9 +20,9 @@ public class Campaña {
 	private String fecUltAct;
 	private String codCampana;
 	private String codLivCamp;
-	public Campaña(String rowId, String name, String descripcion,
+	public Campanna(String rowId, String name, String descripcion,
 			String tipoCRM, String type, String mktgId, String prioridad,
-			String campañaPadre, String status, String aprobacion,
+			String campannaPadre, String status, String aprobacion,
 			String planMktg, String hashtag, String fecIniCam,
 			String fecFinCam, String presupuesto, String usuario,
 			String fecUltAct, String codCampana, String codLivCamp) {
@@ -34,7 +34,7 @@ public class Campaña {
 		this.type = type;
 		this.mktgId = mktgId;
 		this.prioridad = prioridad;
-		this.campañaPadre = campañaPadre;
+		this.campannaPadre = campannaPadre;
 		this.status = status;
 		this.aprobacion = aprobacion;
 		this.planMktg = planMktg;
@@ -89,11 +89,11 @@ public class Campaña {
 	public void setPrioridad(String prioridad) {
 		this.prioridad = prioridad;
 	}
-	public String getCampañaPadre() {
-		return campañaPadre;
+	public String getcampannaPadre() {
+		return campannaPadre;
 	}
-	public void setCampañaPadre(String campañaPadre) {
-		this.campañaPadre = campañaPadre;
+	public void setcampannaPadre(String campannaPadre) {
+		this.campannaPadre = campannaPadre;
 	}
 	public String getStatus() {
 		return status;
@@ -163,10 +163,10 @@ public class Campaña {
 	}
 	@Override
 	public String toString() {
-		return "Campaña [rowId=" + rowId + ", name=" + name + ", descripcion="
+		return "Campanna[rowId=" + rowId + ", name=" + name + ", descripcion="
 				+ descripcion + ", tipoCRM=" + tipoCRM + ", type=" + type
 				+ ", mktgId=" + mktgId + ", prioridad=" + prioridad
-				+ ", campañaPadre=" + campañaPadre + ", status=" + status
+				+ ", campannaPadre=" + campannaPadre + ", status=" + status
 				+ ", aprobacion=" + aprobacion + ", planMktg=" + planMktg
 				+ ", hashtag=" + hashtag + ", fecIniCam=" + fecIniCam
 				+ ", fecFinCam=" + fecFinCam + ", presupuesto=" + presupuesto

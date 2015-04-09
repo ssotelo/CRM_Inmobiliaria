@@ -10,6 +10,7 @@ public class Miembro {
 	private String fecExp;
 	private String fecCan;
 	private String numMem;
+	private String tipMem;
 	private String statusMiembro;
 	private String codigoEsquema;
 	private double puntuacion;
@@ -17,14 +18,14 @@ public class Miembro {
 	private double puntuacionB;
 	private double puntuacionC;
 	private double puntuacionD;
-	private String centroComercial;
+	private double centroComercial;
 	private String fecUltAct;
 	public Miembro(String rowId, String programId, String personId,
 			String tipoAcumulacion, String canalAlta, String fecAlta,
-			String fecExp, String fecCan, String numMem, String statusMiembro,
-			String codigoEsquema, double puntuacion, double puntuacionA,
-			double puntuacionB, double puntuacionC, double puntuacionD,
-			String centroComercial, String fecUltAct) {
+			String fecExp, String fecCan, String numMem, String tipMem,
+			String statusMiembro, String codigoEsquema, double puntuacion,
+			double puntuacionA, double puntuacionB, double puntuacionC,
+			double puntuacionD, double centroComercial, String fecUltAct) {
 		super();
 		this.rowId = rowId;
 		this.programId = programId;
@@ -35,6 +36,7 @@ public class Miembro {
 		this.fecExp = fecExp;
 		this.fecCan = fecCan;
 		this.numMem = numMem;
+		this.tipMem = tipMem;
 		this.statusMiembro = statusMiembro;
 		this.codigoEsquema = codigoEsquema;
 		this.puntuacion = puntuacion;
@@ -99,6 +101,12 @@ public class Miembro {
 	public void setNumMem(String numMem) {
 		this.numMem = numMem;
 	}
+	public String getTipMem() {
+		return tipMem;
+	}
+	public void setTipMem(String tipMem) {
+		this.tipMem = tipMem;
+	}
 	public String getStatusMiembro() {
 		return statusMiembro;
 	}
@@ -141,10 +149,10 @@ public class Miembro {
 	public void setPuntuacionD(double puntuacionD) {
 		this.puntuacionD = puntuacionD;
 	}
-	public String getCentroComercial() {
+	public double getCentroComercial() {
 		return centroComercial;
 	}
-	public void setCentroComercial(String centroComercial) {
+	public void setCentroComercial(double centroComercial) {
 		this.centroComercial = centroComercial;
 	}
 	public String getFecUltAct() {
@@ -159,12 +167,13 @@ public class Miembro {
 				+ ", personId=" + personId + ", tipoAcumulacion="
 				+ tipoAcumulacion + ", canalAlta=" + canalAlta + ", fecAlta="
 				+ fecAlta + ", fecExp=" + fecExp + ", fecCan=" + fecCan
-				+ ", numMem=" + numMem + ", statusMiembro=" + statusMiembro
-				+ ", codigoEsquema=" + codigoEsquema + ", puntuacion="
-				+ puntuacion + ", puntuacionA=" + puntuacionA
-				+ ", puntuacionB=" + puntuacionB + ", puntuacionC="
-				+ puntuacionC + ", puntuacionD=" + puntuacionD
-				+ ", centroComercial=" + centroComercial + ", fecUltAct="
-				+ fecUltAct + "]";
+				+ ", numMem=" + numMem + ", tipMem=" + tipMem
+				+ ", statusMiembro=" + statusMiembro + ", codigoEsquema="
+				+ codigoEsquema + ", puntuacion=" + puntuacion
+				+ ", puntuacionA=" + puntuacionA + ", puntuacionB="
+				+ puntuacionB + ", puntuacionC=" + puntuacionC
+				+ ", puntuacionD=" + puntuacionD + ", centroComercial="
+				+ centroComercial + ", fecUltAct=" + fecUltAct + "]";
 	}
+	
 }
