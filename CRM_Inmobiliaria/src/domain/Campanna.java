@@ -1,6 +1,6 @@
 package domain;
 
-public class Campaña {
+public class Campanna {
 	private String rowId;
 	private String name;
 	private String descripcion;
@@ -20,7 +20,7 @@ public class Campaña {
 	private String fecUltAct;
 	private String codCampana;
 	private String codLivCamp;
-	public Campaña(String rowId, String name, String descripcion,
+	public Campanna(String rowId, String name, String descripcion,
 			String tipoCRM, String type, String mktgId, String prioridad,
 			String campañaPadre, String status, String aprobacion,
 			String planMktg, String hashtag, String fecIniCam,
