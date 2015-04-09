@@ -9,19 +9,19 @@ import java.util.List;
 
 import com.csvreader.CsvWriter;
 
-import domain.CatalogoGeneral;
+import domain.CanalComunicacion;
 
-public class ArchivoCatalogoGeneral {        
+public class ArchivoCanalComunicacion {
 	private Date now = new Date();
 	private SimpleDateFormat formateador = new SimpleDateFormat("yyyyMMdd");
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
 
-	public void archivarCatalogosGenerales(List<CatalogoGeneral> cg) {
+	public void archivarCanalesComunicacion(List<CanalComunicacion> cc) {
 		
-		outFileDat = "C:/apps/eilcis_sieb_crmcatgeneral."+formateador.format(now)+".dat";
-		outFileCif = "C:/apps/eilcis_sieb_crmcatgeneral."+formateador.format(now)+".cif";
+		outFileDat = "C:/apps/eilcis_sieb_mktcanalcom."+formateador.format(now)+".dat";
+		outFileCif = "C:/apps/eilcis_sieb_mktcanalcom."+formateador.format(now)+".cif";
 		boolean alreadyExists = new File(outFileDat).exists();
         if(alreadyExists){
             File ficheroDatos = new File(outFileDat);
@@ -35,19 +35,11 @@ public class ArchivoCatalogoGeneral {
         try{
         	CsvWriter salidaDat = new CsvWriter(new FileWriter(outFileDat, true), '^');
         	CsvWriter salidaCif = new CsvWriter(new FileWriter(outFileCif, true), '^');
-        	for(CatalogoGeneral cat : cg){
-            	System.out.println(cat.getRowId()+"^"+cat.getParRowId()+"^"+cat.getType()
-            			+"^"+cat.getSubtype()+"^"+cat.getVal()+"^"+cat.getName()
-            			+"^"+cat.getDescripcion());
+        	for(CanalComunicacion cat : cc){
+            	System.out.println(cat.getCanalComunicacion()+"^"+cat.getNombreCanal());
             	
-            	salidaDat.write(cat.getRowId());
-            	salidaDat.write(cat.getParRowId());
-            	salidaDat.write(cat.getType());
-            	salidaDat.write(cat.getSubtype());
-            	salidaDat.write(cat.getVal());
-            	salidaDat.write(cat.getName());
-            	salidaDat.write(cat.getDescripcion());
-            	salidaDat.write(Integer.toString(cat.getOrden()));
+            	salidaDat.write(cat.getCanalComunicacion());
+            	salidaDat.write(cat.getNombreCanal());
             	salidaDat.endRecord();
             	cif++;
             }
