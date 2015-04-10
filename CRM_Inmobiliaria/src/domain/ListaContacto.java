@@ -47,9 +47,9 @@ public class ListaContacto {
 	}
 	@Override
 	public String toString() {
-		return "ListaContacto [contactoId=" + contactoId + ", listaId="
-				+ listaId + ", fecIniCli=" + fecIniCli + ", fecFinCli="
-				+ fecFinCli + ", fecUltAct=" + fecUltAct + "]";
+		return  contactoId + "^"
+				+ listaId + "^" + fecIniCli + "^"
+				+ fecFinCli + "^" + fecUltAct;
 	}
 	
 	

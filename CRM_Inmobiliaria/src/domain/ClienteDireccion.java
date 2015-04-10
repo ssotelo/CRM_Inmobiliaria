@@ -1,6 +1,5 @@
 package domain;
 
-
 public class ClienteDireccion {
 	private String personId;
 	private String addressId;
@@ -107,12 +106,12 @@ public class ClienteDireccion {
 	}
 	@Override
 	public String toString() {
-		return "ClienteDireccion [personId=" + personId + ", addressId="
-				+ addressId + ", calle=" + calle + ", numExt=" + numExt
-				+ ", numInt=" + numInt + ", edif=" + edif + ", codpos="
-				+ codpos + ", colonia=" + colonia + ", municipio=" + municipio
-				+ ", estado=" + estado + ", pais=" + pais + ", fecUltAct="
-				+ fecUltAct + "]";
+		return  personId + "^"
+				+ addressId + "^" + calle + "^" + numExt
+				+ "^" + numInt + "^" + edif + "^"
+				+ codpos + "^" + colonia + "^" + municipio
+				+ "^" + estado + "^" + pais + "^"
+				+ fecUltAct;
 	}
 
 }

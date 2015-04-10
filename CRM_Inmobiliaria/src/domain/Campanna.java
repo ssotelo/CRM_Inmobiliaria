@@ -162,14 +162,14 @@ public class Campanna {
 	}
 	@Override
 	public String toString() {
-		return "Campanna [rowId=" + rowId + ", name=" + name + ", descripcion="
-				+ descripcion + ", type=" + type
-				+ ", mktgId=" + mktgId + ", prioridad=" + prioridad
-				+ ", campa�aPadre=" + campannaPadre + ", status=" + status
-				+ ", aprobacion=" + aprobacion + ", planMktg=" + planMktg
-				+ ", hashtag=" + hashtag + ", fecIniCam=" + fecIniCam
-				+ ", fecFinCam=" + fecFinCam + ", presupuesto=" + presupuesto
-				+ ", usuario=" + usuario + ", fecUltAct=" + fecUltAct 
-				+ ", codCampanna="+ codCampanna +", codLivCamp="+ codLivCamp +"]";
+		return  rowId + "^" + name + "^"
+				+ descripcion + "^" + type
+				+ "^" + mktgId + "^" + prioridad
+				+ "^" + campannaPadre + "^" + status
+				+ "^" + aprobacion + "^" + planMktg
+				+ "^" + hashtag + "^" + fecIniCam
+				+ "^" + fecFinCam + "^" + presupuesto
+				+ "^" + usuario + "^" + fecUltAct 
+				+ "^"+ codCampanna +"^"+ codLivCamp;
 	}
 }

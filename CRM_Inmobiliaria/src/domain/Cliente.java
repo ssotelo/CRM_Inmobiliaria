@@ -1,6 +1,5 @@
 package domain;
 
-
 public class Cliente {
 	private String rowId;
 	private String nombre;
@@ -115,12 +114,12 @@ public class Cliente {
 	}
 	@Override
 	public String toString() {
-		return "Cliente [rowId=" + rowId + ", nombre=" + nombre
-				+ ", apePaterno=" + apePaterno + ", apeMaterno=" + apeMaterno
-				+ ", RFC=" + RFC + ", genero=" + genero + ", estadoCivil="
-				+ estadoCivil + ", fecNac=" + fecNac + ", altaCliente="
-				+ altaCliente + ", ultMod=" + ultMod + ", codCliente="
-				+ codCliente + ", clienteMDM=" + clienteMDM + ", alias="
-				+ alias +"]";
+		return  rowId + "^" + nombre
+				+ "^" + apePaterno + "^" + apeMaterno
+				+ "^" + RFC + "^" + genero + "^"
+				+ estadoCivil + "^" + fecNac + "^"
+				+ altaCliente + "^" + ultMod + "^"
+				+ codCliente + "^" + clienteMDM + "^"
+				+ alias;
 	}
 }

@@ -49,9 +49,9 @@ public class Competencia {
 	}
 	@Override
 	public String toString() {
-		return "Competencia [deptNum=" + deptNum + ", nombreTienda="
-				+ nombreTienda + ", nombreCompetencia=" + nombreCompetencia
-				+ ", facebook=" + facebook + ", twitter=" + twitter + "]";
+		return  deptNum + "^"
+				+ nombreTienda + "^" + nombreCompetencia
+				+ "^" + facebook + "^" + twitter;
 	}
 	
 }

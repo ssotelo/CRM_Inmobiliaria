@@ -89,11 +89,11 @@ public class CampannaOfertaCanal {
 	}
 	@Override
 	public String toString() {
-		return "CampanaOfertaCanal [ofertaId=" + ofertaId + ", tratamientoId="
-				+ tratamientoId + ", campanaId=" + campanaId + ", aprobacion="
-				+ aprobacion + ", costo=" + costo + ", fecIniChnl="
-				+ fecIniChnl + ", fecFinChnl=" + fecFinChnl + ", fecUltAct="
-				+ fecUltAct + ", tratamientoNum=" + tratamientoNum
-				+ ", tratamientoName=" + tratamientoName + "]";
+		return  ofertaId + "^"
+				+ tratamientoId + "^" + campanaId + "^"
+				+ aprobacion + "^" + costo + "^"
+				+ fecIniChnl + "^" + fecFinChnl + "^"
+				+ fecUltAct + "^" + tratamientoNum
+				+ "^" + tratamientoName;
 	}
 }

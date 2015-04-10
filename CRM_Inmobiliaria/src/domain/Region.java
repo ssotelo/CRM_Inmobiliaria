@@ -2,12 +2,12 @@ package domain;
 
 public class Region {
 	private String regionId;
-	private String REgionName;
+	private String RegionName;
 	
-	public Region(String regionId, String rEgionName) {
+	public Region(String regionId, String regionName) {
 		super();
 		this.regionId = regionId;
-		REgionName = rEgionName;
+		RegionName = regionName;
 	}
 
 	public String getRegionId() {
@@ -18,17 +18,16 @@ public class Region {
 		this.regionId = regionId;
 	}
 
-	public String getREgionName() {
-		return REgionName;
+	public String getRegionName() {
+		return RegionName;
 	}
 
-	public void setREgionName(String rEgionName) {
-		REgionName = rEgionName;
+	public void setRegionName(String regionName) {
+		RegionName = regionName;
 	}
 
 	@Override
 	public String toString() {
-		return "Region [regionId=" + regionId + ", REgionName=" + REgionName
-				+ "]";
+		return regionId + "^" + RegionName;
 	}
 }

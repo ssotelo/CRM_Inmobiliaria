@@ -160,19 +160,18 @@ public class Programa {
 	}
 	@Override
 	public String toString() {
-		return "Programa [rowId=" + rowId + ", nombre=" + nombre
-				+ ", descripcion=" + descripcion + ", tipoCRM=" 
+		return  rowId + "^" + nombre
+				+ "^" + descripcion + "^" 
 				//tipoCRM
-				+ ", inicioPrograma=" + inicioPrograma + ", finPrograma="
-				+ finPrograma + ", inicioTransferencia=" + inicioTransferencia
-				+ ", inicioCompra=" + inicioCompra + ", crecimientoPuntos="
-				+ crecimientoPuntos + ", vencimientoPuntos="
-				+ vencimientoPuntos + ", reglaCalculo=" + reglaCalculo
-				+ ", reconocimientoBono=" + reconocimientoBono
-				+ ", activeFlag=" + activeFlag + ", conversionPuntos="
-				+ conversionPuntos + ", socioFlag=" + socioFlag
-				+ ", nombreSocio=" + nombreSocio + ", codOrganizacion="
-				+ codOrganizacion + ", ultActualizacion=" + ultActualizacion
-				+ "]";
+				+ "^" + inicioPrograma + "^"
+				+ finPrograma + "^" + inicioTransferencia
+				+ "^" + inicioCompra + "^"
+				+ crecimientoPuntos + "^"
+				+ vencimientoPuntos + "^" + reglaCalculo
+				+ "^" + reconocimientoBono
+				+ "^" + activeFlag + "^"
+				+ conversionPuntos + "^" + socioFlag
+				+ "^" + nombreSocio + "^"
+				+ codOrganizacion + "^" + ultActualizacion;
 	}
 }

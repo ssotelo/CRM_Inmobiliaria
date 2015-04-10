@@ -184,14 +184,14 @@ public class CampannaOferta {
 
 	@Override
 	public String toString() {
-		return "CampannaOferta [campannaId=" + campannaId + ", ofertaId="
-				+ ofertaId + ", producto=" + producto + ", marca=" + marca
-				+ ", grupo=" + grupo + ", seccion=" + seccion + ", division="
-				+ division + ", excProducto=" + excProducto + ", excMarca="
-				+ excMarca + ", excGrupo=" + excGrupo + ", excSeccion="
-				+ excSeccion + ", excDivision=" + excDivision + ", fecIniOfer="
-				+ fecIniOfer + ", fecUltAct=" + fecUltAct + ", tratamientoId="
-				+ tratamientoId + ", tratamientoName=" + tratamientoName
-				+ ", codLivTrat=" + codLivTrat + "]";
+		return  campannaId + "^"
+				+ ofertaId + "^" + producto + "^" + marca
+				+ "^" + grupo + "^" + seccion + "^"
+				+ division + "^" + excProducto + "^"
+				+ excMarca + "^" + excGrupo + "^"
+				+ excSeccion + "^" + excDivision + "^"
+				+ fecIniOfer + "^" + fecUltAct + "^"
+				+ tratamientoId + "^" + tratamientoName
+				+ "^" + codLivTrat;
 	}
 }

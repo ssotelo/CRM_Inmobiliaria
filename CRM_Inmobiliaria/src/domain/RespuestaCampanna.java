@@ -81,11 +81,11 @@ public class RespuestaCampanna {
 	}
 	@Override
 	public String toString() {
-		return "RespuestaCampanna [campannaId=" + campannaId + ", ofertaId="
-				+ ofertaId + ", tratamientoId=" + tratamientoId
-				+ ", clienteId=" + clienteId + ", listaId=" + listaId
-				+ ", respuestaId=" + respuestaId + ", metodoRespuesta="
-				+ metodoRespuesta + ", boleta=" + boleta + ", fecUltAct="
-				+ fecUltAct + "]";
+		return campannaId + "^"
+				+ ofertaId + "^" + tratamientoId
+				+ "^" + clienteId + "^" + listaId
+				+ "^" + respuestaId + "^"
+				+ metodoRespuesta + "^" + boleta + "^"
+				+ fecUltAct;
 	}
 }

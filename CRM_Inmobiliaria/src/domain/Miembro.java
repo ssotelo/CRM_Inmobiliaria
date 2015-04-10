@@ -163,17 +163,17 @@ public class Miembro {
 	}
 	@Override
 	public String toString() {
-		return "Miembro [rowId=" + rowId + ", programId=" + programId
-				+ ", personId=" + personId + ", tipoAcumulacion="
-				+ tipoAcumulacion + ", canalAlta=" + canalAlta + ", fecAlta="
-				+ fecAlta + ", fecExp=" + fecExp + ", fecCan=" + fecCan
-				+ ", numMem=" + numMem + ", tipMem=" + tipMem
-				+ ", statusMiembro=" + statusMiembro + ", codigoEsquema="
-				+ codigoEsquema + ", puntuacion=" + puntuacion
-				+ ", puntuacionA=" + puntuacionA + ", puntuacionB="
-				+ puntuacionB + ", puntuacionC=" + puntuacionC
-				+ ", puntuacionD=" + puntuacionD + ", centroComercial="
-				+ centroComercial + ", fecUltAct=" + fecUltAct + "]";
+		return  rowId + "^" + programId
+				+ "^" + personId + "^"
+				+ tipoAcumulacion + "^" + canalAlta + "^"
+				+ fecAlta + "^" + fecExp + "^" + fecCan
+				+ "^" + numMem + "^" + tipMem
+				+ "^" + statusMiembro + "^"
+				+ codigoEsquema + "^" + puntuacion
+				+ "^" + puntuacionA + "^"
+				+ puntuacionB + "^" + puntuacionC
+				+ "^" + puntuacionD + "^"
+				+ centroComercial + "^" + fecUltAct;
 	}
 	
 }

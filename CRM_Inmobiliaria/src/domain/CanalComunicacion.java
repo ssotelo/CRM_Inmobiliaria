@@ -22,7 +22,7 @@ public class CanalComunicacion {
 	}
 	@Override
 	public String toString() {
-		return "CanalComunicacion [canalComunicacion=" + canalComunicacion
-				+ ", nombreCanal=" + nombreCanal + "]";
+		return  canalComunicacion
+				+ "^" + nombreCanal;
 	}
 }

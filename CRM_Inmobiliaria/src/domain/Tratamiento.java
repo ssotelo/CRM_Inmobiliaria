@@ -22,6 +22,6 @@ public class Tratamiento {
 	}
 	@Override
 	public String toString() {
-		return "Tratamiento [rowId=" + rowId + ", name=" + name + "]";
+		return rowId + "^" + name;
 	}
 }

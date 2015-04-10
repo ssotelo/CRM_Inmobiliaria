@@ -10,7 +10,6 @@ public class CatalogoGeneral {
 	private String descripcion;
 	private int orden;
 	
-
 	public CatalogoGeneral(String rowId, String parRowId, String type,
 			String subtype, String val, String name, String descripcion, int orden) {
 		super();
@@ -90,9 +89,9 @@ public class CatalogoGeneral {
 
 	@Override
 	public String toString() {
-		return "CatalogoGeneral [rowId=" + rowId + ", parRowId=" + parRowId
-				+ ", type=" + type + ", subtype=" + subtype + ", val=" + val
-				+ ", name=" + name + ", descripcion=" + descripcion
-				+ ", orden=" + orden + "]";
+		return  rowId + "^" + parRowId
+				+ "^" + type + "^" + subtype + "^" + val
+				+ "^" + name + "^" + descripcion
+				+ "^" + orden;
 	}
 }

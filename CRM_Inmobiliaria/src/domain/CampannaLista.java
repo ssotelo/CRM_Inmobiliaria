@@ -47,8 +47,8 @@ public class CampannaLista {
 	}
 	@Override
 	public String toString() {
-		return "CampannaLista [campanaId=" + campanaId + ", listaId=" + listaId
-				+ ", fecIniCamp=" + fecIniCamp + ", fecFinCamp=" + fecFinCamp
-				+ ", fecUltAct=" + fecUltAct + "]";
+		return  campanaId + "^" + listaId
+				+ "^" + fecIniCamp + "^" + fecFinCamp
+				+ "^" + fecUltAct;
 	}
 }
