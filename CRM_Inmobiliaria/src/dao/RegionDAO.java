@@ -15,7 +15,7 @@ public class RegionDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_CATREG = "SELECT ROW_ID, NAME FROM SIEBEL811.S_REGION";
+	private String SELECT_CATREG = "SELECT ROW_ID, NAME FROM SIEBEL.S_REGION";
 
 	public List<Region> listarRegiones() {
 		List<Region> regiones = new ArrayList<Region>();

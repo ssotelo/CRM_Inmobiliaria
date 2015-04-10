@@ -39,7 +39,7 @@ public class ArchivoClienteTelefono {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (ClienteTelefono cct : ct) {
-				System.out.println(ct);
+				System.out.println(cct);
 
 				salidaDat.write(cct.getPhoneId());
 				salidaDat.write(cct.getNumTelefonico());

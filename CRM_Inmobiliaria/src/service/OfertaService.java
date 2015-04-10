@@ -3,7 +3,7 @@ package service;
 import archivos.ArchivoOferta;
 import dao.OfertaDAO;
 
-public class OfertaServices {
+public class OfertaService {
 	private ArchivoOferta file = new ArchivoOferta();
 
 	public void consultarOfertas() {

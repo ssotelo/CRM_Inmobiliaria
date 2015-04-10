@@ -15,17 +15,19 @@ public class ClienteDireccionVirtualDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_CATDIRV = "SELECT DISTINCT PER_ID, COMM_MEDIUM_CD, ADDR, "
-			+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD "
+	private String SELECT_CATDIRV = "SELECT DISTINCT PER_ID, COMM_MEDIUM_CD, "
+			+ "ADDR, TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD "
 			+ "FROM SIEBEL811.S_PER_COMM_ADDR "
 			+ "UNION "
 			+ "SELECT DISTINCT ROW_ID,'Twitter',X_ID_TWITTER, "
 			+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD "
 			+ "FROM SIEBEL811.S_CONTACT "
+			+ "WHERE X_ID_TWITTER IS NOT NULL "
 			+ "UNION "
-			+ "SELECT DISTINCT ROW_ID,'Facebook',X_ID_TWITTER, "
+			+ "SELECT DISTINCT ROW_ID,'Facebook',X_ID_FB, "
 			+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD "
-			+ "FROM SIEBEL811.S_CONTACT";
+			+ "FROM SIEBEL811.S_CONTACT "
+			+ "WHERE X_ID_FB IS NOT NULL";
 
 	public List<ClienteDireccionVirtual> listarClientesDireccionesVirtuales() {
 		List<ClienteDireccionVirtual> clientesdireccionesvirtuales = new ArrayList<ClienteDireccionVirtual>();

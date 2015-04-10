@@ -39,12 +39,18 @@ public class ArchivoCentroComercial {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (CentroComercial cat : cc) {
-				System.out.println(cc);
-				salidaDat.write(cat.getRowId());
+				System.out.println(cat);
+				salidaDat.write(cat.getCodCentroComercial());
 				salidaDat.write(cat.getName());
+				salidaDat.write(cat.getColonia());
+				salidaDat.write(cat.getCiudad());
+				salidaDat.write(cat.getPais());
+				salidaDat.write(cat.getEstado());
+				salidaDat.write(cat.getMunicipio());
 				salidaDat.write(cat.getFecApertura());
 				salidaDat.write(cat.getFacebook());
 				salidaDat.write(cat.getTwitter());
+
 				salidaDat.endRecord();
 				cif++;
 			}

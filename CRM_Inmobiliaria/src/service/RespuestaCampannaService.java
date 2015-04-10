@@ -3,7 +3,7 @@ package service;
 import archivos.ArchivoRespuestaCampanna;
 import dao.RespuestaCampannaDAO;
 
-public class RespuestaCammpanaService {
+public class RespuestaCampannaService {
 	private ArchivoRespuestaCampanna file = new ArchivoRespuestaCampanna();
 
 	public void consultarRespuestasCampannas() {

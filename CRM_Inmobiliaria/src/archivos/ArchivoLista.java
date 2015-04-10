@@ -40,7 +40,7 @@ public class ArchivoLista {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (Lista cat : lst) {
-				System.out.println(lst);
+				System.out.println(cat);
 				salidaDat.write(cat.getRowId());
 				salidaDat.write(cat.getName());
 				salidaDat.write(cat.getDescripcion());

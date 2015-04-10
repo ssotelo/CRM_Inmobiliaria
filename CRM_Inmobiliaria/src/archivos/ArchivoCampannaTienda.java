@@ -38,7 +38,7 @@ public class ArchivoCampannaTienda {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (CampannaTienda ccmt : cmt) {
-				System.out.println(cmt);
+				System.out.println(ccmt);
 				salidaDat.write(ccmt.getCampanaId());
 				salidaDat.write(ccmt.getTiendaId());
 				salidaDat.write(ccmt.getCentroComercialId());

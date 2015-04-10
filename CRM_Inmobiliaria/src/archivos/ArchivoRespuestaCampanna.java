@@ -38,7 +38,7 @@ public class ArchivoRespuestaCampanna {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (RespuestaCampanna crcam : rcam) {
-				System.out.println(rcam);
+				System.out.println(crcam);
 				salidaDat.write(crcam.getCampannaId());
 				salidaDat.write(crcam.getOfertaId());
 				salidaDat.write(crcam.getTratamientoId());

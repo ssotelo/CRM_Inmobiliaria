@@ -41,7 +41,7 @@ public class ArchivoCampannaLista {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (CampannaLista cat : cl) {
-				System.out.println(cl);
+				System.out.println(cat);
 
 				salidaDat.write(cat.getCampanaId());
 				salidaDat.write(cat.getListaId());

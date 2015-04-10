@@ -18,7 +18,7 @@ public class CampannaListaDAO {
 	private String SELECT_CATCAMLIS = "SELECT TL.SRC_ID, TL.CALL_LST_ID, "
 			+ "TO_CHAR(TL.CREATED,'YYYYMMDD')CREATED,"
 			+ "TO_CHAR(TL.LAST_UPD,'YYYYMMDD')LAST_UPD "
-			+ "FROM SIEBEL811.S_CAMP_CALL_LST TL, SIEBEL811.S_SRC TC "
+			+ "FROM SIEBEL.S_CAMP_CALL_LST TL, SIEBEL.S_SRC TC "
 			+ "WHERE TL.SRC_ID=TC.ROW_ID "
 			+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
 			+ "AND TC.CAMP_TYPE_CD='Campaign' " + "AND TC.MKTG_TMPL_FLG='N'";
@@ -32,7 +32,7 @@ public class CampannaListaDAO {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				clc.add(new CampannaLista(rs.getString(1), rs.getString(2), rs
-						.getString(3), rs.getString(4), rs.getString(5)));
+						.getString(3), "", rs.getString(4)));
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();

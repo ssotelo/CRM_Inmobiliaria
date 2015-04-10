@@ -37,7 +37,7 @@ public class ArchivoCampanna {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (Campanna ccmp : cmp) {
-				System.out.println(cmp);
+				System.out.println(ccmp);
 				salidaDat.write(ccmp.getRowId());
 				salidaDat.write(ccmp.getName());
 				salidaDat.write(ccmp.getDescripcion());

@@ -20,7 +20,7 @@ public class ContactoDAO {
 			+ "X_ATTRIB_36,X_ATTRIB_37, X_ATTRIB_38, X_ATTRIB_39,X_ATTRIB_03, X_ATTRIB_04, "
 			+ "X_ATTRIB_05, X_ATTRIB_11, X_ATTRIB_09, SUPPRESS_CALL_FLG, "
 			+ "SUPPRESS_EMAIL_FLG, SUPPRESS_MAIL_FLG, "
-			+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD FROM SIEBEL811.S_CONTACT";
+			+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD FROM SIEBEL.S_CONTACT";
 
 	public List<Contacto> listarContactos() {
 		List<Contacto> contactos = new ArrayList<Contacto>();

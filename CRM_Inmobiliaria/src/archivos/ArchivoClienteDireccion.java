@@ -39,7 +39,7 @@ public class ArchivoClienteDireccion {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (ClienteDireccion ccd : cd) {
-				System.out.println(cd);
+				System.out.println(ccd);
 				salidaDat.write(ccd.getPersonId());
 				salidaDat.write(ccd.getAddressId());
 				salidaDat.write(ccd.getCalle());

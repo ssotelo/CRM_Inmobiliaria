@@ -36,7 +36,7 @@ public class ArchivoPlan {
         	CsvWriter salidaDat = new CsvWriter(new FileWriter(outFileDat, true), '^');
         	CsvWriter salidaCif = new CsvWriter(new FileWriter(outFileCif, true), '^');
         	for(Plan cat : cg){
-            	System.out.println(cg);
+            	System.out.println(cat);
             	salidaDat.write(cat.getRowId());
             	salidaDat.write(cat.getTipoPlan());
             	salidaDat.write(cat.getNombre());

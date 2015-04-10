@@ -6,7 +6,7 @@ import dao.CampannaOfertaCanalDAO;
 public class CampannaOfertaCanalService {
 	private ArchivoCampannaOfertaCanal file = new ArchivoCampannaOfertaCanal();
 
-	public void consultarCatalogosGenerales() {
+	public void consultarCampannasOfertasCanales() {
 		CampannaOfertaCanalDAO cgd = new CampannaOfertaCanalDAO();
 		file.archivarCampannasOfertasCanales(cgd
 				.listarCampannasOfertasCanales());

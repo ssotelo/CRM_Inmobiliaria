@@ -41,7 +41,7 @@ public class ArchivoCampannaOfertaCanal {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (CampannaOfertaCanal ccof : cof) {
-				System.out.println(cof);
+				System.out.println(ccof);
 				salidaDat.write(ccof.getOfertaId());
 				salidaDat.write(ccof.getTratamientoId());
 				salidaDat.write(ccof.getCampanaId());

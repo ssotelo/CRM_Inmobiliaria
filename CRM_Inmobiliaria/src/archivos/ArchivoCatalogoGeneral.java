@@ -41,7 +41,7 @@ public class ArchivoCatalogoGeneral {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (CatalogoGeneral cat : cg) {
-				System.out.println(cg);
+				System.out.println(cat);
 
 				salidaDat.write(cat.getRowId());
 				salidaDat.write(cat.getParRowId());

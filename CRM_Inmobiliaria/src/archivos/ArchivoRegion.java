@@ -36,7 +36,7 @@ public class ArchivoRegion {
         	CsvWriter salidaDat = new CsvWriter(new FileWriter(outFileDat, true), '^');
         	CsvWriter salidaCif = new CsvWriter(new FileWriter(outFileCif, true), '^');
         	for(Region cat : reg){
-            	System.out.println(reg);
+            	System.out.println(cat);
             	
             	salidaDat.write(cat.getRegionId());
             	salidaDat.write(cat.getRegionName());

@@ -19,9 +19,9 @@ public class ArchivoOferta {
 	private String outFileCif = "";
 
 	public void archivarOfertas(List<Oferta> ofe) {
-		outFileDat = "C:/apps/eilcis_sieb_ mktoferta."
+		outFileDat = "C:/apps/eilcis_sieb_mktoferta."
 				+ formateador.format(now) + ".dat";
-		outFileCif = "C:/apps/eilcis_sieb_ mktoferta."
+		outFileCif = "C:/apps/eilcis_sieb_mktoferta."
 				+ formateador.format(now) + ".cif";
 		boolean alreadyExists = new File(outFileDat).exists();
 		if (alreadyExists) {
@@ -39,7 +39,7 @@ public class ArchivoOferta {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (Oferta cofe : ofe) {
-				System.out.println(ofe);
+				System.out.println(cofe);
 				salidaDat.write(cofe.getRowId());
 				salidaDat.write(cofe.getTipo());
 				salidaDat.write(cofe.getNombre());

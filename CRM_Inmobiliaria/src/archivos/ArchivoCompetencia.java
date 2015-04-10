@@ -39,7 +39,7 @@ public class ArchivoCompetencia {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (Competencia ccmp : cmpt) {
-				System.out.println(cmpt);
+				System.out.println(ccmp);
 				salidaDat.write(ccmp.getDeptNum());
 				salidaDat.write(ccmp.getNombreTienda());
 				salidaDat.write(ccmp.getNombreCompetencia());

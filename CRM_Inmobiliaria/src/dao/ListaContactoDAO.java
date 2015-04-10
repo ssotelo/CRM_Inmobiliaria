@@ -17,7 +17,7 @@ public class ListaContactoDAO {
 	private ResultSet rs = null;
 	private String SELECT_CATLCNT = "SELECT CON_PER_ID, CALL_LST_ID,"
 			+ "	TO_CHAR(CREATED,'YYYYMMDD')CREATED,"
-			+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD FROM SIEBEL811.S_CALL_LST_CON;";
+			+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD FROM SIEBEL.S_CALL_LST_CON";
 
 	public List<ListaContacto> listarListasContactos() {
 		List<ListaContacto> listarlistascontactos = new ArrayList<ListaContacto>();
@@ -28,8 +28,8 @@ public class ListaContactoDAO {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				listarlistascontactos.add(new ListaContacto(rs.getString(1), rs
-						.getString(2), rs.getString(3), rs.getString(4), rs
-						.getString(5)));
+						.getString(2), rs.getString(3),"", rs
+						.getString(4)));
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();

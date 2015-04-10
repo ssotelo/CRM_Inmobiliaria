@@ -39,7 +39,7 @@ public class ArchivoListaContacto {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (ListaContacto ccnt : lcnt) {
-				System.out.println(lcnt);
+				System.out.println(ccnt);
 				salidaDat.write(ccnt.getContactoId());
 				salidaDat.write(ccnt.getListaId());
 				salidaDat.write(ccnt.getFecIniCli());

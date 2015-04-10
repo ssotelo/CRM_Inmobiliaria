@@ -39,7 +39,7 @@ public class ArchivoCliente {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (Cliente ccli : cli) {
-				System.out.println(cli);
+				System.out.println(ccli);
 				salidaDat.write(ccli.getRowId());
 				salidaDat.write(ccli.getNombre());
 				salidaDat.write(ccli.getApePaterno());

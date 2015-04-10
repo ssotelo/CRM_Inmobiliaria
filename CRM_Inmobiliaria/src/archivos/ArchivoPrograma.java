@@ -39,7 +39,7 @@ public class ArchivoPrograma {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (Programa cpgm : pgm) {
-				System.out.println(pgm);
+				System.out.println(cpgm);
 
 				salidaDat.write(cpgm.getRowId());
 				salidaDat.write(cpgm.getNombre());

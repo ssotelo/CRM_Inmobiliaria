@@ -15,8 +15,14 @@ public class CentroComercialDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_CENCOM = "SELECT TC.ROW_ID, TC.NAME, TC.CREATED, TC.X_ID_FB, TC.X_ID_TWITTER "
-			+ "FROM SIEBEL811.S_ORG_EXT TC WHERE CMPT_FLG = 'N' AND ACCNT_TYPE_CD='Galerias' ";
+	private String SELECT_CENCOM = "SELECT TC.DEPT_NUM, TC.NAME, TD.COUNTY, "
+			+ "TD.COUNTRY, TD.STATE, TD.PROVINCE, "
+			+ "TD.COUNTRY, TO_CHAR(TC.CREATED,'YYYYMMDD')CREATED, "
+			+ "TC.X_ID_FB,TC.X_ID_TWITTER "
+			+ "FROM SIEBEL811.S_ORG_EXT TC, SIEBEL811.S_ADDR_PER TD, SIEBEL811.S_CON_ADDR TR "
+			+ "WHERE TC.ROW_ID=TR.ACCNT_ID "
+			+ "AND TR.ADDR_PER_ID=TD.ROW_ID";
+
 
 	public List<CentroComercial> listarCentrosComerciales() {
 		List<CentroComercial> centroscomerciales = new ArrayList<CentroComercial>();
@@ -28,8 +34,12 @@ public class CentroComercialDAO {
 			while (rs.next()) {
 				centroscomerciales.add(new CentroComercial(rs.getString(1), rs
 						.getString(2), rs.getString(3), rs.getString(4), rs
-						.getString(5)));
+						.getString(5), rs.getString(6), rs.getString(7), rs.
+						getString(8), rs.getString(9), rs.getString(10)));
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

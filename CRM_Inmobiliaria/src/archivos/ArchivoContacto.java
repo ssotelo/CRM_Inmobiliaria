@@ -41,7 +41,7 @@ public class ArchivoContacto {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (Contacto cat : cont) {
-				System.out.println(cont);
+				System.out.println(cat);
 				salidaDat.write(cat.getRowId());
 				salidaDat.write(cat.getRfc());
 				salidaDat.write(cat.getCs());

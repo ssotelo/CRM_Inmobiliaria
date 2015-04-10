@@ -40,7 +40,7 @@ public class ArchivoTarjeta {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (Tarjeta cat : tc) {
-				System.out.println(tc);
+				System.out.println(cat);
 
 				salidaDat.write(cat.getCodCliente());
 				salidaDat.write(cat.getDescripcion());
