@@ -72,10 +72,10 @@ public class CampannaListaCanal {
 	}
 	@Override
 	public String toString() {
-		return "CampannaListaCanal [campanaId=" + campanaId + ", listaId="
-				+ listaId + ", tratamientoId=" + tratamientoId + ", fecIniCam="
-				+ fecIniCam + ", fecFinCam=" + fecFinCam + ", fecUltAct="
-				+ fecUltAct + ", tratamientoNum=" + tratamientoNum
-				+ ", tratamientoName=" + tratamientoName + "]";
+		return  campanaId + "^"
+				+ listaId + "^" + tratamientoId + "^"
+				+ fecIniCam + "^" + fecFinCam + "^"
+				+ fecUltAct + "^" + tratamientoNum
+				+ "^" + tratamientoName;
 	}
 }

@@ -49,8 +49,8 @@ public class ClienteTelefono {
 	}
 	@Override
 	public String toString() {
-		return "ClienteTelefono [phoneId=" + phoneId + ", numTelefonico="
-				+ numTelefonico + ", tipoNumero=" + tipoNumero + ", extension="
-				+ extension + ", fecUltAct=" + fecUltAct + "]";
+		return  phoneId + "^"
+				+ numTelefonico + "^" + tipoNumero + "^"
+				+ extension + "^" + fecUltAct;
 	}
 }

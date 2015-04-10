@@ -1,5 +1,5 @@
 package domain;
-//comentario
+
 public class Tarjeta {
 	private String codCliente;
 	private String descripcion;
@@ -39,8 +39,8 @@ public class Tarjeta {
 	}
 	@Override
 	public String toString() {
-		return "Tarjeta [codCliente=" + codCliente + ", descripcion="
-				+ descripcion + ", tarjeta=" + tarjeta + ", fecUltAct="
-				+ fecUltAct + "]";
+		return codCliente + "^"	+ descripcion + 
+				"^" + tarjeta + "^"
+				+ fecUltAct;
 	}
 }

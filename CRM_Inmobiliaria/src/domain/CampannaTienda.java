@@ -56,9 +56,9 @@ public class CampannaTienda {
 	}
 	@Override
 	public String toString() {
-		return "CampannaTienda [campanaId=" + campanaId + ", tiendaId="
-				+ tiendaId + ", centroComercialId=" + centroComercialId
-				+ ", fecIniTda=" + fecIniTda + ", fecFinTda=" + fecFinTda
-				+ ", fecUltAct=" + fecUltAct + "]";
+		return  campanaId + "^"
+				+ tiendaId + "^" + centroComercialId
+				+ "^" + fecIniTda + "^" + fecFinTda
+				+ "^" + fecUltAct;
 	}
 }

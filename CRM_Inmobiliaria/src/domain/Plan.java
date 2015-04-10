@@ -96,11 +96,10 @@ public class Plan {
 	}
 	@Override
 	public String toString() {
-		return "Plan [rowId=" + rowId + ", tipoPlan=" + tipoPlan + ", nombre="
-				+ nombre + ", aprobacion=" + aprobacion + ", descripcion="
-				+ descripcion + ", regionId=" + regionId + ", fecIniPlan="
-				+ fecIniPlan + ", fecFinPlan=" + fecFinPlan + ", fecUltAct="
-				+ fecUltAct + ", codPlan=" + codPlan + ", tipoCRM=" + tipoCRM
-				+ "]";
+		return  rowId + "^" + tipoPlan + "^"
+				+ nombre + "^" + aprobacion + "^"
+				+ descripcion + "^" + regionId + "^"
+				+ fecIniPlan + "^" + fecFinPlan + "^"
+				+ fecUltAct + "^" + codPlan;
 	}
 }

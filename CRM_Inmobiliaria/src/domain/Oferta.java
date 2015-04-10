@@ -80,10 +80,10 @@ public class Oferta {
 	}
 	@Override
 	public String toString() {
-		return "Oferta [rowId=" + rowId + ", tipo=" + tipo + ", nombre="
-				+ nombre + ", descripcion=" + descripcion + ", aprobacion="
-				+ aprobacion + ", fecIniOfr=" + fecIniOfr + ", fecFinOfr="
-				+ fecFinOfr + ", fecUltAct=" + fecUltAct + ", codOfer="
-				+ codOfer + "]";
+		return  rowId + "^" + tipo + "^"
+				+ nombre + "^" + descripcion + "^"
+				+ aprobacion + "^" + fecIniOfr + "^"
+				+ fecFinOfr + "^" + fecUltAct + "^"
+				+ codOfer;
 	}
 }

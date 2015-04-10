@@ -197,17 +197,17 @@ public class Contacto {
 	}
 	@Override
 	public String toString() {
-		return "Contacto [rowId=" + rowId + ", rfc=" + rfc + ", cs=" + cs
-				+ ", cazaOferta=" + cazaOferta + ", lealtadDH=" + lealtadDH
-				+ ", noInserto=" + noInserto + ", noSMS=" + noSMS
-				+ ", noContactar=" + noContactar + ", promociones="
-				+ promociones + ", eventos=" + eventos + ", aperturas="
-				+ aperturas + ", mercado=" + mercado + ", actualizacion="
-				+ actualizacion + ", activacion=" + activacion
-				+ ", bienvenida=" + bienvenida + ", campanna=" + campanna
-				+ ", seguros=" + seguros + ", control=" + control
-				+ ", clienteSensible=" + clienteSensible + ", noLlamar="
-				+ noLlamar + ", noEmail=" + noEmail + ", noCorreoPostal="
-				+ noCorreoPostal + ", fecUltAct=" + fecUltAct + "]";
+		return  rowId + "^" + rfc + "^" + cs
+				+ "^" + cazaOferta + "^" + lealtadDH
+				+ "^" + noInserto + "^" + noSMS
+				+ "^" + noContactar + "^"
+				+ promociones + "^" + eventos + "^"
+				+ aperturas + "^" + mercado + "^"
+				+ actualizacion + "^" + activacion
+				+ "^" + bienvenida + "^" + campanna
+				+ "^" + seguros + "^" + control
+				+ "^" + clienteSensible + "^"
+				+ noLlamar + "^" + noEmail + "^"
+				+ noCorreoPostal + "^" + fecUltAct;
 	}	
 }

@@ -42,9 +42,9 @@ public class ClienteDireccionVirtual {
 	}
 	@Override
 	public String toString() {
-		return "ClienteDireccionVirtual [personId=" + personId
-				+ ", tipoDireccion=" + tipoDireccion + ", virtualData="
-				+ virtualData + ", fecUltAct=" + fecUltAct + "]";
+		return  personId
+				+ "^" + tipoDireccion + "^"
+				+ virtualData + "^" + fecUltAct;
 	}
 
 }

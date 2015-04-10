@@ -81,10 +81,10 @@ public class Lista {
 	}
 	@Override
 	public String toString() {
-		return "Lista [rowId=" + rowId + ", name=" + name + ", descripcion="
-				+ descripcion + ", tipoLista=" + tipoLista + ", statusLista="
-				+ statusLista + ", codigoDim=" + codigoDim
-				+ ", archivoImportado=" + archivoImportado + ", usuario="
-				+ usuario + ", fecUltAct=" + fecUltAct + "]";
+		return  rowId + "^" + name + "^"
+				+ descripcion + "^" + tipoLista + "^"
+				+ statusLista + "^" + codigoDim
+				+ "^" + archivoImportado + "^"
+				+ usuario + "^" + fecUltAct;
 	}
 }

@@ -59,8 +59,8 @@ public class CentroComercial {
 
 	@Override
 	public String toString() {
-		return "CentroComercial [rowId=" + rowId + ", Name=" + Name
-				+ ", fecApertura=" + fecApertura + ", facebook=" + facebook
-				+ ", twitter=" + twitter + "]";
+		return  rowId + "^" + Name
+				+ "^" + fecApertura + "^" + facebook
+				+ "^" + twitter;
 	}
 }

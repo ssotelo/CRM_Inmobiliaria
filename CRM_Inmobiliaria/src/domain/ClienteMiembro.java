@@ -32,8 +32,8 @@ public class ClienteMiembro {
 	}
 	@Override
 	public String toString() {
-		return "ClienteMiembro [personId=" + personId + ", programId="
-				+ programId + ", fecUltAct=" + fecUltAct + "]";
+		return  personId + "^"
+				+ programId + "^" + fecUltAct;
 	}
 	
 }
