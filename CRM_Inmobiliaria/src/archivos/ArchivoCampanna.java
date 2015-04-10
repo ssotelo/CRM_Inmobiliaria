@@ -41,7 +41,6 @@ public class ArchivoCampanna {
 				salidaDat.write(ccmp.getRowId());
 				salidaDat.write(ccmp.getName());
 				salidaDat.write(ccmp.getDescripcion());
-				salidaDat.write(ccmp.getTipoCRM());
 				salidaDat.write(ccmp.getType());
 				salidaDat.write(ccmp.getMktgId());
 				salidaDat.write(ccmp.getPrioridad());

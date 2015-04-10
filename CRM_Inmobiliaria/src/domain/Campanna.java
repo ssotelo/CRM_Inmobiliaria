@@ -21,7 +21,7 @@ public class Campanna {
 	private String codCampanna;
 	private String codLivCamp;
 	public Campanna(String rowId, String name, String descripcion,
-			String tipoCRM, String type, String mktgId, String prioridad,
+			String type, String mktgId, String prioridad,
 			String campannaPadre, String status, String aprobacion,
 			String planMktg, String hashtag, String fecIniCam,
 			String fecFinCam, String presupuesto, String usuario,
@@ -30,7 +30,6 @@ public class Campanna {
 		this.rowId = rowId;
 		this.name = name;
 		this.descripcion = descripcion;
-		this.tipoCRM = tipoCRM;
 		this.type = type;
 		this.mktgId = mktgId;
 		this.prioridad = prioridad;
@@ -164,7 +163,7 @@ public class Campanna {
 	@Override
 	public String toString() {
 		return "Campanna [rowId=" + rowId + ", name=" + name + ", descripcion="
-				+ descripcion + ", tipoCRM=" + tipoCRM + ", type=" + type
+				+ descripcion + ", type=" + type
 				+ ", mktgId=" + mktgId + ", prioridad=" + prioridad
 				+ ", campa�aPadre=" + campannaPadre + ", status=" + status
 				+ ", aprobacion=" + aprobacion + ", planMktg=" + planMktg
