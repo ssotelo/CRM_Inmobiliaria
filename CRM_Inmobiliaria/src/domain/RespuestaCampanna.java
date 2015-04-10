@@ -25,11 +25,11 @@ public class RespuestaCampanna {
 		this.boleta = boleta;
 		this.fecUltAct = fecUltAct;
 	}
-	public String getCampanaId() {
+	public String getCampannaId() {
 		return campannaId;
 	}
-	public void setCampanaId(String campanaId) {
-		this.campannaId = campanaId;
+	public void setCampannaId(String campannaId) {
+		this.campannaId = campannaId;
 	}
 	public String getOfertaId() {
 		return ofertaId;
@@ -81,7 +81,7 @@ public class RespuestaCampanna {
 	}
 	@Override
 	public String toString() {
-		return "RespuestaCampa�a [campanaId=" + campannaId + ", ofertaId="
+		return "RespuestaCampanna [campannaId=" + campannaId + ", ofertaId="
 				+ ofertaId + ", tratamientoId=" + tratamientoId
 				+ ", clienteId=" + clienteId + ", listaId=" + listaId
 				+ ", respuestaId=" + respuestaId + ", metodoRespuesta="

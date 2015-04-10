@@ -9,17 +9,20 @@ import java.util.List;
 
 import com.csvreader.CsvWriter;
 
-import domain.Campanna;
-public class ArchivoCampanna {
+import domain.CampannaOfertaCanal;
+
+public class ArchivoCampannaOfertaCanal {
 	private Date now = new Date();
 	private SimpleDateFormat formateador = new SimpleDateFormat("yyyyMMdd");
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
-	public void archivarCampannas(List<Campanna> cmp) {
-		outFileDat = "C:/apps/eilcis_sieb_mktcampanas."
+
+	public void archivarCampannasOfertasCanales(List<CampannaOfertaCanal> cof) {
+
+		outFileDat = "C:/apps/eilcis_sieb_mktcampofertacanal."
 				+ formateador.format(now) + ".dat";
-		outFileCif = "C:/apps/eilcis_sieb_mktcampanas."
+		outFileCif = "C:/apps/eilcis_sieb_mktcampofertacanal."
 				+ formateador.format(now) + ".cif";
 		boolean alreadyExists = new File(outFileDat).exists();
 		if (alreadyExists) {
@@ -32,34 +35,25 @@ public class ArchivoCampanna {
 			ficheroCifras.delete();
 		}
 		try {
+
 			CsvWriter salidaDat = new CsvWriter(
 					new FileWriter(outFileDat, true), '^');
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
-			for (Campanna ccmp : cmp) {
-				System.out.println(cmp);
-				salidaDat.write(ccmp.getRowId());
-				salidaDat.write(ccmp.getName());
-				salidaDat.write(ccmp.getDescripcion());
-				salidaDat.write(ccmp.getType());
-				salidaDat.write(ccmp.getMktgId());
-				salidaDat.write(ccmp.getPrioridad());
-				salidaDat.write(ccmp.getCampannaPadre());
-				salidaDat.write(ccmp.getStatus());
-				salidaDat.write(ccmp.getAprobacion());
-				salidaDat.write(ccmp.getPlanMktg());
-				salidaDat.write(ccmp.getHashtag());
-				salidaDat.write(ccmp.getFecIniCam());
-				salidaDat.write(ccmp.getFecFinCam());
-				salidaDat.write(ccmp.getPresupuesto());
-				salidaDat.write(ccmp.getUsuario());
-				salidaDat.write(ccmp.getFecUltAct());
-				salidaDat.write(ccmp.getCodCampanna());
-				salidaDat.write(ccmp.getCodLivCamp());
-				
+			for (CampannaOfertaCanal ccof : cof) {
+				System.out.println(cof);
+				salidaDat.write(ccof.getOfertaId());
+				salidaDat.write(ccof.getTratamientoId());
+				salidaDat.write(ccof.getCampanaId());
+				salidaDat.write(ccof.getAprobacion());
+				salidaDat.write(ccof.getCosto());
+				salidaDat.write(ccof.getFecIniChnl());
+				salidaDat.write(ccof.getFecFinChnl());
+				salidaDat.write(ccof.getFecUltAct());
+				salidaDat.write(ccof.getTratamientoNum());
+				salidaDat.write(ccof.getTratamientoName());
 				salidaDat.endRecord();
 				cif++;
-
 			}
 			salidaDat.close();
 			salidaCif.write(outFileDat);
@@ -69,5 +63,5 @@ public class ArchivoCampanna {
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
+	}
 }
-}	

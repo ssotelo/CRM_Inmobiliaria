@@ -9,17 +9,18 @@ import java.util.List;
 
 import com.csvreader.CsvWriter;
 
-import domain.Campanna;
-public class ArchivoCampanna {
+import domain.RespuestaCampanna;
+
+public class ArchivoRespuestaCampanna {
 	private Date now = new Date();
 	private SimpleDateFormat formateador = new SimpleDateFormat("yyyyMMdd");
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
-	public void archivarCampannas(List<Campanna> cmp) {
-		outFileDat = "C:/apps/eilcis_sieb_mktcampanas."
+	public void archivarRespuestasCampannas(List<RespuestaCampanna> rcam) {
+		outFileDat = "C:/apps/eilcis_sieb_mktrespuestacampana."
 				+ formateador.format(now) + ".dat";
-		outFileCif = "C:/apps/eilcis_sieb_mktcampanas."
+		outFileCif = "C:/apps/eilcis_sieb_mktrespuestacampana."
 				+ formateador.format(now) + ".cif";
 		boolean alreadyExists = new File(outFileDat).exists();
 		if (alreadyExists) {
@@ -36,30 +37,19 @@ public class ArchivoCampanna {
 					new FileWriter(outFileDat, true), '^');
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
-			for (Campanna ccmp : cmp) {
-				System.out.println(cmp);
-				salidaDat.write(ccmp.getRowId());
-				salidaDat.write(ccmp.getName());
-				salidaDat.write(ccmp.getDescripcion());
-				salidaDat.write(ccmp.getType());
-				salidaDat.write(ccmp.getMktgId());
-				salidaDat.write(ccmp.getPrioridad());
-				salidaDat.write(ccmp.getCampannaPadre());
-				salidaDat.write(ccmp.getStatus());
-				salidaDat.write(ccmp.getAprobacion());
-				salidaDat.write(ccmp.getPlanMktg());
-				salidaDat.write(ccmp.getHashtag());
-				salidaDat.write(ccmp.getFecIniCam());
-				salidaDat.write(ccmp.getFecFinCam());
-				salidaDat.write(ccmp.getPresupuesto());
-				salidaDat.write(ccmp.getUsuario());
-				salidaDat.write(ccmp.getFecUltAct());
-				salidaDat.write(ccmp.getCodCampanna());
-				salidaDat.write(ccmp.getCodLivCamp());
-				
+			for (RespuestaCampanna crcam : rcam) {
+				System.out.println(rcam);
+				salidaDat.write(crcam.getCampannaId());
+				salidaDat.write(crcam.getOfertaId());
+				salidaDat.write(crcam.getTratamientoId());
+				salidaDat.write(crcam.getClienteId());
+				salidaDat.write(crcam.getListaId());
+				salidaDat.write(crcam.getRespuestaId());
+				salidaDat.write(crcam.getMetodoRespuesta());
+				salidaDat.write(crcam.getBoleta());
+				salidaDat.write(crcam.getFecUltAct());
 				salidaDat.endRecord();
 				cif++;
-
 			}
 			salidaDat.close();
 			salidaCif.write(outFileDat);
@@ -69,5 +59,5 @@ public class ArchivoCampanna {
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
+	}
 }
-}	
