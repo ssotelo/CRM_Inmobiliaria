@@ -17,9 +17,7 @@ public class ArchivoClienteDireccion {
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
-/* Hola LEE*/
-	/*Hola de nuevo lee*/
-	//hola
+
 	public void archivarClienteDireccion(List<ClienteDireccion> cd) {
 		outFileDat = "C:/apps/eilcis_sieb_clientedirecc."
 				+ formateador.format(now) + ".dat";
@@ -41,12 +39,7 @@ public class ArchivoClienteDireccion {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (ClienteDireccion ccd : cd) {
-				System.out.println(ccd.getPersonId() + "^" + ccd.getAddressId()
-						+ "^" + ccd.getCalle() + "^" + ccd.getNumExt() + "^"
-						+ ccd.getNumInt() + "^" + ccd.getEdif() + "^"
-						+ ccd.getCodpos() + "^" + ccd.getColonia() + "^"
-						+ ccd.getMunicipio() + "^" + ccd.getEstado() + "^"
-						+ ccd.getPais() + "^" + ccd.getFecUltAct());
+				System.out.println(cd);
 				salidaDat.write(ccd.getPersonId());
 				salidaDat.write(ccd.getAddressId());
 				salidaDat.write(ccd.getCalle());

@@ -3,7 +3,6 @@ package service;
 import archivos.ArchivoCampannaOferta;
 import dao.CampannaOfertaDAO;
 
-
 public class CampannaOfertaService {
 	private ArchivoCampannaOferta file = new ArchivoCampannaOferta();
 

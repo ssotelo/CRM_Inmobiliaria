@@ -39,6 +39,7 @@ public class ArchivoMiembro {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (Miembro cat : mem) {
+				System.out.println(mem);
 				salidaDat.write(cat.getRowId());
 				salidaDat.write(cat.getProgramId());
 				salidaDat.write(cat.getPersonId());

@@ -18,8 +18,7 @@ public class ClienteTelefonoDAO {
 	private String SELECT_CATTEL = "SELECT DISTINCT TC.ROW_ID, TN.ADDR, TN.COMM_USE_TYPE_CD,"
 			+ "TN.X_EXTENSION, TO_CHAR(TN.LAST_UPD,'YYYYMMDD')LAST_UPD "
 			+ "FROM SIEBEL811.S_CONTACT TC, SIEBEL811.S_PER_COMM_ADDR TN "
-			+ "WHERE TC.ROW_ID=TN.PER_ID "
-			+ "AND TN.COMM_MEDIUM_CD='Phone' ";
+			+ "WHERE TC.ROW_ID=TN.PER_ID " + "AND TN.COMM_MEDIUM_CD='Phone' ";
 
 	public List<ClienteTelefono> listarClientestelefonos() {
 		List<ClienteTelefono> clientestelefonos = new ArrayList<ClienteTelefono>();

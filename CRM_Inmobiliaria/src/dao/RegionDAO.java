@@ -11,17 +11,17 @@ import domain.Conexion;
 import domain.Region;
 
 public class RegionDAO {
-	private Connection userConn=null;
+	private Connection userConn = null;
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String SELECT_CATREG = "SELECT ROW_ID, NAME FROM SIEBEL811.S_REGION";
-	
 
 	public List<Region> listarRegiones() {
 		List<Region> regiones = new ArrayList<Region>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+			conn = (this.userConn != null) ? this.userConn : Conexion
+					.getConnection();
 			stmt = conn.prepareStatement(SELECT_CATREG);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

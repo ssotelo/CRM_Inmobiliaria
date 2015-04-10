@@ -17,6 +17,7 @@ public class ArchivoRespuestaCampanna {
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
+
 	public void archivarRespuestasCampannas(List<RespuestaCampanna> rcam) {
 		outFileDat = "C:/apps/eilcis_sieb_mktrespuestacampana."
 				+ formateador.format(now) + ".dat";

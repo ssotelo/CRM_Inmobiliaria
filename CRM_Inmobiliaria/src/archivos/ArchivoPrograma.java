@@ -1,5 +1,5 @@
 package archivos;
-//modificarprograma
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,9 +19,9 @@ public class ArchivoPrograma {
 	private String outFileCif = "";
 
 	public void archivarProgramas(List<Programa> pgm) {
-		outFileDat = "/home/crmca/workspace/apps/eildim_sieb_programalealtad."
+		outFileDat = "C:/apps/eildim_sieb_programalealtad."
 				+ formateador.format(now) + ".dat";
-		outFileCif = "/home/crmca/workspace/apps/eildim_sieb_programalealtad."
+		outFileCif = "C:/apps/eildim_sieb_programalealtad."
 				+ formateador.format(now) + ".cif";
 		boolean alreadyExists = new File(outFileDat).exists();
 		if (alreadyExists) {
@@ -39,31 +39,11 @@ public class ArchivoPrograma {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (Programa cpgm : pgm) {
-				System.out.println(cpgm.getRowId()
-						+ "^"
-						+ cpgm.getNombre()
-						+ "^"
-						+ cpgm.getDescripcion()
-						+ "^"
-						// + cpgm.getTipoCRM()
-						+ "^" + cpgm.getInicioPrograma() + "^"
-						+ cpgm.getFinPrograma() + "^"
-						+ cpgm.getInicioTransferencia() + "^"
-						+ cpgm.getInicioCompra() + "^"
-						+ cpgm.getCrecimientoPuntos() + "^"
-						+ cpgm.getVencimientoPuntos() + "^"
-						+ cpgm.getReglaCalculo() + "^"
-						+ cpgm.getReconocimientoBono() + "^"
-						+ cpgm.getActiveFlag() + "^"
-						+ cpgm.getConversionPuntos() + "^"
-						+ cpgm.getSocioFlag() + "^" + cpgm.getNombreSocio()
-						+ "^" + cpgm.getCodOrganizacion() + "^"
-						+ cpgm.getUltActualizacion());
+				System.out.println(pgm);
 
 				salidaDat.write(cpgm.getRowId());
 				salidaDat.write(cpgm.getNombre());
 				salidaDat.write(cpgm.getDescripcion());
-				// salidaDat.write(cpgm.getTipoCRM());
 				salidaDat.write(cpgm.getInicioPrograma());
 				salidaDat.write(cpgm.getFinPrograma());
 				salidaDat.write(cpgm.getInicioTransferencia());

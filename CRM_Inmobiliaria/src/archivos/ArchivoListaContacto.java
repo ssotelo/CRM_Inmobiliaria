@@ -45,7 +45,7 @@ public class ArchivoListaContacto {
 				salidaDat.write(ccnt.getFecIniCli());
 				salidaDat.write(ccnt.getFecFinCli());
 				salidaDat.write(ccnt.getFecUltAct());
-									salidaDat.endRecord();
+				salidaDat.endRecord();
 				cif++;
 
 			}

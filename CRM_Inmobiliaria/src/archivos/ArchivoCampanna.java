@@ -10,12 +10,14 @@ import java.util.List;
 import com.csvreader.CsvWriter;
 
 import domain.Campanna;
+
 public class ArchivoCampanna {
 	private Date now = new Date();
 	private SimpleDateFormat formateador = new SimpleDateFormat("yyyyMMdd");
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
+
 	public void archivarCampannas(List<Campanna> cmp) {
 		outFileDat = "C:/apps/eilcis_sieb_mktcampanas."
 				+ formateador.format(now) + ".dat";
@@ -56,7 +58,7 @@ public class ArchivoCampanna {
 				salidaDat.write(ccmp.getFecUltAct());
 				salidaDat.write(ccmp.getCodCampanna());
 				salidaDat.write(ccmp.getCodLivCamp());
-				
+
 				salidaDat.endRecord();
 				cif++;
 
@@ -69,5 +71,5 @@ public class ArchivoCampanna {
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
+	}
 }
-}	

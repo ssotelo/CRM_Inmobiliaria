@@ -18,8 +18,7 @@ public class ClienteMiembroDAO {
 	private String SELECT_CATMIE = "SELECT TR.PER_ID, TR.MEMBER_ID, "
 			+ "TO_CHAR(TR.LAST_UPD,'YYYYMMDD')LAST_UPD "
 			+ "FROM SIEBEL811.S_LOY_MEM_CON TR, SIEBEL811.S_CONTACT TC, SIEBEL811.S_LOY_MEMBER TM "
-			+ "WHERE TC.ROW_ID = TR.PER_ID "
-			+ "AND TM.ROW_ID = TR.MEMBER_ID";
+			+ "WHERE TC.ROW_ID = TR.PER_ID " + "AND TM.ROW_ID = TR.MEMBER_ID";
 
 	public List<ClienteMiembro> listarClientesMiembros() {
 		List<ClienteMiembro> clientesmiembros = new ArrayList<ClienteMiembro>();

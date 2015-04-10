@@ -11,7 +11,7 @@ import domain.CanalComunicacion;
 import domain.Conexion;
 
 public class CanalComunicacionDAO {
-	private Connection userConn=null;
+	private Connection userConn = null;
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
@@ -19,12 +19,12 @@ public class CanalComunicacionDAO {
 			+ "FROM SIEBEL811.S_LST_OF_VAL "
 			+ "WHERE ACTIVE_FLG='Y' AND TYPE='OFFER_MEDIA' "
 			+ "ORDER BY ORDER_BY";
-	
 
 	public List<CanalComunicacion> listarCanalesComunicacion() {
 		List<CanalComunicacion> cc = new ArrayList<CanalComunicacion>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+			conn = (this.userConn != null) ? this.userConn : Conexion
+					.getConnection();
 			stmt = conn.prepareStatement(SELECT_CATCANCOM);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

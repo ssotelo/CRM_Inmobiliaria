@@ -1,5 +1,5 @@
 package archivos;
-//comentariocliente
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,12 +17,12 @@ public class ArchivoCliente {
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
-//cambioss
+
 	public void archivarClientes(List<Cliente> cli) {
-		outFileDat = "C:/apps/eilcis_sieb_clientes."
-				+ formateador.format(now) + ".dat";
-		outFileCif = "C:/apps/eilcis_sieb_clientes."
-				+ formateador.format(now) + ".cif";
+		outFileDat = "C:/apps/eilcis_sieb_clientes." + formateador.format(now)
+				+ ".dat";
+		outFileCif = "C:/apps/eilcis_sieb_clientes." + formateador.format(now)
+				+ ".cif";
 		boolean alreadyExists = new File(outFileDat).exists();
 		if (alreadyExists) {
 			File ficheroDatos = new File(outFileDat);
@@ -39,12 +39,7 @@ public class ArchivoCliente {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (Cliente ccli : cli) {
-				System.out.println(ccli.getRowId() + "^" + ccli.getNombre()
-						+ "^" + ccli.getApePaterno() + "^"
-						+ ccli.getApeMaterno() + "^" + ccli.getRFC() + "^"
-						+ ccli.getGenero() + "^" + ccli.getEstadoCivil() + "^"
-						+ ccli.getFecNac() + "^" + ccli.getAltaCliente() + "^"
-						+ ccli.getClienteMDM() + "^" + ccli.getUltMod());
+				System.out.println(cli);
 				salidaDat.write(ccli.getRowId());
 				salidaDat.write(ccli.getNombre());
 				salidaDat.write(ccli.getApePaterno());

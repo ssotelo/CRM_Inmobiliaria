@@ -1,5 +1,5 @@
 package archivos;
-//HOLA SOY OTRO COMENTARIO SSOTELO
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -17,40 +17,44 @@ public class ArchivoCentroComercial {
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
-	public void archivarCentrosComerciales(List<CentroComercial> cc){
-		outFileDat = "C:/apps/eilcis_sieb_centrocomercial."+formateador.format(now)+".dat";
-		outFileCif = "C:/apps/eilcis_sieb_centrocomercial."+formateador.format(now)+".cif";
+
+	public void archivarCentrosComerciales(List<CentroComercial> cc) {
+		outFileDat = "C:/apps/eilcis_sieb_centrocomercial."
+				+ formateador.format(now) + ".dat";
+		outFileCif = "C:/apps/eilcis_sieb_centrocomercial."
+				+ formateador.format(now) + ".cif";
 		boolean alreadyExists = new File(outFileDat).exists();
-        if(alreadyExists){
-            File ficheroDatos = new File(outFileDat);
-            ficheroDatos.delete();
-        } 
-        alreadyExists = new File(outFileCif).exists();
-        if(alreadyExists){
-        	File ficheroCifras = new File(outFileCif);
-        	ficheroCifras.delete();
-        }
-        try{
-        	CsvWriter salidaDat = new CsvWriter(new FileWriter(outFileDat, true), '^');
-        	CsvWriter salidaCif = new CsvWriter(new FileWriter(outFileCif, true), '^');
-        	for(CentroComercial cat : cc){
-        		System.out.println(cat.getRowId()+"^"+cat.getName()+"^"
-        	+cat.getFecApertura()+"^"+cat.getFacebook()+"^"+cat.getTwitter());
-        		salidaDat.write(cat.getRowId());
-        		salidaDat.write(cat.getName());
-        		salidaDat.write(cat.getFecApertura());
-        		salidaDat.write(cat.getFacebook());
-        		salidaDat.write(cat.getTwitter());
-            	salidaDat.endRecord();
-            	cif++;
-            }
-            salidaDat.close();
-            salidaCif.write(outFileDat);
-            salidaCif.write(formateador.format(now));
-            salidaCif.write(Long.toString(cif));
-            salidaCif.close();
-        }catch(IOException ioe){
-        	ioe.printStackTrace();
-        }
+		if (alreadyExists) {
+			File ficheroDatos = new File(outFileDat);
+			ficheroDatos.delete();
+		}
+		alreadyExists = new File(outFileCif).exists();
+		if (alreadyExists) {
+			File ficheroCifras = new File(outFileCif);
+			ficheroCifras.delete();
+		}
+		try {
+			CsvWriter salidaDat = new CsvWriter(
+					new FileWriter(outFileDat, true), '^');
+			CsvWriter salidaCif = new CsvWriter(
+					new FileWriter(outFileCif, true), '^');
+			for (CentroComercial cat : cc) {
+				System.out.println(cc);
+				salidaDat.write(cat.getRowId());
+				salidaDat.write(cat.getName());
+				salidaDat.write(cat.getFecApertura());
+				salidaDat.write(cat.getFacebook());
+				salidaDat.write(cat.getTwitter());
+				salidaDat.endRecord();
+				cif++;
+			}
+			salidaDat.close();
+			salidaCif.write(outFileDat);
+			salidaCif.write(formateador.format(now));
+			salidaCif.write(Long.toString(cif));
+			salidaCif.close();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
 	}
 }

@@ -11,7 +11,7 @@ import domain.CampannaOferta;
 import domain.Conexion;
 
 public class CampannaOfertaDAO {
-	private Connection userConn=null;
+	private Connection userConn = null;
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
@@ -25,20 +25,22 @@ public class CampannaOfertaDAO {
 			+ "WHERE TC.ROW_ID=TR.SRC_ID AND TT.MKTG_OFFR_ID=TOF.ROW_ID  "
 			+ "AND TT.ROW_ID=TR.DCP_ID AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
 			+ "AND TC.CAMP_TYPE_CD='Campaign' AND TC.MKTG_TMPL_FLG='N'";
-	
 
 	public List<CampannaOferta> listarCampannasOfertas() {
 		List<CampannaOferta> campoffr = new ArrayList<CampannaOferta>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+			conn = (this.userConn != null) ? this.userConn : Conexion
+					.getConnection();
 			stmt = conn.prepareStatement(SELECT_CATGEN);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				campoffr.add(new CampannaOferta(rs.getString(1), rs.getString(2),
-						rs.getString(3),rs.getString(4), rs.getString(5), rs.getString(6),
-						rs.getString(7), rs.getString(8),rs.getString(9),
-						rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),
-						rs.getString(14),rs.getString(15),rs.getString(16),rs.getString(17)));
+				campoffr.add(new CampannaOferta(rs.getString(1), rs
+						.getString(2), rs.getString(3), rs.getString(4), rs
+						.getString(5), rs.getString(6), rs.getString(7), rs
+						.getString(8), rs.getString(9), rs.getString(10), rs
+						.getString(11), rs.getString(12), rs.getString(13), rs
+						.getString(14), rs.getString(15), rs.getString(16), rs
+						.getString(17)));
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();

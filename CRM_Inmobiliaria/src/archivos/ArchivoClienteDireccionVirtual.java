@@ -40,9 +40,7 @@ public class ArchivoClienteDireccionVirtual {
 			CsvWriter salidaCif = new CsvWriter(
 					new FileWriter(outFileCif, true), '^');
 			for (ClienteDireccionVirtual ccdv : cdv) {
-				System.out.println(ccdv.getPersonId() + "^"
-						+ ccdv.getTipoDireccion() + "^" + ccdv.getVirtualData()
-						+ "^" + ccdv.getFecUltAct());
+				System.out.println(cdv);
 				salidaDat.write(ccdv.getPersonId());
 				salidaDat.write(ccdv.getTipoDireccion());
 				salidaDat.write(ccdv.getVirtualData());

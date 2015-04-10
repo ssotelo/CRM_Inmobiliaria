@@ -11,7 +11,7 @@ import domain.Conexion;
 import domain.Lista;
 
 public class ListaDAO {
-	private Connection userConn=null;
+	private Connection userConn = null;
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
@@ -20,18 +20,19 @@ public class ListaDAO {
 			+ "TU.LOGIN, TO_CHAR(TLS.LAST_UPD,'YYYYMMDD')LAST_UPD "
 			+ "FROM SIEBEL811.S_CALL_LST TLS LEFT OUTER JOIN SIEBEL811.S_USER TU "
 			+ "ON TLS.LAST_UPD_BY=TU.ROW_ID";
-	
 
 	public List<Lista> listarListas() {
 		List<Lista> listas = new ArrayList<Lista>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+			conn = (this.userConn != null) ? this.userConn : Conexion
+					.getConnection();
 			stmt = conn.prepareStatement(SELECT_CATGEN);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				listas.add(new Lista(rs.getString(1), rs.getString(2),
-						rs.getString(3),rs.getString(4), rs.getString(5), rs.getString(6),
-						rs.getString(7), rs.getString(8),rs.getString(9)));
+				listas.add(new Lista(rs.getString(1), rs.getString(2), rs
+						.getString(3), rs.getString(4), rs.getString(5), rs
+						.getString(6), rs.getString(7), rs.getString(8), rs
+						.getString(9)));
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
