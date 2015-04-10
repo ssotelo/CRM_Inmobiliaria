@@ -26,25 +26,22 @@ public class CampannaDAO {
 			+ "TC.SUB_TYPE ='MARKETING_CAMPAIGN' AND TC.CAMP_TYPE_CD='Campaign' "
 			+ "AND TC.MKTG_TMPL_FLG='N'";
 
-	public List<Campanna> listarCampannas() {
+	public List<Campanna> listarCampannas(){
 		List<Campanna> campannas = new ArrayList<Campanna>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+			conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
 			stmt = conn.prepareStatement(SELECT_CAMP);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				campannas.add(new Campanna(rs.getString(1), rs.getString(2), rs
-						.getString(3), rs.getString(4), rs.getString(5), rs
-						.getString(6), rs.getString(7), rs.getString(8), rs
-						.getString(9), rs.getString(10), rs.getString(11), rs
-						.getString(12), rs.getString(13), rs.getString(14), rs
-						.getString(15), rs.getString(16), rs.getString(17), rs
-						.getString(18)));
+				campannas.add(new Campanna(rs.getString(1), rs.getString(2), rs.getString(3),
+						rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),
+						rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),
+						rs.getString(12),rs.getString(13), rs.getString(14),rs.getString(15),rs.getString(16)
+						,rs.getString(17),rs.getString(18)));
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return campannas;
-	}
+}
 }
