@@ -1,11 +1,10 @@
 package presentacion;
 
-import service.TarjetaService;
-
+import service.DireccionService;
 
 public class acceso {
 	public static void main(String[] args) {
-		TarjetaService service = new TarjetaService();
-		service.consultarTarjetas();
+		DireccionService service = new DireccionService();
+		service.consultarDirecciones();
 	}
 }
