@@ -14,6 +14,8 @@ public class Cliente {
 	private String codCliente;
 	private String clienteMDM;
 	private String alias;
+	private String fecHoy;
+	private String totCliente;
 	
 	public Cliente(String rowId, String nombre, String apePaterno,
 			String apeMaterno, String rFC, String genero, String estadoCivil,
@@ -34,6 +36,14 @@ public class Cliente {
 		this.clienteMDM = clienteMDM;
 		this.alias = alias;
 	}
+	
+	public Cliente(String fecHoy, String ultMod, String totCliente) {
+		super();
+		this.ultMod = ultMod;
+		this.fecHoy = fecHoy;
+		this.totCliente = totCliente;
+	}
+
 	public String getRowId() {
 		return rowId;
 	}
@@ -111,6 +121,19 @@ public class Cliente {
 	}
 	public void setAlias(String alias) {
 		this.alias = alias;
+	}
+	
+	public String getFecHoy() {
+		return fecHoy;
+	}
+	public void setFecHoy(String fecHoy) {
+		this.fecHoy = fecHoy;
+	}
+	public String getTotCliente() {
+		return totCliente;
+	}
+	public void setTotCliente(String totCliente) {
+		this.totCliente = totCliente;
 	}
 	@Override
 	public String toString() {

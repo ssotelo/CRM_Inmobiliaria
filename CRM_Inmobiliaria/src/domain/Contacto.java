@@ -24,6 +24,8 @@ public class Contacto {
 	private String noEmail;
 	private String noCorreoPostal;
 	private String fecUltAct;
+	private String fecToday;
+	private String totContactos;
 	public Contacto(String rowId, String rfc, String cs, String cazaOferta,
 			String lealtadDH, String noInserto, String noSMS,
 			String noContactar, String promociones, String eventos,
@@ -56,6 +58,11 @@ public class Contacto {
 		this.noEmail = noEmail;
 		this.noCorreoPostal = noCorreoPostal;
 		this.fecUltAct = fecUltAct;
+	}
+	public Contacto(String fecToday, String fecUltAct, String totContactos){
+		this.fecToday = fecToday;
+		this.fecUltAct = fecUltAct;
+		this.totContactos = totContactos;
 	}
 	public String getRowId() {
 		return rowId;
@@ -194,6 +201,19 @@ public class Contacto {
 	}
 	public void setFecUltAct(String fecUltAct) {
 		this.fecUltAct = fecUltAct;
+	}
+	
+	public String getFecToday() {
+		return fecToday;
+	}
+	public void setFecToday(String fecToday) {
+		this.fecToday = fecToday;
+	}
+	public String getTotContactos() {
+		return totContactos;
+	}
+	public void setTotContactos(String totContactos) {
+		this.totContactos = totContactos;
 	}
 	@Override
 	public String toString() {

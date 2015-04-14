@@ -9,5 +9,6 @@ public class PlanService {
 	public void consultarPlanes() {
 		PlanDAO cgd = new PlanDAO();
 		file.archivarPlanes(cgd.listarPlanes());
+		file.archivarPlanesCtl(cgd.listarPlanesCtl());
 	}
 }

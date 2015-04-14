@@ -9,5 +9,7 @@ public class MiembroService {
 	public void consultarMiembros() {
 		MiembroDAO mem = new MiembroDAO();
 		file.archivarMiembros(mem.listarMiembros());
+		file.archivarMiembrosCtl(mem.listarMiembrosCtl());
+
 	}
 }

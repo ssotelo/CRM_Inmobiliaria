@@ -9,5 +9,6 @@ public class ContactoService {
 	public void consultarContactos() {
 		ContactoDAO cgd = new ContactoDAO();
 		file.archivarContactos(cgd.listarContactos());
+		file.archivarContactosCtl(cgd.listarContactosCtl());
 	}
 }

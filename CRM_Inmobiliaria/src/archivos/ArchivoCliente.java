@@ -17,6 +17,7 @@ public class ArchivoCliente {
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
+	private String outFileCtl = "";
 
 	public void archivarClientes(List<Cliente> cli) {
 		outFileDat = "C:/apps/eilcis_sieb_clientes." + formateador.format(now)
@@ -55,13 +56,35 @@ public class ArchivoCliente {
 				salidaDat.write(ccli.getAlias());
 				salidaDat.endRecord();
 				cif++;
-
 			}
 			salidaDat.close();
 			salidaCif.write(outFileDat);
 			salidaCif.write(formateador.format(now));
 			salidaCif.write(Long.toString(cif));
 			salidaCif.close();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+	}
+	
+	public void archivarClientesCTL(List<Cliente> clictl) {
+		outFileCtl = "C:/apps/eilcis_sieb_clientes." + formateador.format(now)
+				+ ".ctl";
+		boolean alreadyExists = new File(outFileCtl).exists();
+		if (alreadyExists) {
+			File ficheroDatos = new File(outFileCtl);
+			ficheroDatos.delete();
+		}
+		try {
+			CsvWriter salidaDat = new CsvWriter(
+					new FileWriter(outFileCtl, true), '^');
+			for (Cliente ccli : clictl) {
+				salidaDat.write(ccli.getFecHoy());
+				salidaDat.write(ccli.getUltMod());
+				salidaDat.write(ccli.getTotCliente());
+				salidaDat.endRecord();
+			}
+			salidaDat.close();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

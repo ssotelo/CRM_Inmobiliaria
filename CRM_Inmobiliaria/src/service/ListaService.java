@@ -9,5 +9,6 @@ public class ListaService {
 	public void consultarListas() {
 		ListaDAO cgd = new ListaDAO();
 		file.archivarListas(cgd.listarListas());
+		file.archivarListasCtl(cgd.listarListasCtl());
 	}
 }

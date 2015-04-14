@@ -20,7 +20,18 @@ public class ContactoDAO {
 			+ "X_ATTRIB_36,X_ATTRIB_37, X_ATTRIB_38, X_ATTRIB_39,X_ATTRIB_03, X_ATTRIB_04, "
 			+ "X_ATTRIB_05, X_ATTRIB_11, X_ATTRIB_09, SUPPRESS_CALL_FLG, "
 			+ "SUPPRESS_EMAIL_FLG, SUPPRESS_MAIL_FLG, "
-			+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD FROM SIEBEL.S_CONTACT";
+			+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD FROM SIEBEL811.S_CONTACT";
+
+	private String SELECT_CONCTL = "SELECT "
+			+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
+			+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, "
+			+ "COUNT(TRUNC(LAST_UPD)) AS TOTAL "
+			+ "FROM SIEBEL811.S_CONTACT "
+			+ "WHERE LAST_UPD "
+			+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
+			+ "AND TO_DATE('20151231','YYYYMMDD') "
+			+ "GROUP BY TRUNC(LAST_UPD) "
+			+ "ORDER BY LAST_UPD";
 
 	public List<Contacto> listarContactos() {
 		List<Contacto> contactos = new ArrayList<Contacto>();
@@ -38,6 +49,23 @@ public class ContactoDAO {
 						.getString(15), rs.getString(16), rs.getString(17), rs
 						.getString(18), rs.getString(19), rs.getString(20), rs
 						.getString(21), rs.getString(22), rs.getString(23)));
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return contactos;
+	}
+	
+	public List<Contacto> listarContactosCtl() {
+		List<Contacto> contactos = new ArrayList<Contacto>();
+		try {
+			conn = (this.userConn != null) ? this.userConn : Conexion
+					.getConnection();
+			stmt = conn.prepareStatement(SELECT_CONCTL);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				contactos.add(new Contacto(rs.getString(1), rs.getString(2), rs
+						.getString(3)));
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();

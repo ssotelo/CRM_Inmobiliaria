@@ -9,5 +9,6 @@ public class CampannaService {
 	public void consultarCampannas() {
 		CampannaDAO cld = new CampannaDAO();
 		file.archivarCampannas(cld.listarCampannas());
+		file.archivarCampannasCtl(cld.listarCampannasCtl());
 	}
 }

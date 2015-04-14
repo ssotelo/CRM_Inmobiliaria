@@ -19,6 +19,8 @@ public class Campanna {
 	private String fecUltAct;
 	private String codCampanna;
 	private String codLivCamp;
+	private String fecToday;
+	private String totCamp;
 
 	public Campanna(String rowId, String name, String descripcion, String type,
 			String mktgId, String prioridad, String campannaPadre,
@@ -45,6 +47,11 @@ public class Campanna {
 		this.fecUltAct = fecUltAct;
 		this.codCampanna = codCampanna;
 		this.codLivCamp = codLivCamp;
+	}
+	public Campanna(String fecToday, String fecUltAct, String totCamp){
+		this.fecToday = fecToday;
+		this.fecUltAct = fecUltAct;
+		this.totCamp = totCamp;
 	}
 
 	public String getRowId() {
@@ -190,7 +197,18 @@ public class Campanna {
 	public void setCodLivCamp(String codLivCamp) {
 		this.codLivCamp = codLivCamp;
 	}
-
+	public String getFecToday() {
+		return fecToday;
+	}
+	public void setFecToday(String fecToday) {
+		this.fecToday = fecToday;
+	}
+	public String getTotCamp() {
+		return totCamp;
+	}
+	public void setTotCamp(String totCamp) {
+		this.totCamp = totCamp;
+	}
 	@Override
 	public String toString() {
 		return rowId + "^" + name + "^" + descripcion + "^" + type + "^"

@@ -20,6 +20,9 @@ public class Miembro {
 	private double puntuacionD;
 	private double centroComercial;
 	private String fecUltAct;
+	private String fecToday;
+	private String totMiembros;
+	private String totPuntos;
 	public Miembro(String rowId, String programId, String personId,
 			String tipoAcumulacion, String canalAlta, String fecAlta,
 			String fecExp, String fecCan, String numMem, String tipMem,
@@ -47,6 +50,14 @@ public class Miembro {
 		this.centroComercial = centroComercial;
 		this.fecUltAct = fecUltAct;
 	}
+	public Miembro(String fecToday, String fecUltAct, 
+			String programId, String totMiembros, String totPuntos){
+		this.fecToday = fecToday;
+		this.fecUltAct = fecUltAct;
+		this.programId = programId;
+		this.totMiembros = totMiembros;
+		this.totPuntos = totPuntos;
+		}
 	public String getRowId() {
 		return rowId;
 	}
@@ -160,6 +171,24 @@ public class Miembro {
 	}
 	public void setFecUltAct(String fecUltAct) {
 		this.fecUltAct = fecUltAct;
+	}
+	public String getFecToday() {
+		return fecToday;
+	}
+	public void setFecToday(String fecToday) {
+		this.fecToday = fecToday;
+	}
+	public String getTotMiembros() {
+		return totMiembros;
+	}
+	public void setTotMiembros(String totMiembros) {
+		this.totMiembros = totMiembros;
+	}
+	public String getTotPuntos() {
+		return totPuntos;
+	}
+	public void setTotPuntos(String totPuntos) {
+		this.totPuntos = totPuntos;
 	}
 	@Override
 	public String toString() {

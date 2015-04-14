@@ -17,6 +17,7 @@ public class ArchivoContacto {
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
+	private String outFileCtl = "";
 
 	public void archivarContactos(List<Contacto> cont) {
 
@@ -73,6 +74,31 @@ public class ArchivoContacto {
 			salidaCif.write(formateador.format(now));
 			salidaCif.write(Long.toString(cif));
 			salidaCif.close();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+	}
+	
+	public void archivarContactosCtl(List<Contacto> cont) {
+
+		outFileCtl = "C:/apps/eilcis_sieb_mktatribcliente."
+				+ formateador.format(now) + ".ctl";
+		boolean alreadyExists = new File(outFileCtl).exists();
+		if (alreadyExists) {
+			File ficheroDatos = new File(outFileCtl);
+			ficheroDatos.delete();
+		}
+		try {
+
+			CsvWriter salidaCtl = new CsvWriter(
+					new FileWriter(outFileCtl, true), '^');
+			for (Contacto cat : cont) {
+				salidaCtl.write(cat.getFecToday());
+				salidaCtl.write(cat.getFecUltAct());
+				salidaCtl.write(cat.getTotContactos());
+				salidaCtl.endRecord();
+			}
+			salidaCtl.close();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

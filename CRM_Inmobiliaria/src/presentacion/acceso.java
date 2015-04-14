@@ -1,10 +1,10 @@
 package presentacion;
 
-import service.DireccionService;
+import service.PlanService;
 
 public class acceso {
 	public static void main(String[] args) {
-		DireccionService service = new DireccionService();
-		service.consultarDirecciones();
+		PlanService service = new PlanService();
+		service.consultarPlanes();
 	}
 }

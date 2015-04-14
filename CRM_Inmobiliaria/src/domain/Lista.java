@@ -10,6 +10,8 @@ public class Lista {
 	private String archivoImportado;
 	private String usuario;
 	private String fecUltAct;
+	private String fectoday;
+	private String totListas;
 	
 	public Lista(String rowId, String name, String descripcion,
 			String tipoLista, String statusLista, String codigoDim,
@@ -24,6 +26,11 @@ public class Lista {
 		this.archivoImportado = archivoImportado;
 		this.usuario = usuario;
 		this.fecUltAct = fecUltAct;
+	}
+	public Lista(String fecToday, String fecUltAct, String totListas){
+		this.fectoday = fecToday;
+		this.fecUltAct = fecUltAct;
+		this.totListas = totListas;
 	}
 	public String getRowId() {
 		return rowId;
@@ -78,6 +85,18 @@ public class Lista {
 	}
 	public void setFecUltAct(String fecUltAct) {
 		this.fecUltAct = fecUltAct;
+	}
+	public String getFectoday() {
+		return fectoday;
+	}
+	public void setFectoday(String fectoday) {
+		this.fectoday = fectoday;
+	}
+	public String getTotListas() {
+		return totListas;
+	}
+	public void setTotListas(String totListas) {
+		this.totListas = totListas;
 	}
 	@Override
 	public String toString() {

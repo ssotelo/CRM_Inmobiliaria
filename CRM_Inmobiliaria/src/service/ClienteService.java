@@ -9,5 +9,6 @@ public class ClienteService {
 	public void consultarClientes() {
 		ClienteDAO cld = new ClienteDAO();
 		file.archivarClientes(cld.listarClientes());
+		file.archivarClientesCTL(cld.listarClientesCtl());
 	}
 }

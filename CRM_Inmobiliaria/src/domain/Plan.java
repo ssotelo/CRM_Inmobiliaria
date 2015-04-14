@@ -12,6 +12,8 @@ public class Plan {
 	private String fecUltAct;
 	private String codPlan;
 	private String tipoCRM;
+	private String fecToday;
+	private String totPlanes;
 	public Plan(String rowId, String tipoPlan, String nombre,
 			String aprobacion, String descripcion, String regionId,
 			String fecIniPlan, String fecFinPlan, String fecUltAct,
@@ -27,6 +29,11 @@ public class Plan {
 		this.fecFinPlan = fecFinPlan;
 		this.fecUltAct = fecUltAct;
 		this.codPlan = codPlan;
+	}
+	public Plan(String fecToday, String fecUltAct, String totPlanes){
+		this.fecToday = fecToday;
+		this.fecUltAct = fecUltAct;
+		this.totPlanes = totPlanes;
 	}
 	public String getRowId() {
 		return rowId;
@@ -93,6 +100,18 @@ public class Plan {
 	}
 	public void setTipoCRM(String tipoCRM) {
 		this.tipoCRM = tipoCRM;
+	}
+	public String getFecToday() {
+		return fecToday;
+	}
+	public void setFecToday(String fecToday) {
+		this.fecToday = fecToday;
+	}
+	public String getTotPlanes() {
+		return totPlanes;
+	}
+	public void setTotPlanes(String totPlanes) {
+		this.totPlanes = totPlanes;
 	}
 	@Override
 	public String toString() {

@@ -22,6 +22,17 @@ public class ClienteDAO {
 			+ "TO_CHAR(TC.LAST_UPD,'YYYYMMDD')LAST_UPD, TC.X_ID_CUST, TC.PERSON_UID, "
 			+ "TC.ALIAS_NAME "
 			+ "FROM SIEBEL811.S_CONTACT TC";
+	
+	private String SELECT_CLICTL = "SELECT "
+			+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY,"
+			+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, "
+			+ "COUNT(TRUNC(LAST_UPD)) AS TOTAL "
+			+ "FROM SIEBEL811.S_CONTACT "
+			+ "WHERE LAST_UPD "
+			+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
+			+ "AND TO_DATE('20151231','YYYYMMDD') "
+			+ "GROUP BY TRUNC(LAST_UPD) "
+			+ "ORDER BY LAST_UPD";
 
 	public List<Cliente> listarClientes(){
 		List<Cliente> clientes = new ArrayList<Cliente>();
@@ -34,6 +45,22 @@ public class ClienteDAO {
 						rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),
 						rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),
 						rs.getString(12),rs.getString(13)));
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return clientes;
+	}
+	
+	public List<Cliente> listarClientesCtl(){
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		try {
+			conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+			stmt = conn.prepareStatement(SELECT_CLICTL);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				clientes.add(new Cliente(rs.getString(1),rs.getString(2),
+						rs.getString(3)));
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();

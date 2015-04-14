@@ -9,7 +9,9 @@ public class Oferta {
 	private String fecIniOfr;
 	private String fecFinOfr;
 	private String fecUltAct;
-	private String codOfer;
+	private String codOfer; 
+	private String fecToday;
+	private String totOfertas;
 	public Oferta(String rowId, String tipo, String nombre, String descripcion,
 			String aprobacion, String fecIniOfr, String fecFinOfr,
 			String fecUltAct, String codOfer) {
@@ -23,6 +25,11 @@ public class Oferta {
 		this.fecFinOfr = fecFinOfr;
 		this.fecUltAct = fecUltAct;
 		this.codOfer = codOfer;
+	}
+	public Oferta(String fecToday, String fecUltAct, String totOfertas){
+		this.fecToday = fecToday;
+		this.fecUltAct = fecUltAct;
+		this.totOfertas = totOfertas;
 	}
 	public String getRowId() {
 		return rowId;
@@ -77,6 +84,18 @@ public class Oferta {
 	}
 	public void setCodOfer(String codOfer) {
 		this.codOfer = codOfer;
+	}
+	public String getFecToday() {
+		return fecToday;
+	}
+	public void setFecToday(String fecToday) {
+		this.fecToday = fecToday;
+	}
+	public String getTotOfertas() {
+		return totOfertas;
+	}
+	public void setTotOfertas(String totOfertas) {
+		this.totOfertas = totOfertas;
 	}
 	@Override
 	public String toString() {

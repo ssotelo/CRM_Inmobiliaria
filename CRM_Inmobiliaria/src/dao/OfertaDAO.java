@@ -22,8 +22,20 @@ public class OfertaDAO {
 			+ "TO_CHAR(TR.LAST_UPD,'YYYYMMDD')LAST_UPD FROM SIEBEL.S_SRC TC,"
 			+ " SIEBEL.S_SRC_DCP TR, SIEBEL.S_MKTG_OFFR TOF,"
 			+ " SIEBEL.S_DMND_CRTN_PRG TT WHERE TC.ROW_ID=TR.SRC_ID "
-			+ "AND TT.MKTG_OFFR_ID=TOF.ROW_ID AND TT.ROW_ID=TR.DCP_ID AND TC.SUB_TYPE ='MARKETING_CAMPAIGN'"
+			+ "AND TT.MKTG_OFFR_ID=TOF.ROW_ID AND TT.ROW_ID=TR.DCP_ID "
+			+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN'"
 			+ " AND TC.CAMP_TYPE_CD='Campaign' AND TC.MKTG_TMPL_FLG='N'";
+
+	private String SELECT_OFECTL = "SELECT "
+			+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
+			+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, "
+			+ "COUNT(TRUNC(LAST_UPD)) AS TOTAL "
+			+ "FROM SIEBEL811.S_MKTG_OFFR "
+			+ "WHERE LAST_UPD "
+			+ "BETWEEN TO_DATE('20140101','YYYYMMDD') "
+			+ "AND TO_DATE('20151231','YYYYMMDD') "
+			+ "GROUP BY TRUNC(LAST_UPD) "
+			+ "ORDER BY LAST_UPD";
 
 	public List<Oferta> listarOfertas() {
 		List<Oferta> ofertas = new ArrayList<Oferta>();
@@ -43,4 +55,22 @@ public class OfertaDAO {
 		}
 		return ofertas;
 	}
+
+	public List<Oferta> listarOfertasCtl() {
+		List<Oferta> ofertas = new ArrayList<Oferta>();
+		try {
+			conn = (this.userConn != null) ? this.userConn : Conexion
+					.getConnection();
+			stmt = conn.prepareStatement(SELECT_OFECTL);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				ofertas.add(new Oferta(rs.getString(1), rs.getString(2), rs
+						.getString(3)));
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return ofertas;
+	}
+
 }

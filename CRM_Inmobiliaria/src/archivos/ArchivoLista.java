@@ -17,9 +17,9 @@ public class ArchivoLista {
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
-
+	private String outFileCtl = "";
+	
 	public void archivarListas(List<Lista> lst) {
-
 		outFileDat = "C:/apps/eildim_sieb_mktlistas." + formateador.format(now)
 				+ ".dat";
 		outFileCif = "C:/apps/eildim_sieb_mktlistas." + formateador.format(now)
@@ -58,6 +58,29 @@ public class ArchivoLista {
 			salidaCif.write(formateador.format(now));
 			salidaCif.write(Long.toString(cif));
 			salidaCif.close();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+	}
+
+	public void archivarListasCtl(List<Lista> lst) {
+		outFileCtl = "C:/apps/eildim_sieb_mktlistas." + formateador.format(now)
+				+ ".ctl";
+		boolean alreadyExists = new File(outFileCtl).exists();
+		if (alreadyExists) {
+			File ficheroDatos = new File(outFileCtl);
+			ficheroDatos.delete();
+		}
+		try {
+			CsvWriter salidaCtl = new CsvWriter(
+					new FileWriter(outFileCtl, true), '^');
+			for (Lista cat : lst) {
+				salidaCtl.write(cat.getFectoday());
+				salidaCtl.write(cat.getFecUltAct());
+				salidaCtl.write(cat.getTotListas());
+				salidaCtl.endRecord();
+			}
+			salidaCtl.close();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

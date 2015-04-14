@@ -22,7 +22,21 @@ public class MiembroDAO {
 			+ "TM.MEMSHIP_SCHEME_ID, TM.VAL_SCORE, TM.POINT_TYPE_A_VAL, TM.POINT_TYPE_B_VAL,"
 			+ "	TM.POINT_TYPE_C_VAL, TM.POINT_TYPE_D_VAL, TCC.DEPT_NUM, "
 			+ "TO_CHAR(TM.LAST_UPD,'YYYYMMDD')LAST_UPD FROM SIEBEL811.S_CONTACT TC,"
-			+ " SIEBEL811.S_LOY_MEMBER TM, SIEBEL811.S_ORG_EXT TCC WHERE TM.PR_CON_ID=TC.ROW_ID AND TC.X_GALLERY=TCC.NAME(+)";
+			+ " SIEBEL811.S_LOY_MEMBER TM, SIEBEL811.S_ORG_EXT TCC "
+			+ "WHERE TM.PR_CON_ID=TC.ROW_ID AND TC.X_GALLERY=TCC.NAME(+)";
+
+	private String SELECT_CTLMEM = "SELECT "
+			+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY,"
+			+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD,"
+			+ "PROGRAM_ID,"
+			+ "COUNT(TRUNC(LAST_UPD))AS MIEMBROS,"
+			+ "SUM(POINT_TYPE_A_VAL+POINT_TYPE_B_VAL)AS PUNTOS "
+			+ "FROM SIEBEL811.S_LOY_MEMBER "
+			+ "WHERE LAST_UPD "
+			+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
+			+ "AND TO_DATE('20151231','YYYYMMDD') "
+			+ "GROUP BY PROGRAM_ID,TRUNC(LAST_UPD) "
+			+ "ORDER BY LAST_UPD";
 
 	public List<Miembro> listarMiembros() {
 		List<Miembro> miembros = new ArrayList<Miembro>();
@@ -39,6 +53,23 @@ public class MiembroDAO {
 						.getString(12), rs.getDouble(13), rs.getDouble(14), rs
 						.getDouble(15), rs.getDouble(16), rs.getDouble(17), rs
 						.getDouble(18), rs.getString(19)));
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return miembros;
+	}
+	
+	public List<Miembro> listarMiembrosCtl() {
+		List<Miembro> miembros = new ArrayList<Miembro>();
+		try {
+			conn = (this.userConn != null) ? this.userConn : Conexion
+					.getConnection();
+			stmt = conn.prepareStatement(SELECT_CTLMEM);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				miembros.add(new Miembro(rs.getString(1), rs.getString(2), rs
+						.getString(3), rs.getString(4), rs.getString(5)));
 			}
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();

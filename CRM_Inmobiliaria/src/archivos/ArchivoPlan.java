@@ -17,9 +17,9 @@ public class ArchivoPlan {
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
+	private String outFileCtl = "";
 
 	public void archivarPlanes(List<Plan> cg) {
-		
 		outFileDat = "C:/apps/eilcis_sieb_mktplanes."+formateador.format(now)+".dat";
 		outFileCif = "C:/apps/eilcis_sieb_mktplanes."+formateador.format(now)+".cif";
 		boolean alreadyExists = new File(outFileDat).exists();
@@ -55,6 +55,27 @@ public class ArchivoPlan {
             salidaCif.write(formateador.format(now));
             salidaCif.write(Long.toString(cif));
             salidaCif.close();
+        }catch(IOException ioe){
+        	ioe.printStackTrace();
+        }
+	}
+	
+	public void archivarPlanesCtl(List<Plan> cg) {
+		outFileCtl = "C:/apps/eilcis_sieb_mktplanes."+formateador.format(now)+".ctl";
+		boolean alreadyExists = new File(outFileCtl).exists();
+        if(alreadyExists){
+            File ficheroDatos = new File(outFileCtl);
+            ficheroDatos.delete();
+        } 
+        try{
+        	CsvWriter salidaCtl = new CsvWriter(new FileWriter(outFileCtl, true), '^');
+        	for(Plan cat : cg){
+            	salidaCtl.write(cat.getRowId());
+            	salidaCtl.write(cat.getTipoPlan());
+            	salidaCtl.write(cat.getNombre());
+            	salidaCtl.endRecord();
+            }
+            salidaCtl.close();
         }catch(IOException ioe){
         	ioe.printStackTrace();
         }

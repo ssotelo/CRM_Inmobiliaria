@@ -17,6 +17,7 @@ public class ArchivoMiembro {
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
+	private String outFileCtl = "";
 
 	public void archivarMiembros(List<Miembro> mem) {
 		outFileDat = "C:/apps/eilcis_sieb_miembro." + formateador.format(now)
@@ -70,4 +71,31 @@ public class ArchivoMiembro {
 			ioe.printStackTrace();
 		}
 	}
+	
+	public void archivarMiembrosCtl(List<Miembro> memctl) {
+		outFileCtl = "C:/apps/eilcis_sieb_miembro." + formateador.format(now)
+				+ ".ctl";
+		boolean alreadyExists = new File(outFileCtl).exists();
+		alreadyExists = new File(outFileCtl).exists();
+		if (alreadyExists) {
+			File ficheroCifras = new File(outFileCtl);
+			ficheroCifras.delete();
+		}
+		try {
+			CsvWriter salidaCtl = new CsvWriter(
+					new FileWriter(outFileCtl, true), '^');
+			for (Miembro cat : memctl) {
+				salidaCtl.write(cat.getFecToday());
+				salidaCtl.write(cat.getFecUltAct());
+				salidaCtl.write(cat.getProgramId());
+				salidaCtl.write(cat.getTotMiembros());
+				salidaCtl.write(cat.getTotPuntos());
+				salidaCtl.endRecord();
+			}
+			salidaCtl.close();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+	}
+
 }
