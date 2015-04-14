@@ -8,7 +8,7 @@ public class CampannaOfertaCanalService {
 
 	public void consultarCampannasOfertasCanales() {
 		CampannaOfertaCanalDAO cgd = new CampannaOfertaCanalDAO();
-		file.archivarCampannasOfertasCanales(cgd
-				.listarCampannasOfertasCanales());
+		file.archivarCampannasOfertasCanales(cgd.listarCampannasOfertasCanales());
+		file.archivarCampannasOfertasCanalesCtl(cgd.listarCampannasOfertasCanalesCtl());
 	}
 }

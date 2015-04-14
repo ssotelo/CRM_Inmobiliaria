@@ -9,6 +9,8 @@ public class CampannaListaCanal {
 	private String fecUltAct;
 	private String tratamientoNum;
 	private String tratamientoName;
+	private String fecToday;
+	private String totCampListCan;
 	public CampannaListaCanal(String campanaId, String listaId,
 			String tratamientoId, String fecIniCam, String fecFinCam,
 			String fecUltAct, String tratamientoNum, String tratamientoName) {
@@ -21,6 +23,11 @@ public class CampannaListaCanal {
 		this.fecUltAct = fecUltAct;
 		this.tratamientoNum = tratamientoNum;
 		this.tratamientoName = tratamientoName;
+	}
+	public CampannaListaCanal(String fecToday, String fecUltAct, String totCampListCan){
+		this.fecToday = fecToday;
+		this.fecUltAct = fecUltAct;
+		this.totCampListCan = totCampListCan;
 	}
 	public String getCampanaId() {
 		return campanaId;
@@ -69,6 +76,18 @@ public class CampannaListaCanal {
 	}
 	public void setTratamientoName(String tratamientoName) {
 		this.tratamientoName = tratamientoName;
+	}
+	public String getFecToday() {
+		return fecToday;
+	}
+	public void setFecToday(String fecToday) {
+		this.fecToday = fecToday;
+	}
+	public String getTotCampListCan() {
+		return totCampListCan;
+	}
+	public void setTotCampListCan(String totCampListCan) {
+		this.totCampListCan = totCampListCan;
 	}
 	@Override
 	public String toString() {

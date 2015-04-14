@@ -17,6 +17,7 @@ public class ArchivoCampannaTienda {
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
+	private String outFileCtl = "";
 	public void archivarCampannasTiendas(List<CampannaTienda> cmt) {
 		outFileDat = "C:/apps/eilcis_sieb_mktcampanatienda."
 				+ formateador.format(now) + ".dat";
@@ -57,5 +58,28 @@ public class ArchivoCampannaTienda {
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
-}
+	}
+	
+	public void archivarCampannasTiendasCtl(List<CampannaTienda> cmt) {
+		outFileCtl = "C:/apps/eilcis_sieb_mktcampanatienda."
+				+ formateador.format(now) + ".ctl";
+		boolean alreadyExists = new File(outFileCtl).exists();
+		if (alreadyExists) {
+			File ficheroControl = new File(outFileCtl);
+			ficheroControl.delete();
+		}
+		try {
+			CsvWriter salidaCtl = new CsvWriter(
+					new FileWriter(outFileCtl, true), '^');
+			for (CampannaTienda ccmt : cmt) {
+				salidaCtl.write(ccmt.getFecToday());
+				salidaCtl.write(ccmt.getFecUltAct());
+				salidaCtl.write(ccmt.getTotCampTienda());
+				salidaCtl.endRecord();
+			}
+			salidaCtl.close();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+	}
 }	

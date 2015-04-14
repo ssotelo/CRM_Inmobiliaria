@@ -19,13 +19,31 @@ public class CampannaListaCanalDAO {
 			+ "TO_CHAR(TRL.CREATED,'YYYYMMDD')CREATED, "
 			+ "TO_CHAR(TRL.LAST_UPD,'YYYYMMDD')LAST_UPD, "
 			+ "TT.X_ID_TREAT, TT.NAME "
-			+ "FROM SIEBEL.S_SRC TC, SIEBEL.S_DMND_CRTN_PRG TT, "
-			+ "SIEBEL.S_CALL_LST TL, SIEBEL.S_SRC_DCP TRT, SIEBEL.S_CAMP_CALL_LST TRL "
+			+ "FROM SIEBEL811.S_SRC TC, SIEBEL811.S_DMND_CRTN_PRG TT, "
+			+ "SIEBEL811.S_CALL_LST TL, SIEBEL811.S_SRC_DCP TRT, SIEBEL811.S_CAMP_CALL_LST TRL "
 			+ "WHERE TC.ROW_ID=TRT.SRC_ID AND TT.ROW_ID=TRT.DCP_ID "
 			+ "AND TC.ROW_ID=TRL.SRC_ID AND TL.ROW_ID=TRL.CALL_LST_ID "
 			+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
 			+ "AND TC.CAMP_TYPE_CD='Campaign' AND TC.MKTG_TMPL_FLG='N'";
 
+	private String SELECT_CATCAMLISCANCTL = "SELECT "
+			+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
+			+ "TO_CHAR(TRUNC(TRCT.LAST_UPD),'YYYYMMDD')LAST_UPD, "
+			+ "COUNT(TRUNC(TRCT.LAST_UPD)) AS TOTAL "
+			+ "FROM SIEBEL811.S_SRC_PGROUP TRCT, "
+			+ "SIEBEL811.S_SRC TC, "
+			+ "SIEBEL811.S_PGROUP TT "
+			+ "WHERE TRCT.LAST_UPD "
+			+ "BETWEEN TO_DATE('20140101','YYYYMMDD') "
+			+ "AND TO_DATE('20151231','YYYYMMDD') "
+			+ "AND TRCT.SRC_ID=TC.ROW_ID "
+			+ "AND TRCT.PGROUP_ID=TT.ROW_ID "
+			+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
+			+ "AND TC.CAMP_TYPE_CD='Campaign' "
+			+ "AND TC.MKTG_TMPL_FLG='N' "
+			+ "GROUP BY TRUNC(TRCT.LAST_UPD) "
+			+ "ORDER BY LAST_UPD";
+	
 	public List<CampannaListaCanal> listarCampannasListasCanales() {
 		List<CampannaListaCanal> clc = new ArrayList<CampannaListaCanal>();
 		try {
@@ -45,4 +63,20 @@ public class CampannaListaCanalDAO {
 		return clc;
 	}
 
+	public List<CampannaListaCanal> listarCampannasListasCanalesCtl() {
+		List<CampannaListaCanal> clc = new ArrayList<CampannaListaCanal>();
+		try {
+			conn = (this.userConn != null) ? this.userConn : Conexion
+					.getConnection();
+			stmt = conn.prepareStatement(SELECT_CATCAMLISCANCTL);
+			rs = stmt.executeQuery();
+			while (rs.next()) {
+				clc.add(new CampannaListaCanal(rs.getString(1),
+						rs.getString(2), rs.getString(3)));
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		return clc;
+	}
 }

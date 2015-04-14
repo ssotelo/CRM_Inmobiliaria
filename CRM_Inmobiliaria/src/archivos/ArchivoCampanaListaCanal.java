@@ -17,9 +17,9 @@ public class ArchivoCampanaListaCanal {
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
+	private String outFileCtl = "";
 
 	public void archivarCampannasListasCanales(List<CampannaListaCanal> clc) {
-
 		outFileDat = "C:/apps/eilcis_sieb_mktcampanalistacanal."
 				+ formateador.format(now) + ".dat";
 		outFileCif = "C:/apps/eilcis_sieb_mktcampanalistacanal."
@@ -59,6 +59,29 @@ public class ArchivoCampanaListaCanal {
 			salidaCif.write(formateador.format(now));
 			salidaCif.write(Long.toString(cif));
 			salidaCif.close();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+	}
+
+	public void archivarCampannasListasCanalesCtl(List<CampannaListaCanal> clc) {
+		outFileCtl = "C:/apps/eilcis_sieb_mktcampanalistacanal."
+				+ formateador.format(now) + ".ctl";
+		boolean alreadyExists = new File(outFileCtl).exists();
+		if (alreadyExists) {
+			File ficheroCtl = new File(outFileCtl);
+			ficheroCtl.delete();
+		}
+		try {
+			CsvWriter salidaCtl = new CsvWriter(
+					new FileWriter(outFileCtl, true), '^');
+			for (CampannaListaCanal cat : clc) {
+				salidaCtl.write(cat.getFecToday());
+				salidaCtl.write(cat.getFecUltAct());
+				salidaCtl.write(cat.getTotCampListCan());
+				salidaCtl.endRecord();
+			}
+			salidaCtl.close();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

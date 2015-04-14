@@ -9,5 +9,6 @@ public class CampannaOfertaService {
 	public void consultarCampannaOferta() {
 		CampannaOfertaDAO cgd = new CampannaOfertaDAO();
 		file.archivarCampannasOfertas(cgd.listarCampannasOfertas());
+		file.archivarCampannasOfertasCtl(cgd.listarCampannasOfertasCtl());
 	}
 }

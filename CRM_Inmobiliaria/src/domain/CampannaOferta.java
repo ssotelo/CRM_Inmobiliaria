@@ -19,6 +19,9 @@ public class CampannaOferta {
 	private String tratamientoId;
 	private String tratamientoName;
 	private String codLivTrat;
+	private String fecToday;
+	private String tipoCRM;
+	private String totCampOffr;
 
 	public CampannaOferta(String campannaId, String ofertaId, String producto,
 			String marca, String grupo, String seccion, String division,
@@ -44,6 +47,12 @@ public class CampannaOferta {
 		this.tratamientoId = tratamientoId;
 		this.tratamientoName = tratamientoName;
 		this.codLivTrat = codLivTrat;
+	}
+	
+	public CampannaOferta(String fecToday, String fecUltAct, String totCampOffr){
+		this.fecToday = fecToday;
+		this.fecUltAct = fecUltAct;
+		this.totCampOffr = totCampOffr;
 	}
 
 	public String getCampannaId() {
@@ -180,6 +189,30 @@ public class CampannaOferta {
 
 	public void setCodLivTrat(String codLivTrat) {
 		this.codLivTrat = codLivTrat;
+	}
+	
+	public String getFecToday() {
+		return fecToday;
+	}
+
+	public void setFecToday(String fecToday) {
+		this.fecToday = fecToday;
+	}
+
+	public String getTipoCRM() {
+		return tipoCRM;
+	}
+
+	public void setTipoCRM(String tipoCRM) {
+		this.tipoCRM = tipoCRM;
+	}
+
+	public String getTotCampOffr() {
+		return totCampOffr;
+	}
+
+	public void setTotCampOffr(String totCampOffr) {
+		this.totCampOffr = totCampOffr;
 	}
 
 	@Override

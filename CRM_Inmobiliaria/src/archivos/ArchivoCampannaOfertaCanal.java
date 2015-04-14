@@ -17,9 +17,9 @@ public class ArchivoCampannaOfertaCanal {
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
-
+	private String outFileCtl = "";
+ 
 	public void archivarCampannasOfertasCanales(List<CampannaOfertaCanal> cof) {
-
 		outFileDat = "C:/apps/eilcis_sieb_mktcampofertacanal."
 				+ formateador.format(now) + ".dat";
 		outFileCif = "C:/apps/eilcis_sieb_mktcampofertacanal."
@@ -60,6 +60,30 @@ public class ArchivoCampannaOfertaCanal {
 			salidaCif.write(formateador.format(now));
 			salidaCif.write(Long.toString(cif));
 			salidaCif.close();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+	}
+	
+	public void archivarCampannasOfertasCanalesCtl(List<CampannaOfertaCanal> cof) {
+		outFileCtl = "C:/apps/eilcis_sieb_mktcampofertacanal."
+				+ formateador.format(now) + ".ctl";
+		boolean alreadyExists = new File(outFileCtl).exists();
+		if (alreadyExists) {
+			File ficheroControl = new File(outFileCtl);
+			ficheroControl.delete();
+		}
+		try {
+
+			CsvWriter salidaCtl = new CsvWriter(
+					new FileWriter(outFileCtl, true), '^');
+			for (CampannaOfertaCanal ccof : cof) {
+				salidaCtl.write(ccof.getFecToday());
+				salidaCtl.write(ccof.getFecUltAct());
+				salidaCtl.write(ccof.getTotCampOffrCan());
+				salidaCtl.endRecord();
+			}
+			salidaCtl.close();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

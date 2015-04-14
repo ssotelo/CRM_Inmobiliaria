@@ -9,5 +9,6 @@ public class OfertaService {
 	public void consultarOfertas() {
 		OfertaDAO cld = new OfertaDAO();
 		file.archivarOfertas(cld.listarOfertas());
+		file.archivarOfertasCtl(cld.listarOfertasCtl());
 	}
 }

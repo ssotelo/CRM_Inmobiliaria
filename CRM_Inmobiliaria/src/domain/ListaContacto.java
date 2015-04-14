@@ -6,6 +6,8 @@ public class ListaContacto {
 	private String fecIniCli;
 	private String fecFinCli;
 	private String fecUltAct;
+	private String fecToday;
+	private String totClieLista;
 	public ListaContacto(String contactoId, String listaId, String fecIniCli,
 			String fecFinCli, String fecUltAct) {
 		super();
@@ -14,6 +16,11 @@ public class ListaContacto {
 		this.fecIniCli = fecIniCli;
 		this.fecFinCli = fecFinCli;
 		this.fecUltAct = fecUltAct;
+	}
+	public ListaContacto(String fecToday, String fecUltAct, String totClieLista){
+		this.fecToday = fecToday;
+		this.fecUltAct = fecUltAct;
+		this.totClieLista = totClieLista;
 	}
 	public String getContactoId() {
 		return contactoId;
@@ -45,12 +52,22 @@ public class ListaContacto {
 	public void setFecUltAct(String fecUltAct) {
 		this.fecUltAct = fecUltAct;
 	}
+	public String getFecToday() {
+		return fecToday;
+	}
+	public void setFecToday(String fecToday) {
+		this.fecToday = fecToday;
+	}
+	public String getTotClieLista() {
+		return totClieLista;
+	}
+	public void setTotClieLista(String totClieLista) {
+		this.totClieLista = totClieLista;
+	}
 	@Override
 	public String toString() {
 		return  contactoId + "^"
 				+ listaId + "^" + fecIniCli + "^"
 				+ fecFinCli + "^" + fecUltAct;
 	}
-	
-	
 }

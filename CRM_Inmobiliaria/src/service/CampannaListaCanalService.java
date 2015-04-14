@@ -9,5 +9,6 @@ public class CampannaListaCanalService {
 	public void consultarCampannaListaCanal() {
 		CampannaListaCanalDAO cgd = new CampannaListaCanalDAO();
 		file.archivarCampannasListasCanales(cgd.listarCampannasListasCanales());
+		file.archivarCampannasListasCanalesCtl(cgd.listarCampannasListasCanalesCtl());
 	}
 }

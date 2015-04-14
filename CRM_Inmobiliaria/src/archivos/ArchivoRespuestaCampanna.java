@@ -17,6 +17,7 @@ public class ArchivoRespuestaCampanna {
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
+	private String outFileCtl = "";
 	public void archivarRespuestasCampannas(List<RespuestaCampanna> rcam) {
 		outFileDat = "C:/apps/eilcis_sieb_mktrespuestacampana."
 				+ formateador.format(now) + ".dat";
@@ -60,4 +61,28 @@ public class ArchivoRespuestaCampanna {
 			ioe.printStackTrace();
 		}
 	}
+	
+	public void archivarRespuestasCampannasCtl(List<RespuestaCampanna> rcam) {
+		outFileCtl = "C:/apps/eilcis_sieb_mktrespuestacampana."
+				+ formateador.format(now) + ".ctl";
+		boolean alreadyExists = new File(outFileCtl).exists();
+		if (alreadyExists) {
+			File ficheroControl = new File(outFileCtl);
+			ficheroControl.delete();
+		}
+		try {
+			CsvWriter salidaCtl = new CsvWriter(
+					new FileWriter(outFileCtl, true), '^');
+			for (RespuestaCampanna crcam : rcam) {
+				salidaCtl.write(crcam.getFecToday());
+				salidaCtl.write(crcam.getFecUltAct());
+				salidaCtl.write(crcam.getTotRespCamp());
+				salidaCtl.endRecord();
+			}
+			salidaCtl.close();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+	}
+
 }

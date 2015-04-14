@@ -9,5 +9,6 @@ public class RespuestaCampannaService {
 	public void consultarRespuestasCampannas() {
 		RespuestaCampannaDAO cld = new RespuestaCampannaDAO();
 		file.archivarRespuestasCampannas(cld.listarRespuestasCampannas());
+		file.archivarRespuestasCampannasCtl(cld.listarRespuestasCampannasCtl());
 	}
 }

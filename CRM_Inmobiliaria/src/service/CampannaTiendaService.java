@@ -8,5 +8,6 @@ public class CampannaTiendaService {
 	public void consultarCampannasTiendas(){
 		CampannaTiendaDAO cld = new CampannaTiendaDAO();
 		file.archivarCampannasTiendas(cld.listarCampannasTiendas());
+		file.archivarCampannasTiendasCtl(cld.listarCampannasTiendasCtl());
 		}
 }

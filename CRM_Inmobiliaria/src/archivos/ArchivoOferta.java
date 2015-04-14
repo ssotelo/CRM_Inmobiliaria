@@ -74,14 +74,12 @@ public class ArchivoOferta {
 		}
 		try {
 			CsvWriter salidaCtl = new CsvWriter(
-					new FileWriter(outFileDat, true), '^');
+					new FileWriter(outFileCtl, true), '^');
 			for (Oferta cofe : ofe) {
 				salidaCtl.write(cofe.getFecToday());
 				salidaCtl.write(cofe.getFecUltAct());
 				salidaCtl.write(cofe.getTotOfertas());
 				salidaCtl.endRecord();
-				cif++;
-
 			}
 			salidaCtl.close();
 		} catch (IOException ioe) {
