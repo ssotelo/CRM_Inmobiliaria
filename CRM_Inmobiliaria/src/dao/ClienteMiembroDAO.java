@@ -15,12 +15,17 @@ public class ClienteMiembroDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_CATMIE = "SELECT TR.PER_ID, TR.MEMBER_ID, "
-			+ "TO_CHAR(TR.LAST_UPD,'YYYYMMDD')LAST_UPD "
-			+ "FROM SIEBEL811.S_LOY_MEM_CON TR, SIEBEL811.S_CONTACT TC, SIEBEL811.S_LOY_MEMBER TM "
-			+ "WHERE TC.ROW_ID = TR.PER_ID " + "AND TM.ROW_ID = TR.MEMBER_ID";
 
 	public List<ClienteMiembro> listarClientesMiembros() {
+		String SELECT_CATMIE = "SELECT TR.PER_ID, TR.MEMBER_ID, "
+				+ "TO_CHAR(TR.LAST_UPD,'YYYYMMDD')LAST_UPD "
+				+ "FROM SIEBEL811.S_LOY_MEM_CON TR, "
+				+ "SIEBEL811.S_CONTACT TC, SIEBEL811.S_LOY_MEMBER TM "
+				+ "WHERE TR.LAST_UPD "
+				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "AND TC.ROW_ID = TR.PER_ID "
+				+ "AND TM.ROW_ID = TR.MEMBER_ID";
 		List<ClienteMiembro> clientesmiembros = new ArrayList<ClienteMiembro>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion

@@ -15,29 +15,16 @@ public class OfertaDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_CATOFE = "SELECT TC.ROW_ID, TOF.ROW_ID, TOF.X_ATTRIB_05,"
-			+ " TOF.X_ATTRIB_04, TOF.X_ATTRIB_03, TOF.X_ATTRIB_02, TOF.X_ATTRIB_01, "
-			+ "TOF.X_ATTRIB_10, TOF.X_ATTRIB_09,TOF.X_ATTRIB_08, TOF.X_ATTRIB_07,"
-			+ "TOF.X_ATTRIB_06, TO_CHAR(TOF.START_DT,'YYYYMMDD')START_DT, "
-			+ "TO_CHAR(TR.LAST_UPD,'YYYYMMDD')LAST_UPD FROM SIEBEL811.S_SRC TC,"
-			+ " SIEBEL811.S_SRC_DCP TR, SIEBEL811.S_MKTG_OFFR TOF,"
-			+ " SIEBEL811.S_DMND_CRTN_PRG TT WHERE TC.ROW_ID=TR.SRC_ID "
-			+ "AND TT.MKTG_OFFR_ID=TOF.ROW_ID AND TT.ROW_ID=TR.DCP_ID "
-			+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN'"
-			+ " AND TC.CAMP_TYPE_CD='Campaign' AND TC.MKTG_TMPL_FLG='N'";
-
-	private String SELECT_OFECTL = "SELECT "
-			+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
-			+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, "
-			+ "COUNT(TRUNC(LAST_UPD)) AS TOTAL "
-			+ "FROM SIEBEL811.S_MKTG_OFFR "
-			+ "WHERE LAST_UPD "
-			+ "BETWEEN TO_DATE('20140101','YYYYMMDD') "
-			+ "AND TO_DATE('20151231','YYYYMMDD') "
-			+ "GROUP BY TRUNC(LAST_UPD) "
-			+ "ORDER BY LAST_UPD";
-
+	
 	public List<Oferta> listarOfertas() {
+		String SELECT_CATOFE = "SELECT ROW_ID, X_TYPE_NUM, NAME, COMMENTS, APPR_STAT_CD,"
+				+ "TO_CHAR(START_DT,'YYYYMMDD')START_DT, TO_CHAR(END_DT,'YYYYMMDD')END_DT, "
+				+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, X_ID_OFFER "
+				+ "FROM SIEBEL811.S_MKTG_OFFR "
+				+ "WHERE LAST_UPD "
+				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD')";
+
 		List<Oferta> ofertas = new ArrayList<Oferta>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
@@ -57,6 +44,14 @@ public class OfertaDAO {
 	}
 
 	public List<Oferta> listarOfertasCtl() {
+		String SELECT_OFECTL = "SELECT "
+				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
+				+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, "
+				+ "COUNT(TRUNC(LAST_UPD)) AS TOTAL "
+				+ "FROM SIEBEL811.S_MKTG_OFFR " + "WHERE LAST_UPD "
+				+ "BETWEEN TO_DATE('20140101','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "GROUP BY TRUNC(LAST_UPD) " + "ORDER BY LAST_UPD";
 		List<Oferta> ofertas = new ArrayList<Oferta>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
@@ -72,5 +67,4 @@ public class OfertaDAO {
 		}
 		return ofertas;
 	}
-
 }

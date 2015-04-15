@@ -14,16 +14,24 @@ import domain.Conexion;
 public class ClienteDireccionDAO {
 	private Connection userConn = null;
 	private Connection conn = null;
-	private PreparedStatement stmt = null;
+	private PreparedStatement stmt = null;	
 	private ResultSet rs = null;
 	SimpleDateFormat formateador = new SimpleDateFormat("yyyyMMdd");
-	private String SELECT_CATDIR = "SELECT TC.ROW_ID, TD.ROW_ID, TD.ADDR, TD.ADDR_NUM, "
-			+ "TD.ADDR_LINE_5, TD.ADDR_LINE_3, TD.ZIPCODE, TD.PROVINCE, TD.CITY, "
-			+ "TD.STATE, TD.COUNTRY, TO_CHAR(TD.LAST_UPD,'YYYYMMDD')LAST_UPD "
-			+ "FROM SIEBEL811.S_CONTACT TC, SIEBEL811.S_ADDR_PER TD, SIEBEL811.S_CON_ADDR TR "
-			+ "WHERE TC.ROW_ID=TR.CONTACT_ID " + "AND TR.ADDR_PER_ID=TD.ROW_ID";
 
 	public List<ClienteDireccion> listarClientesDirecciones() {
+		String SELECT_CATDIR = "SELECT TC.ROW_ID, TD.ROW_ID, "
+				+ "TD.ADDR, TD.ADDR_NUM, "
+				+ "TD.ADDR_LINE_5, TD.ADDR_LINE_3, "
+				+ "TD.ZIPCODE, TD.PROVINCE, TD.CITY, "
+				+ "TD.STATE, TD.COUNTRY, "
+				+ "TO_CHAR(TD.LAST_UPD,'YYYYMMDD')LAST_UPD "
+				+ "FROM SIEBEL811.S_CONTACT TC, "
+				+ "SIEBEL811.S_ADDR_PER TD, SIEBEL811.S_CON_ADDR TR "
+				+ "WHERE TD.LAST_UPD "
+				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "AND TC.ROW_ID=TR.CONTACT_ID " 
+				+ "AND TR.ADDR_PER_ID=TD.ROW_ID";
 		List<ClienteDireccion> clientesdirecciones = new ArrayList<ClienteDireccion>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion

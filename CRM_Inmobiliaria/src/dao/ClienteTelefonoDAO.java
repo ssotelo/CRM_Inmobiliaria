@@ -15,12 +15,16 @@ public class ClienteTelefonoDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_CATTEL = "SELECT DISTINCT TC.ROW_ID, TN.ADDR, TN.COMM_USE_TYPE_CD,"
-			+ "TN.X_EXTENSION, TO_CHAR(TN.LAST_UPD,'YYYYMMDD')LAST_UPD "
-			+ "FROM SIEBEL811.S_CONTACT TC, SIEBEL811.S_PER_COMM_ADDR TN "
-			+ "WHERE TC.ROW_ID=TN.PER_ID " + "AND TN.COMM_MEDIUM_CD='Phone' ";
 
 	public List<ClienteTelefono> listarClientestelefonos() {
+		String SELECT_CATTEL = "SELECT DISTINCT TC.ROW_ID, TN.ADDR, TN.COMM_USE_TYPE_CD,"
+				+ "TN.X_EXTENSION, TO_CHAR(TN.LAST_UPD,'YYYYMMDD')LAST_UPD "
+				+ "FROM SIEBEL811.S_CONTACT TC, SIEBEL811.S_PER_COMM_ADDR TN "
+				+ "WHERE TN.LAST_UPD "
+				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "AND TC.ROW_ID=TN.PER_ID " 
+				+ "AND TN.COMM_MEDIUM_CD='Phone' ";
 		List<ClienteTelefono> clientestelefonos = new ArrayList<ClienteTelefono>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion

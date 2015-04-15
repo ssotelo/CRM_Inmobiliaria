@@ -15,12 +15,17 @@ public class CompetenciaDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_COMP = "SELECT PP.DEPT_NUM, PP.NAME AS TIENDA,TH.NAME AS COMPETENCIA, TH.X_ID_FB, TH.X_ID_TWITTER "
-			+ "FROM SIEBEL811.S_ORG_EXT PP, SIEBEL811.S_ORG_EXT TH, SIEBEL811.S_PARTY_REL TR "
-			+ "WHERE TR.REL_PARTY_ID=PP.ROW_ID AND TR.PARTY_ID=TH.ROW_ID  "
-			+ "ORDER BY PP.NAME";
 
 	public List<Competencia> listarCompetencias() {
+		String SELECT_COMP = "SELECT PP.DEPT_NUM, PP.NAME AS TIENDA,"
+				+ "TH.NAME AS COMPETENCIA, TH.X_ID_FB, TH.X_ID_TWITTER "
+				+ "FROM SIEBEL811.S_ORG_EXT PP, "
+				+ "SIEBEL811.S_ORG_EXT TH, SIEBEL811.S_PARTY_REL TR "
+				+ "WHERE PP.LAST_UPD BETWEEN TO_DATE('20150101','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD')"
+				+ "AND TR.REL_PARTY_ID=PP.ROW_ID "
+				+ "AND TR.PARTY_ID=TH.ROW_ID  "
+				+ "ORDER BY PP.NAME";
 		List<Competencia> competencias = new ArrayList<Competencia>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
@@ -37,5 +42,4 @@ public class CompetenciaDAO {
 		}
 		return competencias;
 	}
-
 }

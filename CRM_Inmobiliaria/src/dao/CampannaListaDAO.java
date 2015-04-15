@@ -15,15 +15,18 @@ public class CampannaListaDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_CATCAMLIS = "SELECT TL.SRC_ID, TL.CALL_LST_ID, "
-			+ "TO_CHAR(TL.CREATED,'YYYYMMDD')CREATED,"
-			+ "TO_CHAR(TL.LAST_UPD,'YYYYMMDD')LAST_UPD "
-			+ "FROM SIEBEL.S_CAMP_CALL_LST TL, SIEBEL.S_SRC TC "
-			+ "WHERE TL.SRC_ID=TC.ROW_ID "
-			+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
-			+ "AND TC.CAMP_TYPE_CD='Campaign' " + "AND TC.MKTG_TMPL_FLG='N'";
 
 	public List<CampannaLista> listarCampannasListas() {
+		String SELECT_CATCAMLIS = "SELECT TL.SRC_ID, TL.CALL_LST_ID, "
+				+ "TO_CHAR(TL.CREATED,'YYYYMMDD')CREATED,"
+				+ "TO_CHAR(TL.LAST_UPD,'YYYYMMDD')LAST_UPD "
+				+ "FROM SIEBEL.S_CAMP_CALL_LST TL, SIEBEL.S_SRC TC "
+				+ "WHERE TL.LAST_UPD "
+				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "AND TL.SRC_ID=TC.ROW_ID "
+				+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
+				+ "AND TC.CAMP_TYPE_CD='Campaign' " + "AND TC.MKTG_TMPL_FLG='N'";
 		List<CampannaLista> clc = new ArrayList<CampannaLista>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion

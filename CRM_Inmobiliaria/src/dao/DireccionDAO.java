@@ -15,10 +15,13 @@ public class DireccionDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_CATDIR = "SELECT DISTINCT X_DES_CITY, CITY, "
-			+ "X_DES_STA, STATE, COUNTRY FROM SIEBEL.S_ADDR_PER";
 
 	public List<Direccion> listarDirecciones() {
+		String SELECT_CATDIR = "SELECT DISTINCT X_DES_CITY, CITY, "
+				+ "X_DES_STA, STATE, COUNTRY "
+				+ "FROM SIEBEL811.S_ADDR_PER "
+				+ "WHERE LAST_UPD BETWEEN TO_DATE('20150101','YYYYMMDD') "
+				+ "AND TO_DATE('20150101','YYYYMMDD')";
 		List<Direccion> dirs = new ArrayList<Direccion>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion

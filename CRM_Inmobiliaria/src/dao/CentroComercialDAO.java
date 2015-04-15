@@ -15,16 +15,20 @@ public class CentroComercialDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_CENCOM = "SELECT TC.DEPT_NUM, TC.NAME, TD.COUNTY, "
-			+ "TD.COUNTRY, TD.STATE, TD.PROVINCE, "
-			+ "TD.COUNTRY, TO_CHAR(TC.CREATED,'YYYYMMDD')CREATED, "
-			+ "TC.X_ID_FB,TC.X_ID_TWITTER "
-			+ "FROM SIEBEL811.S_ORG_EXT TC, SIEBEL811.S_ADDR_PER TD, SIEBEL811.S_CON_ADDR TR "
-			+ "WHERE TC.ROW_ID=TR.ACCNT_ID "
-			+ "AND TR.ADDR_PER_ID=TD.ROW_ID";
-
 
 	public List<CentroComercial> listarCentrosComerciales() {
+		String SELECT_CENCOM = "SELECT "
+				+ "TC.DEPT_NUM, TC.NAME, TD.COUNTY, "
+				+ "TD.COUNTRY, TD.STATE, TD.PROVINCE, "
+				+ "TD.COUNTRY, "
+				+ "TO_CHAR(TC.CREATED,'YYYYMMDD')CREATED, "
+				+ "TC.X_ID_FB,TC.X_ID_TWITTER "
+				+ "FROM SIEBEL811.S_ORG_EXT TC, SIEBEL811.S_ADDR_PER TD, SIEBEL811.S_CON_ADDR TR "
+				+ "WHERE TC.LAST_UPD "
+				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "AND TC.ROW_ID=TR.ACCNT_ID "
+				+ "AND TR.ADDR_PER_ID=TD.ROW_ID ";
 		List<CentroComercial> centroscomerciales = new ArrayList<CentroComercial>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion

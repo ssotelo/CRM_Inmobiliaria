@@ -15,9 +15,6 @@ public class ListaContactoDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_CATLISCON = "SELECT CON_PER_ID, CALL_LST_ID,"
-			+ "	TO_CHAR(CREATED,'YYYYMMDD')CREATED,"
-			+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD FROM SIEBEL811.S_CALL_LST_CON";
 	
 	private String SELECT_CATLISCONCTL = "SELECT "
 			+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
@@ -31,6 +28,12 @@ public class ListaContactoDAO {
 			+ "ORDER BY LAST_UPD";	
 
 	public List<ListaContacto> listarListasContactos() {
+		String SELECT_CATLISCON = "SELECT CON_PER_ID, CALL_LST_ID,"
+				+ "TO_CHAR(CREATED,'YYYYMMDD')CREATED, "
+				+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD "
+				+ "FROM SIEBEL811.S_CALL_LST_CON "
+				+ "WHERE LAST_UPD BETWEEN TO_DATE('20150101','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD')";
 		List<ListaContacto> listarlistascontactos = new ArrayList<ListaContacto>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion

@@ -15,9 +15,14 @@ public class RegionDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_CATREG = "SELECT ROW_ID, NAME FROM SIEBEL.S_REGION";
+	
 
 	public List<Region> listarRegiones() {
+		String SELECT_CATREG = "SELECT ROW_ID, NAME "
+				+ "FROM SIEBEL811.S_REGION "
+				+ "WHERE LAST_UPD "
+				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD')";
 		List<Region> regiones = new ArrayList<Region>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion

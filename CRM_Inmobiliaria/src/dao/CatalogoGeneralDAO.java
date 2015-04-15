@@ -16,12 +16,15 @@ public class CatalogoGeneralDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_CATGEN = "SELECT ROW_ID, PAR_ROW_ID,"
-			+ "TYPE,SUB_TYPE, VAL, NAME, DESC_TEXT, ORDER_BY "
-			+ "FROM SIEBEL811.S_LST_OF_VAL "
-			+ "WHERE ACTIVE_FLG='Y' ORDER BY TYPE";
 
 	public List<CatalogoGeneral> listarCatalogosGenerales() {
+		String SELECT_CATGEN = "SELECT ROW_ID, PAR_ROW_ID,"
+				+ "TYPE,SUB_TYPE, VAL, NAME, DESC_TEXT, ORDER_BY "
+				+ "FROM SIEBEL811.S_LST_OF_VAL "
+				+ "WHERE LAST_UPD "
+				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "AND ACTIVE_FLG='Y' ORDER BY TYPE ";
 		List<CatalogoGeneral> catalogosgenerales = new ArrayList<CatalogoGeneral>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion

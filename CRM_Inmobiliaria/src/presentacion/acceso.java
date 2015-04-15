@@ -1,10 +1,10 @@
 package presentacion;
 
-import service.RespuestaCampannaService;
+import service.CampannaService;
 
 public class acceso {
 	public static void main(String[] args) {
-		RespuestaCampannaService service = new RespuestaCampannaService();
-		service.consultarRespuestasCampannas();
+		CampannaService service = new CampannaService();
+		service.consultarCampannas();
 	}
 }

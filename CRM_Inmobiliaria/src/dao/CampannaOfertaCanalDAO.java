@@ -15,35 +15,21 @@ public class CampannaOfertaCanalDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_CATCAMPOFFRCAN = "SELECT TOF.ROW_ID, TT.MEDIA_TYPE_CD, "
-			+ "TC.ROW_ID, TOF.APPR_STAT_CD, TT.COST, TO_CHAR(TT.START_DT,'YYYYMMDD')START_DT, "
-			+ "TO_CHAR(TT.END_DT,'YYYYMMDD')END_DT, "
-			+ "TO_CHAR(TC.LAST_UPD,'YYYYMMDD')LAST_UPD, "
-			+ "TT.X_ID_TREAT, TT.NAME FROM SIEBEL811.S_SRC TC,"
-			+ " SIEBEL811.S_MKTG_OFFR TOF, SIEBEL811.S_SRC_DCP TRT, "
-			+ "SIEBEL811.S_DMND_CRTN_PRG TT WHERE TRT.SRC_ID=TC.ROW_ID(+) "
-			+ " AND TRT.DCP_ID=TT.ROW_ID AND TT.MKTG_OFFR_ID=TOF.ROW_ID "
-			+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
-			+ "AND TC.CAMP_TYPE_CD='Campaign' AND TC.MKTG_TMPL_FLG='N'";
-
-	private String SELECT_CATCAMPOFFRCANCTL = "SELECT "
-			+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
-			+ "TO_CHAR(TRUNC(TR.LAST_UPD),'YYYYMMDD')LAST_UPD, "
-			+ "COUNT(TRUNC(TR.LAST_UPD)) AS TOTAL "
-			+ "FROM SIEBEL811.S_SRC TC, SIEBEL811.S_MKTG_OFFR TOF, "
-			+ "SIEBEL811.S_SRC_DCP TR, SIEBEL811.S_DMND_CRTN_PRG TT "
-			+ "WHERE TR.LAST_UPD "
-			+ "BETWEEN TO_DATE('20140101','YYYYMMDD') "
-			+ "AND TO_DATE('20151231','YYYYMMDD') "
-			+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
-			+ "AND TC.CAMP_TYPE_CD='Campaign' "
-			+ "AND TR.SRC_ID=TC.ROW_ID(+) "
-			+ "AND TR.DCP_ID=TT.ROW_ID "
-			+ "AND TT.MKTG_OFFR_ID=TOF.ROW_ID "
-			+ "GROUP BY TRUNC(TR.LAST_UPD) "
-			+ "ORDER BY LAST_UPD";
 
 	public List<CampannaOfertaCanal> listarCampannasOfertasCanales() {
+		String SELECT_CATCAMPOFFRCAN = "SELECT TOF.ROW_ID, TT.MEDIA_TYPE_CD, "
+				+ "TC.ROW_ID, TOF.APPR_STAT_CD, TT.COST, TO_CHAR(TT.START_DT,'YYYYMMDD')START_DT, "
+				+ "TO_CHAR(TT.END_DT,'YYYYMMDD')END_DT, "
+				+ "TO_CHAR(TC.LAST_UPD,'YYYYMMDD')LAST_UPD, "
+				+ "TT.X_ID_TREAT, TT.NAME FROM SIEBEL811.S_SRC TC,"
+				+ " SIEBEL811.S_MKTG_OFFR TOF, SIEBEL811.S_SRC_DCP TRT, "
+				+ "SIEBEL811.S_DMND_CRTN_PRG TT WHERE TC.LAST_UPD "
+				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "AND TRT.SRC_ID=TC.ROW_ID(+) "
+				+ "AND TRT.DCP_ID=TT.ROW_ID AND TT.MKTG_OFFR_ID=TOF.ROW_ID "
+				+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
+				+ "AND TC.CAMP_TYPE_CD='Campaign' AND TC.MKTG_TMPL_FLG='N'";
 		List<CampannaOfertaCanal> campoofertac = new ArrayList<CampannaOfertaCanal>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
@@ -63,6 +49,22 @@ public class CampannaOfertaCanalDAO {
 	}
 
 	public List<CampannaOfertaCanal> listarCampannasOfertasCanalesCtl() {
+		String SELECT_CATCAMPOFFRCANCTL = "SELECT "
+				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
+				+ "TO_CHAR(TRUNC(TR.LAST_UPD),'YYYYMMDD')LAST_UPD, "
+				+ "COUNT(TRUNC(TR.LAST_UPD)) AS TOTAL "
+				+ "FROM SIEBEL811.S_SRC TC, SIEBEL811.S_MKTG_OFFR TOF, "
+				+ "SIEBEL811.S_SRC_DCP TR, SIEBEL811.S_DMND_CRTN_PRG TT "
+				+ "WHERE TR.LAST_UPD "
+				+ "BETWEEN TO_DATE('20140101','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
+				+ "AND TC.CAMP_TYPE_CD='Campaign' "
+				+ "AND TR.SRC_ID=TC.ROW_ID(+) "
+				+ "AND TR.DCP_ID=TT.ROW_ID "
+				+ "AND TT.MKTG_OFFR_ID=TOF.ROW_ID "
+				+ "GROUP BY TRUNC(TR.LAST_UPD) "
+				+ "ORDER BY LAST_UPD";
 		List<CampannaOfertaCanal> campoofertac = new ArrayList<CampannaOfertaCanal>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion

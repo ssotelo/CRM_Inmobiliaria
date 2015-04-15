@@ -15,12 +15,16 @@ public class TarjetaDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_CATTAR = "SELECT TC.ROW_ID, TT.TYPE_CD, TT.IDENTITY_DOC_NUM, "
-			+ "TO_CHAR(TT.LAST_UPD,'YYYYMMDD')LAST_UPD "
-			+ "FROM SIEBEL.S_CON_IDNTY_DOC TT, SIEBEL.S_CONTACT TC "
-			+ "WHERE TT.CONTACT_ID=TC.ROW_ID(+)";
 
 	public List<Tarjeta> listarTarjetas() {
+		String SELECT_CATTAR = "SELECT TC.ROW_ID, TT.TYPE_CD, TT.IDENTITY_DOC_NUM, "
+				+ "TO_CHAR(TT.LAST_UPD,'YYYYMMDD')LAST_UPD "
+				+ "FROM SIEBEL811.S_CON_IDNTY_DOC TT, SIEBEL811.S_CONTACT TC "
+				+ "WHERE TT.LAST_UPD "
+				+ "BETWEEN TO_DATE('20141201','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "AND TT.CONTACT_ID=TC.ROW_ID(+)";
+
 		List<Tarjeta> tarjetas = new ArrayList<Tarjeta>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion

@@ -16,25 +16,19 @@ public class ClienteDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_CATCLI = "SELECT TC.ROW_ID, TC.FST_NAME, TC.LAST_NAME, TC.MID_NAME, "
-			+ "TC.SOC_SECURITY_NUM, TC.SEX_MF, TC.MARITAL_STAT_CD, "
-			+ "TO_CHAR(TC.BIRTH_DT,'YYYYMMDD')BIRTH_DT, TO_CHAR(TC.CREATED,'YYYYMMDD')CREATED, "
-			+ "TO_CHAR(TC.LAST_UPD,'YYYYMMDD')LAST_UPD, TC.X_ID_CUST, TC.PERSON_UID, "
-			+ "TC.ALIAS_NAME "
-			+ "FROM SIEBEL811.S_CONTACT TC";
 	
-	private String SELECT_CLICTL = "SELECT "
-			+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY,"
-			+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, "
-			+ "COUNT(TRUNC(LAST_UPD)) AS TOTAL "
-			+ "FROM SIEBEL811.S_CONTACT "
-			+ "WHERE LAST_UPD "
-			+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
-			+ "AND TO_DATE('20151231','YYYYMMDD') "
-			+ "GROUP BY TRUNC(LAST_UPD) "
-			+ "ORDER BY LAST_UPD";
 
 	public List<Cliente> listarClientes(){
+		String SELECT_CATCLI = "SELECT TC.ROW_ID, TC.FST_NAME, TC.LAST_NAME, TC.MID_NAME, "
+				+ "TC.SOC_SECURITY_NUM, TC.SEX_MF, TC.MARITAL_STAT_CD, "
+				+ "TO_CHAR(TC.BIRTH_DT,'YYYYMMDD')BIRTH_DT, "
+				+ "TO_CHAR(TC.CREATED,'YYYYMMDD')CREATED, "
+				+ "TO_CHAR(TC.LAST_UPD,'YYYYMMDD')LAST_UPD, "
+				+ "TC.X_ID_CUST, TC.PERSON_UID, "
+				+ "TC.ALIAS_NAME "
+				+ "FROM SIEBEL811.S_CONTACT TC "
+				+ "WHERE TC.LAST_UPD BETWEEN TO_DATE('20150101','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD')";
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
@@ -53,6 +47,16 @@ public class ClienteDAO {
 	}
 	
 	public List<Cliente> listarClientesCtl(){
+		String SELECT_CLICTL = "SELECT "
+				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY,"
+				+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, "
+				+ "COUNT(TRUNC(LAST_UPD)) AS TOTAL "
+				+ "FROM SIEBEL811.S_CONTACT "
+				+ "WHERE LAST_UPD "
+				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "GROUP BY TRUNC(LAST_UPD) "
+				+ "ORDER BY LAST_UPD";
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
