@@ -16,7 +16,8 @@ public class CatalogoGeneralDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	private String SELECT_CATGEN = "SELECT ROW_ID, PAR_ROW_ID,TYPE,SUB_TYPE, VAL, NAME, DESC_TEXT, ORDER_BY "
+	private String SELECT_CATGEN = "SELECT ROW_ID, PAR_ROW_ID,"
+			+ "TYPE,SUB_TYPE, VAL, NAME, DESC_TEXT, ORDER_BY "
 			+ "FROM SIEBEL811.S_LST_OF_VAL "
 			+ "WHERE ACTIVE_FLG='Y' ORDER BY TYPE";
 

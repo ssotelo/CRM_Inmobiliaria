@@ -16,12 +16,13 @@ public class Conexion {
 	private static Driver driver = null;
 	*/
 	/*Datos para Sieb desarrollo*/
+
 	private static String JDBC_DRIVER ="oracle.jdbc.OracleDriver";
 	private static String JDBC_URL="jdbc:oracle:thin:@//172.16.204.59:1521/SIEBDEV";
 	private static String JDBC_USER="DCHAVEZ";
 	private static String JDBC_PASS="DCHAVEZ_";
 	private static Driver driver = null;
-	
+
 	public static synchronized Connection getConnection() throws SQLException{
 		if(driver==null){
 			try{
@@ -58,5 +59,4 @@ public class Conexion {
 			if(conn != null) conn.close();
 		}catch(SQLException sqle){sqle.printStackTrace();}
 	}
-
 }
