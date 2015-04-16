@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.csvreader.CsvWriter;
 
-import domain.ConnSftp;
 import domain.Direccion;
 
 
@@ -20,7 +19,7 @@ public class ArchivoDireccion {
 	private String outFileDat = "";
 	private String outFileCif = "";
 
-	public void archivarDirecciones(List<Direccion> cg) {
+	public void archivarDirecciones(List<Direccion> cg, String cfg) {
 		String ruta = "C:/apps/";
 		outFileDat = "eilcis_sieb_munestadopais."
 				+ formateador.format(now) + ".dat";
@@ -58,11 +57,6 @@ public class ArchivoDireccion {
 			salidaCif.close();
 			System.out.println(outFileDat);
 			System.out.println(outFileCif);
-			
-
-			ConnSftp consftp = new  ConnSftp();
-			System.out.println("archivo outFile"+ outFileDat);
-		consftp.conexionSftp(outFileDat,outFileDat);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

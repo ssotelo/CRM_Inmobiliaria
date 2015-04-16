@@ -19,7 +19,7 @@ public class ArchivoTarjeta {
 	private String outFileDat = "";
 	private String outFileCif = "";
 
-	public void archivarTarjetas(List<Tarjeta> tc) {
+	public void archivarTarjetas(List<Tarjeta> tc, String cfg) {
 		String ruta = "C:/apps/";
 		outFileDat = "eilcis_sieb_clientetarjcredito."
 				+ formateador.format(now) + ".dat";
@@ -55,11 +55,9 @@ public class ArchivoTarjeta {
 			salidaCif.close();
 			System.out.println(outFileDat);
 			System.out.println(outFileCif);
-			
-
 			ConnSftp consftp = new  ConnSftp();
 			System.out.println("archivo outFile"+ outFileDat);
-		consftp.conexionSftp(outFileDat,outFileDat);
+			consftp.conexionSftp(cfg);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

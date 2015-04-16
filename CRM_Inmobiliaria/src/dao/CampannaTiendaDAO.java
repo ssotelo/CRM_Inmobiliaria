@@ -17,10 +17,12 @@ public class CampannaTiendaDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	
-	public List<CampannaTienda> listarCampannasTiendas(String FecIni, String FecFin) {
+	public List<CampannaTienda> listarCampannasTiendas(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CAMTI = "SELECT TRCT.SRC_ID, TRCT.PGROUP_ID, TT.NAME,"
 				+ "TO_CHAR(TRCT.CREATED,'YYYYMMDD')CREATED ,TO_CHAR(TRCT.LAST_UPD,'YYYYMMDD')"
-				+ "LAST_UPD FROM SIEBEL811.S_SRC_PGROUP TRCT, SIEBEL811.S_SRC TC,"
+				+ "LAST_UPD FROM " + DBO + ".S_SRC_PGROUP TRCT, "
+				+ DBO +".S_SRC TC,"
 				+ "SIEBEL811.S_PGROUP TT "
 				+ "WHERE TRCT.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
@@ -31,7 +33,7 @@ public class CampannaTiendaDAO {
 		List<CampannaTienda> campannastiendas = new ArrayList<CampannaTienda>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CAMTI);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -48,14 +50,15 @@ public class CampannaTiendaDAO {
 		return campannastiendas;
 	}
 
-	public List<CampannaTienda> listarCampannasTiendasCtl(String FecIni, String FecFin) {
+	public List<CampannaTienda> listarCampannasTiendasCtl(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CAMTICTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY,"
 				+ "TO_CHAR(TRUNC(TRCT.LAST_UPD),'YYYYMMDD')LAST_UPD, "
 				+ "COUNT(TRUNC(TRCT.LAST_UPD)) AS TOTAL "
 				+ "FROM SIEBEL811.S_SRC_PGROUP TRCT, "
-				+ "SIEBEL811.S_SRC TC,"
-				+ "SIEBEL811.S_PGROUP TT "
+				+ DBO + ".S_SRC TC,"
+				+ DBO + ".S_PGROUP TT "
 				+ "WHERE TRCT.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD')  "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -69,7 +72,7 @@ public class CampannaTiendaDAO {
 		List<CampannaTienda> campannastiendas = new ArrayList<CampannaTienda>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CAMTICTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

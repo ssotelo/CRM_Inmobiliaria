@@ -16,10 +16,16 @@ public class TarjetaDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<Tarjeta> listarTarjetas(String FecIni, String FecFin) {
+	public List<Tarjeta> listarTarjetas(String FecIni, String FecFin, String cfg) {
+		String DBO ="SIEBEL811";
+		/*
+		 * Código para extraer información de *.cfg del dbo
+		 * 
+		 * */
+		
 		String SELECT_CATTAR = "SELECT TC.ROW_ID, TT.TYPE_CD, TT.IDENTITY_DOC_NUM, "
 				+ "TO_CHAR(TT.LAST_UPD,'YYYYMMDD')LAST_UPD "
-				+ "FROM SIEBEL811.S_CON_IDNTY_DOC TT, SIEBEL811.S_CONTACT TC "
+				+ "FROM "+DBO+".S_CON_IDNTY_DOC TT, "+DBO+".S_CONTACT TC "
 				+ "WHERE TT.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -28,7 +34,7 @@ public class TarjetaDAO {
 		List<Tarjeta> tarjetas = new ArrayList<Tarjeta>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATTAR);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

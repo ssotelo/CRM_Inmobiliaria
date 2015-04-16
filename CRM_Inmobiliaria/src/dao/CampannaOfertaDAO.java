@@ -16,7 +16,8 @@ public class CampannaOfertaDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<CampannaOferta> listarCampannasOfertas(String FecIni, String FecFin) {
+	public List<CampannaOferta> listarCampannasOfertas(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CAMPOFFR = "SELECT TC.ROW_ID, TOF.ROW_ID, "
 				+ "TOF.X_ATTRIB_05, TOF.X_ATTRIB_04, "
 				+ "TOF.X_ATTRIB_03, TOF.X_ATTRIB_02, "
@@ -25,8 +26,8 @@ public class CampannaOfertaDAO {
 				+ "TO_CHAR(TOF.START_DT,'YYYYMMDD')START_DT, "
 				+ "TO_CHAR(TR.LAST_UPD,'YYYYMMDD')LAST_UPD,"
 				+ "TT.X_ID_TREAT, TT.NAME, TT.OFFER_NUM "
-				+ "FROM SIEBEL811.S_SRC TC, SIEBEL811.S_SRC_DCP TR, "
-				+ "SIEBEL811.S_MKTG_OFFR TOF, SIEBEL811.S_DMND_CRTN_PRG TT "
+				+ "FROM " + DBO + ".S_SRC TC, " + DBO + ".S_SRC_DCP TR, "
+				+ DBO + ".S_MKTG_OFFR TOF, " + DBO + ".S_DMND_CRTN_PRG TT "
 				+ "WHERE TR.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -36,7 +37,7 @@ public class CampannaOfertaDAO {
 		List<CampannaOferta> campoffr = new ArrayList<CampannaOferta>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CAMPOFFR);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -57,14 +58,15 @@ public class CampannaOfertaDAO {
 		return campoffr;
 	}
 	
-	public List<CampannaOferta> listarCampannasOfertasCtl(String FecIni, String FecFin) {
+	public List<CampannaOferta> listarCampannasOfertasCtl(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CAMPOFFRCTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(TR.LAST_UPD),'YYYYMMDD')LAST_UPD, "
 				+ "COUNT(TC.ROW_ID) AS TOTAL "
-				+ "FROM SIEBEL811.S_SRC TC, SIEBEL811.S_SRC_DCP TR, "
-				+ "SIEBEL811.S_MKTG_OFFR TOF, "
-				+ "SIEBEL811.S_DMND_CRTN_PRG TT "
+				+ "FROM " + DBO + ".S_SRC TC, " + DBO + ".S_SRC_DCP TR, "
+				+ DBO + ".S_MKTG_OFFR TOF, "
+				+ DBO + ".S_DMND_CRTN_PRG TT "
 				+ "WHERE TR.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -78,7 +80,7 @@ public class CampannaOfertaDAO {
 		List<CampannaOferta> campoffr = new ArrayList<CampannaOferta>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CAMPOFFRCTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

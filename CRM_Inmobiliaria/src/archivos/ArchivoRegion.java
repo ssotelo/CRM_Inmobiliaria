@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.csvreader.CsvWriter;
 
-import domain.ConnSftp;
 import domain.Region;
 
 public class ArchivoRegion {
@@ -19,7 +18,7 @@ public class ArchivoRegion {
 	private String outFileDat = "";
 	private String outFileCif = "";
 
-	public void archivarRegiones(List<Region> reg) {
+	public void archivarRegiones(List<Region> reg, String cfg) {
 		String ruta = "C:/apps/";		
 		outFileDat = "eilcis_sieb_mktregion."+formateador.format(now)+".dat";
 		outFileCif = "eilcis_sieb_mktregion."+formateador.format(now)+".cif";
@@ -49,11 +48,6 @@ public class ArchivoRegion {
             salidaCif.close();
 			System.out.println(outFileDat);
 			System.out.println(outFileCif);
-			
-
-			ConnSftp consftp = new  ConnSftp();
-			System.out.println("archivo outFile"+ outFileDat);
-		consftp.conexionSftp(outFileDat,outFileDat);
         }catch(IOException ioe){
         	ioe.printStackTrace();
         }

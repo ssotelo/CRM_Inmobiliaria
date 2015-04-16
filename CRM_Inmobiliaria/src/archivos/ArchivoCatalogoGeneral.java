@@ -10,7 +10,6 @@ import java.util.List;
 import com.csvreader.CsvWriter;
 
 import domain.CatalogoGeneral;
-import domain.ConnSftp;
 
 public class ArchivoCatalogoGeneral {
 	private Date now = new Date();
@@ -19,7 +18,7 @@ public class ArchivoCatalogoGeneral {
 	private String outFileDat = "";
 	private String outFileCif = "";
 
-	public void archivarCatalogosGenerales(List<CatalogoGeneral> cg) {
+	public void archivarCatalogosGenerales(List<CatalogoGeneral> cg, String cfg) {
 		String ruta = "C:/apps/";
 		outFileDat = "eilcis_sieb_crmcatgeneral."
 				+ formateador.format(now) + ".dat";
@@ -60,11 +59,6 @@ public class ArchivoCatalogoGeneral {
 			salidaCif.close();
 			System.out.println(outFileDat);
 			System.out.println(outFileCif);
-			
-
-			ConnSftp consftp = new  ConnSftp();
-			System.out.println("archivo outFile"+ outFileDat);
-		consftp.conexionSftp(outFileDat,outFileDat);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

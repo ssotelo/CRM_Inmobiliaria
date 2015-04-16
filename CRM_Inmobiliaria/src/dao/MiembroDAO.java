@@ -17,7 +17,8 @@ public class MiembroDAO {
 	private ResultSet rs = null;
 
 
-	public List<Miembro> listarMiembros(String FecIni, String FecFin) {
+	public List<Miembro> listarMiembros(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_MEMBER = "SELECT TM.ROW_ID , TM.PROGRAM_ID, TM.PR_CON_ID,"
 				+ " TM.ACCRUAL_TYPE_CD, TC.X_BNN_SOURCE, "
 				+ "TO_CHAR(TM.START_DT,'YYYYMMDD')START_ST,"
@@ -30,8 +31,8 @@ public class MiembroDAO {
 				+ "TM.POINT_TYPE_C_VAL, TM.POINT_TYPE_D_VAL, "
 				+ "TCC.DEPT_NUM, "
 				+ "TO_CHAR(TM.LAST_UPD,'YYYYMMDD')LAST_UPD "
-				+ "FROM SIEBEL811.S_CONTACT TC,"
-				+ "SIEBEL811.S_LOY_MEMBER TM, SIEBEL811.S_ORG_EXT TCC "
+				+ "FROM " + DBO + ".S_CONTACT TC,"
+				+ DBO + ".S_LOY_MEMBER TM, "+ DBO +".S_ORG_EXT TCC "
 				+ "WHERE TM.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -40,7 +41,7 @@ public class MiembroDAO {
 		List<Miembro> miembros = new ArrayList<Miembro>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_MEMBER);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -61,14 +62,15 @@ public class MiembroDAO {
 		return miembros;
 	}
 	
-	public List<Miembro> listarMiembrosCtl(String FecIni, String FecFin) {
+	public List<Miembro> listarMiembrosCtl(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CTLMEM = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY,"
 				+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD,"
 				+ "PROGRAM_ID,"
 				+ "COUNT(TRUNC(LAST_UPD))AS MIEMBROS,"
 				+ "SUM(POINT_TYPE_A_VAL+POINT_TYPE_B_VAL)AS PUNTOS "
-				+ "FROM SIEBEL811.S_LOY_MEMBER "
+				+ "FROM " + DBO + ".S_LOY_MEMBER "
 				+ "WHERE LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -77,7 +79,7 @@ public class MiembroDAO {
 		List<Miembro> miembros = new ArrayList<Miembro>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CTLMEM);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

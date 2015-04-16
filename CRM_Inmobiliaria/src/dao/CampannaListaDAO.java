@@ -16,11 +16,12 @@ public class CampannaListaDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<CampannaLista> listarCampannasListas(String FecIni, String FecFin) {
+	public List<CampannaLista> listarCampannasListas(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CATCAMLIS = "SELECT TL.SRC_ID, TL.CALL_LST_ID, "
 				+ "TO_CHAR(TL.CREATED,'YYYYMMDD')CREATED,"
 				+ "TO_CHAR(TL.LAST_UPD,'YYYYMMDD')LAST_UPD "
-				+ "FROM SIEBEL.S_CAMP_CALL_LST TL, SIEBEL.S_SRC TC "
+				+ "FROM " + DBO + ".S_CAMP_CALL_LST TL, " + DBO + ".S_SRC TC "
 				+ "WHERE TL.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -30,7 +31,7 @@ public class CampannaListaDAO {
 		List<CampannaLista> clc = new ArrayList<CampannaLista>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATCAMLIS);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

@@ -16,7 +16,8 @@ public class ContactoDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<Contacto> listarContactos(String FecIni, String FecFin) {
+	public List<Contacto> listarContactos(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CATCON = "SELECT ROW_ID, SOC_SECURITY_NUM, "
 				+ "X_ATTRIB_18, X_ATTRIB_19,"
 				+ " X_ATTRIB_20, X_ATTRIB_23, X_ATTRIB_24, "
@@ -25,14 +26,14 @@ public class ContactoDAO {
 				+ "X_ATTRIB_03, X_ATTRIB_04, "
 				+ "X_ATTRIB_05, X_ATTRIB_11, X_ATTRIB_09, SUPPRESS_CALL_FLG, "
 				+ "SUPPRESS_EMAIL_FLG, SUPPRESS_MAIL_FLG, "
-				+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD FROM SIEBEL811.S_CONTACT "
+				+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD FROM " + DBO + ".S_CONTACT "
 				+ "WHERE LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')";
 		List<Contacto> contactos = new ArrayList<Contacto>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATCON);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -54,12 +55,13 @@ public class ContactoDAO {
 		return contactos;
 	}
 	
-	public List<Contacto> listarContactosCtl(String FecIni, String FecFin) {
+	public List<Contacto> listarContactosCtl(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CONCTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, "
 				+ "COUNT(TRUNC(LAST_UPD)) AS TOTAL "
-				+ "FROM SIEBEL811.S_CONTACT "
+				+ "FROM " + DBO + ".S_CONTACT "
 				+ "WHERE LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -68,7 +70,7 @@ public class ContactoDAO {
 		List<Contacto> contactos = new ArrayList<Contacto>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CONCTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

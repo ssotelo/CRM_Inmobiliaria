@@ -16,14 +16,15 @@ public class PlanDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<Plan> listarPlanes(String FecIni, String FecFin) {
+	public List<Plan> listarPlanes(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CATPLN = "SELECT TC.ROW_ID, TC.PLAN_TYPE_CD, TC.NAME, "
 				+ "TC.EXEC_APPR_STAT_CD, TC.OBJECTIVE, TR.NAME, "
 				+ "TO_CHAR(TC.PROG_START_DT,'YYYYMMDD')PROG_START_DT, "
 				+ "TO_CHAR(TC.PROG_END_DT,'YYYYMMDD')PROG_END_DT ,"
 				+ "TO_CHAR(TRUNC(TC.LAST_UPD),'YYYYMMDD')LAST_UPD, TC.SRC_NUM "
-				+ "FROM SIEBEL811.S_SRC TC "
-				+ "LEFT OUTER JOIN SIEBEL811.S_REGION TR "
+				+ "FROM "+ DBO + ".S_SRC TC "
+				+ "LEFT OUTER JOIN " + DBO + ".S_REGION TR "
 				+ "ON TR.ROW_ID=TC.REGION_ID "
 				+ "WHERE TC.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
@@ -33,7 +34,7 @@ public class PlanDAO {
 		List<Plan> pln = new ArrayList<Plan>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATPLN);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -51,12 +52,13 @@ public class PlanDAO {
 		return pln;
 	}
 	
-	public List<Plan> listarPlanesCtl(String FecIni, String FecFin) {
+	public List<Plan> listarPlanesCtl(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_PLNCTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, "
 				+ "COUNT(TRUNC(LAST_UPD)) AS TOTAL "
-				+ "FROM SIEBEL811.S_SRC "
+				+ "FROM " + DBO +".S_SRC "
 				+ "WHERE LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -67,7 +69,7 @@ public class PlanDAO {
 		List<Plan> pln = new ArrayList<Plan>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_PLNCTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

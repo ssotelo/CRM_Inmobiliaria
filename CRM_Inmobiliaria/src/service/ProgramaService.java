@@ -6,8 +6,8 @@ import dao.ProgramaDAO;
 public class ProgramaService {
 	private ArchivoPrograma file = new ArchivoPrograma();
 
-	public void consultarProgramas(String Ini,String Fin) {
+	public void consultarProgramas(String Ini,String Fin, String cfg) {
 		ProgramaDAO pgm = new ProgramaDAO();
-		file.archivarProgramas(pgm.listarProgramas(Ini,Fin));
+		file.archivarProgramas(pgm.listarProgramas(Ini,Fin,cfg),cfg);
 	}
 }

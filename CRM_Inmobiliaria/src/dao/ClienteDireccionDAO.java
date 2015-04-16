@@ -18,15 +18,16 @@ public class ClienteDireccionDAO {
 	private ResultSet rs = null;
 	SimpleDateFormat formateador = new SimpleDateFormat("yyyyMMdd");
 
-	public List<ClienteDireccion> listarClientesDirecciones(String FecIni, String FecFin) {
+	public List<ClienteDireccion> listarClientesDirecciones(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CATDIR = "SELECT TC.ROW_ID, TD.ROW_ID, "
 				+ "TD.ADDR, TD.ADDR_NUM, "
 				+ "TD.ADDR_LINE_5, TD.ADDR_LINE_3, "
 				+ "TD.ZIPCODE, TD.PROVINCE, TD.CITY, "
 				+ "TD.STATE, TD.COUNTRY, "
 				+ "TO_CHAR(TD.LAST_UPD,'YYYYMMDD')LAST_UPD "
-				+ "FROM SIEBEL811.S_CONTACT TC, "
-				+ "SIEBEL811.S_ADDR_PER TD, SIEBEL811.S_CON_ADDR TR "
+				+ "FROM " + DBO + ".S_CONTACT TC, "
+				+ DBO + ".S_ADDR_PER TD, " + DBO + ".S_CON_ADDR TR "
 				+ "WHERE TD.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -35,7 +36,7 @@ public class ClienteDireccionDAO {
 		List<ClienteDireccion> clientesdirecciones = new ArrayList<ClienteDireccion>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATDIR);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.csvreader.CsvWriter;
 
-import domain.ConnSftp;
 import domain.RespuestaCampanna;
 
 public class ArchivoRespuestaCampanna {
@@ -19,7 +18,7 @@ public class ArchivoRespuestaCampanna {
 	private String outFileDat = "";
 	private String outFileCif = "";
 	private String outFileCtl = "";
-	public void archivarRespuestasCampannas(List<RespuestaCampanna> rcam) {
+	public void archivarRespuestasCampannas(List<RespuestaCampanna> rcam, String cfg) {
 		String ruta = "C:/apps/";
 		outFileDat = "eilcis_sieb_mktrespuestacampana."
 				+ formateador.format(now) + ".dat";
@@ -65,7 +64,7 @@ public class ArchivoRespuestaCampanna {
 		}
 	}
 	
-	public void archivarRespuestasCampannasCtl(List<RespuestaCampanna> rcam) {
+	public void archivarRespuestasCampannasCtl(List<RespuestaCampanna> rcam, String cfg) {
 		String ruta = "C:/apps/";
 		outFileCtl = "eilcis_sieb_mktrespuestacampana."
 				+ formateador.format(now) + ".ctl";
@@ -85,11 +84,6 @@ public class ArchivoRespuestaCampanna {
 			}
 			salidaCtl.close();
 			System.out.println(outFileCtl);
-			
-
-			ConnSftp consftp = new  ConnSftp();
-			System.out.println("archivo outFile"+ outFileDat);
-		consftp.conexionSftp(outFileDat,outFileDat);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

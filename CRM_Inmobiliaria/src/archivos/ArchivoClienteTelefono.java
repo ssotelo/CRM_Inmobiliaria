@@ -10,7 +10,6 @@ import java.util.List;
 import com.csvreader.CsvWriter;
 
 import domain.ClienteTelefono;
-import domain.ConnSftp;
 
 public class ArchivoClienteTelefono {
 	private Date now = new Date();
@@ -19,7 +18,7 @@ public class ArchivoClienteTelefono {
 	private String outFileDat = "";
 	private String outFileCif = "";
 
-	public void archivarClientetelefono(List<ClienteTelefono> ct) {
+	public void archivarClientetelefono(List<ClienteTelefono> ct, String cfg) {
 		String ruta = "C:/apps/";
 		outFileDat = "eilcis_sieb_clientetelefono."
 				+ formateador.format(now) + ".dat";
@@ -56,10 +55,6 @@ public class ArchivoClienteTelefono {
 			salidaCif.close();
 			System.out.println(outFileDat);
 			System.out.println(outFileCif);
-
-			ConnSftp consftp = new  ConnSftp();
-			System.out.println("archivo outFile"+ outFileDat);
-		consftp.conexionSftp(outFileDat,outFileDat);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

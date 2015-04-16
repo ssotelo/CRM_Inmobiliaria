@@ -16,17 +16,18 @@ public class ClienteDireccionVirtualDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<ClienteDireccionVirtual> listarClientesDireccionesVirtuales(String FecIni, String FecFin) {
+	public List<ClienteDireccionVirtual> listarClientesDireccionesVirtuales(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CATDIRV = "SELECT DISTINCT PER_ID, COMM_MEDIUM_CD, "
 				+ "ADDR, TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD "
-				+ "FROM SIEBEL811.S_PER_COMM_ADDR "
+				+ "FROM " + DBO +".S_PER_COMM_ADDR "
 				+ "WHERE LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')"
 				+ "UNION "
 				+ "SELECT DISTINCT ROW_ID,'Twitter',X_ID_TWITTER, "
 				+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD "
-				+ "FROM SIEBEL811.S_CONTACT "
+				+ "FROM " + DBO + ".S_CONTACT "
 				+ "WHERE LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -34,7 +35,7 @@ public class ClienteDireccionVirtualDAO {
 				+ "UNION "
 				+ "SELECT DISTINCT ROW_ID,'Facebook',X_ID_FB, "
 				+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD "
-				+ "FROM SIEBEL811.S_CONTACT "
+				+ "FROM " + DBO + ".S_CONTACT "
 				+ "WHERE LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -42,7 +43,7 @@ public class ClienteDireccionVirtualDAO {
 		List<ClienteDireccionVirtual> clientesdireccionesvirtuales = new ArrayList<ClienteDireccionVirtual>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATDIRV);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

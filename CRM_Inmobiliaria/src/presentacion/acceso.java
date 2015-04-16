@@ -28,79 +28,83 @@ import service.TarjetaService;
 
 public class acceso {
 	public static void main(String[] args) {
+		String FIni = "20150201";//args[0];
+		String Ffin = "20151231";//args[1];
+		String cfg = "C:/Users/Wendy/workspace/config.cfg";//args[2];
+		 
 		CampannaListaCanalService service01 = new CampannaListaCanalService();
-		service01.consultarCampannaListaCanal("20140101","20151231");
+		service01.consultarCampannaListaCanal(FIni,Ffin,cfg);
 		
 		CampannaListaService service02 = new CampannaListaService();
-		service02.consultarCampannasListas("20140101","20151231");
+		service02.consultarCampannasListas(FIni,Ffin,cfg);
 		
 		CampannaOfertaCanalService service03 = new CampannaOfertaCanalService();
-		service03.consultarCampannasOfertasCanales("20140101","20151231");
+		service03.consultarCampannasOfertasCanales(FIni,Ffin,cfg);
 
 		CampannaOfertaService service04 = new CampannaOfertaService();
-		service04.consultarCampannaOferta("20140101","20151231");
+		service04.consultarCampannaOferta(FIni,Ffin,cfg);
 
 		CampannaService service05 = new CampannaService();
-		service05.consultarCampannas("20140101","20151231");
+		service05.consultarCampannas(FIni,Ffin,cfg);
 
 		CampannaTiendaService service06 = new CampannaTiendaService();
-		service06.consultarCampannasTiendas("20140101","20151231");
+		service06.consultarCampannasTiendas(FIni,Ffin,cfg);
 
 		CatalogoGeneralService service07 = new CatalogoGeneralService();
-		service07.consultarCatalogosGenerales("20140101","20151231");
+		service07.consultarCatalogosGenerales(FIni,Ffin,cfg);
 		
 		CentroComercialService service08 = new CentroComercialService();
-		service08.consultarCentrosComerciales("20140101","20151231");
+		service08.consultarCentrosComerciales(FIni,Ffin,cfg);
 		
 		ClienteDireccionService service09 = new ClienteDireccionService();
-		service09.consultarClientesDireccion("20140101","20151231");
+		service09.consultarClientesDireccion(FIni,Ffin,cfg);
 		
 		ClienteDireccionVirtualService service10 = new ClienteDireccionVirtualService();
-		service10.consultarClientesDireccionesVirtuales("20140101","20151231");
+		service10.consultarClientesDireccionesVirtuales(FIni,Ffin,cfg);
 		
 		ClienteMiembroService service11 = new ClienteMiembroService();
-		service11.consultarClientesMiembros("20140101","20151231");
+		service11.consultarClientesMiembros(FIni,Ffin,cfg);
 		
 		ClienteService service12 = new ClienteService();
-		service12.consultarClientes("20140101","20151231");
+		service12.consultarClientes(FIni,Ffin,cfg);
 		
 		ClienteTelefonoService service13 = new ClienteTelefonoService();
-		service13.consultarClientetelefono("20140101","20151231");
+		service13.consultarClientetelefono(FIni,Ffin,cfg);
 
 		CompetenciaService service14 = new CompetenciaService();
-		service14.consultarCompetencias("20140101","20151231");
+		service14.consultarCompetencias(FIni,Ffin,cfg);
 
 		ContactoService service15 = new ContactoService();
-		service15.consultarContactos("20140101","20151231");
+		service15.consultarContactos(FIni,Ffin,cfg);
 
 		DireccionService service16 = new DireccionService();
-		service16.consultarDirecciones("20140101","20151231");
+		service16.consultarDirecciones(FIni,Ffin,cfg);
 
 		ListaContactoService service17 = new ListaContactoService();
-		service17.consultarListasContactos("20140101","20151231");
+		service17.consultarListasContactos(FIni,Ffin,cfg);
 
 		ListaService service18 = new ListaService();
-		service18.consultarListas("20140101","20151231");
+		service18.consultarListas(FIni,Ffin,cfg);
 		
 		MiembroService service19 = new MiembroService();
-		service19.consultarMiembros("20140101","20151231");
+		service19.consultarMiembros(FIni,Ffin,cfg);
 
 		OfertaService service20 = new OfertaService();
-		service20.consultarOfertas("20140101","20151231");
+		service20.consultarOfertas(FIni,Ffin,cfg);
 		
 		PlanService service21 = new PlanService();
-		service21.consultarPlanes("20140101","20151231");
+		service21.consultarPlanes(FIni,Ffin,cfg);
 		
 		ProgramaService service22 = new ProgramaService();
-		service22.consultarProgramas("20140101","20151231");
+		service22.consultarProgramas(FIni,Ffin,cfg);
 		
 		RegionService service23 = new RegionService();
-		service23.consultarRegiones("20140101","20151231");
+		service23.consultarRegiones(FIni,Ffin,cfg);
 		
 		RespuestaCampannaService service24 = new RespuestaCampannaService();
-		service24.consultarRespuestasCampannas("20140101","20151231");
+		service24.consultarRespuestasCampannas(FIni,Ffin,cfg);
 		
 		TarjetaService service25 = new TarjetaService();
-		service25.consultarTarjetas("20140101","20151231");
+		service25.consultarTarjetas(FIni,Ffin,cfg);
 	}
 }

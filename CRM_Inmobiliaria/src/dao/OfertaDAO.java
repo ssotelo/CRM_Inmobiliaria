@@ -16,11 +16,12 @@ public class OfertaDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	
-	public List<Oferta> listarOfertas(String FecIni, String FecFin) {
+	public List<Oferta> listarOfertas(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CATOFE = "SELECT ROW_ID, X_TYPE_NUM, NAME, COMMENTS, APPR_STAT_CD,"
 				+ "TO_CHAR(START_DT,'YYYYMMDD')START_DT, TO_CHAR(END_DT,'YYYYMMDD')END_DT, "
 				+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, X_ID_OFFER "
-				+ "FROM SIEBEL811.S_MKTG_OFFR "
+				+ "FROM " + DBO + ".S_MKTG_OFFR "
 				+ "WHERE LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')";
@@ -28,7 +29,7 @@ public class OfertaDAO {
 		List<Oferta> ofertas = new ArrayList<Oferta>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATOFE);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -46,19 +47,20 @@ public class OfertaDAO {
 		return ofertas;
 	}
 
-	public List<Oferta> listarOfertasCtl(String FecIni, String FecFin) {
+	public List<Oferta> listarOfertasCtl(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_OFECTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, "
 				+ "COUNT(TRUNC(LAST_UPD)) AS TOTAL "
-				+ "FROM SIEBEL811.S_MKTG_OFFR " + "WHERE LAST_UPD "
+				+ "FROM " + DBO + ".S_MKTG_OFFR " + "WHERE LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
 				+ "GROUP BY TRUNC(LAST_UPD) " + "ORDER BY LAST_UPD";
 		List<Oferta> ofertas = new ArrayList<Oferta>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_OFECTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

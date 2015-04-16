@@ -16,17 +16,18 @@ public class DireccionDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<Direccion> listarDirecciones(String FecIni, String FecFin) {
+	public List<Direccion> listarDirecciones(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CATDIR = "SELECT DISTINCT X_DES_CITY, CITY, "
 				+ "X_DES_STA, STATE, COUNTRY "
-				+ "FROM SIEBEL811.S_ADDR_PER "
+				+ "FROM " + DBO + ".S_ADDR_PER "
 				+ "WHERE LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')";
 		List<Direccion> dirs = new ArrayList<Direccion>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATDIR);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

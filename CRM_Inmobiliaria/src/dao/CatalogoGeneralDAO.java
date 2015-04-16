@@ -17,10 +17,11 @@ public class CatalogoGeneralDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<CatalogoGeneral> listarCatalogosGenerales(String FecIni, String FecFin) {
+	public List<CatalogoGeneral> listarCatalogosGenerales(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CATGEN = "SELECT ROW_ID, PAR_ROW_ID,"
 				+ "TYPE,SUB_TYPE, VAL, NAME, DESC_TEXT, ORDER_BY "
-				+ "FROM SIEBEL811.S_LST_OF_VAL "
+				+ "FROM "+ DBO +".S_LST_OF_VAL "
 				+ "WHERE LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -28,7 +29,7 @@ public class CatalogoGeneralDAO {
 		List<CatalogoGeneral> catalogosgenerales = new ArrayList<CatalogoGeneral>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATGEN);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

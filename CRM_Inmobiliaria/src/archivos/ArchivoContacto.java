@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.csvreader.CsvWriter;
 
-import domain.ConnSftp;
 import domain.Contacto;
 
 public class ArchivoContacto {
@@ -20,7 +19,7 @@ public class ArchivoContacto {
 	private String outFileCif = "";
 	private String outFileCtl = "";
 
-	public void archivarContactos(List<Contacto> cont) {
+	public void archivarContactos(List<Contacto> cont, String cfg) {
 		String ruta = "C:/apps/";
 		outFileDat = "eilcis_sieb_mktatribcliente."
 				+ formateador.format(now) + ".dat";
@@ -75,17 +74,12 @@ public class ArchivoContacto {
 			salidaCif.close();
 			System.out.println(outFileDat);
 			System.out.println(outFileCif);
-			
-
-			ConnSftp consftp = new  ConnSftp();
-			System.out.println("archivo outFile"+ outFileDat);
-		consftp.conexionSftp(outFileDat,outFileDat);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
 	}
 	
-	public void archivarContactosCtl(List<Contacto> cont) {
+	public void archivarContactosCtl(List<Contacto> cont, String cfg) {
 		String ruta = "C:/apps/";
 		outFileCtl = "eilcis_sieb_mktatribcliente."
 				+ formateador.format(now) + ".ctl";
@@ -105,11 +99,6 @@ public class ArchivoContacto {
 			}
 			salidaCtl.close();
 			System.out.println(outFileCtl);
-			
-
-			ConnSftp consftp = new  ConnSftp();
-			System.out.println("archivo outFile"+ outFileDat);
-		consftp.conexionSftp(outFileDat,outFileDat);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

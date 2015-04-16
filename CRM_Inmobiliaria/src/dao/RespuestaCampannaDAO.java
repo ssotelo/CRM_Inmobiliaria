@@ -17,15 +17,16 @@ public class RespuestaCampannaDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<RespuestaCampanna> listarRespuestasCampannas(String FecIni, String FecFin) {
+	public List<RespuestaCampanna> listarRespuestasCampannas(String FecIni, String FecFin, String cfg) {
+		String DBO ="SIEBEL811";
 		String SELECT_CATRCAM = "SELECT TR.SRC_ID, TT.MKTG_OFFR_ID,"
 				+ "TT.MEDIA_TYPE_CD, TR.PR_CON_ID, TR.CALL_LST_ID,"
 				+ " TR.OUTCOME_CD,TR.COMM_METHOD, "
 				+ "TR.MEET_LOC, TO_CHAR(TR.LAST_UPD,'YYYYMMDD')"
 				+ "LAST_UPD "
-				+ "FROM SIEBEL811.S_COMMUNICATION TR, "
-				+ "SIEBEL811.S_DMND_CRTN_PRG TT, "
-				+ "SIEBEL811.S_SRC TC "
+				+ "FROM "+ DBO +".S_COMMUNICATION TR, "
+				+ ""+DBO+".S_DMND_CRTN_PRG TT, "
+				+ ""+DBO+".S_SRC TC "
 				+ "WHERE TR.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -37,7 +38,7 @@ public class RespuestaCampannaDAO {
 		List<RespuestaCampanna> respuestascampannas = new ArrayList<RespuestaCampanna>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATRCAM);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -55,14 +56,15 @@ public class RespuestaCampannaDAO {
 		return respuestascampannas;
 	}
 	
-	public List<RespuestaCampanna> listarRespuestasCampannasCtl(String FecIni, String FecFin) {
+	public List<RespuestaCampanna> listarRespuestasCampannasCtl(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CATRCAMCTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(TR.LAST_UPD),'YYYYMMDD')LAST_UPD, "
 				+ "COUNT(TRUNC(TR.LAST_UPD)) AS TOTAL "
-				+ "FROM SIEBEL811.S_COMMUNICATION TR, "
-				+ "SIEBEL811.S_DMND_CRTN_PRG TT, "
-				+ "SIEBEL811.S_SRC TC "
+				+ "FROM " + DBO + ".S_COMMUNICATION TR, "
+				+ DBO +".S_DMND_CRTN_PRG TT, "
+				+ DBO +".S_SRC TC "
 				+ "WHERE TR.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -75,7 +77,7 @@ public class RespuestaCampannaDAO {
 		List<RespuestaCampanna> respuestascampannas = new ArrayList<RespuestaCampanna>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATRCAMCTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

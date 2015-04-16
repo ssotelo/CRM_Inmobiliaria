@@ -18,7 +18,8 @@ public class ClienteDAO {
 	private ResultSet rs = null;
 	
 
-	public List<Cliente> listarClientes(String FecIni, String FecFin){
+	public List<Cliente> listarClientes(String FecIni, String FecFin, String cfg){
+		String DBO = "SIEBEL811"; 
 		String SELECT_CATCLI = "SELECT TC.ROW_ID, TC.FST_NAME, TC.LAST_NAME, TC.MID_NAME, "
 				+ "TC.SOC_SECURITY_NUM, TC.SEX_MF, TC.MARITAL_STAT_CD, "
 				+ "TO_CHAR(TC.BIRTH_DT,'YYYYMMDD')BIRTH_DT, "
@@ -26,13 +27,13 @@ public class ClienteDAO {
 				+ "TO_CHAR(TC.LAST_UPD,'YYYYMMDD')LAST_UPD, "
 				+ "TC.X_ID_CUST, TC.PERSON_UID, "
 				+ "TC.ALIAS_NAME "
-				+ "FROM SIEBEL811.S_CONTACT TC "
+				+ "FROM "+ DBO +".S_CONTACT TC "
 				+ "WHERE TC.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')";
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+			conn = (this.userConn != null) ? this.userConn : Conexion.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATCLI);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -50,12 +51,13 @@ public class ClienteDAO {
 		return clientes;
 	}
 	
-	public List<Cliente> listarClientesCtl(String FecIni, String FecFin){
+	public List<Cliente> listarClientesCtl(String FecIni, String FecFin, String cfg){
+		String DBO = "SIEBEL811";
 		String SELECT_CLICTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY,"
 				+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, "
 				+ "COUNT(TRUNC(LAST_UPD)) AS TOTAL "
-				+ "FROM SIEBEL811.S_CONTACT "
+				+ "FROM " + DBO + ".S_CONTACT "
 				+ "WHERE LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -63,7 +65,7 @@ public class ClienteDAO {
 				+ "ORDER BY LAST_UPD";
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion.getConnection();
+			conn = (this.userConn != null) ? this.userConn : Conexion.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CLICTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

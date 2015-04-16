@@ -16,7 +16,8 @@ public class ProgramaDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<Programa> listarProgramas(String FecIni, String FecFin) {
+	public List<Programa> listarProgramas(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_LOYPRO = "SELECT TP.ROW_ID, TP.NAME, TP.DESC_TEXT,"
 				+ "TO_CHAR(TP.START_DT,'YYYYMMDD')START_DT, "
 				+ "TO_CHAR(TP.END_DT,'YYYYMMDD')END_DT, "
@@ -24,9 +25,9 @@ public class ProgramaDAO {
 				+ "TP.POINT_EXP_LEVEL_CD,TP.APPLY_CD, TP.REVRECG_PERIOD_DUR, "
 				+ "TP.ACTIVE_FLG, TP.PNT_TO_PAY_FLG,TP.PARTNER_FLG, TCC.NAME, TSP.NAME, "
 				+ "TO_CHAR(TP.LAST_UPD,'YYYYMMDD')LAST_UPD "
-				+ "FROM SIEBEL811.S_LOY_PROGRAM TP, "
-				+ "SIEBEL811.S_ORG_EXT TCC, "
-				+ "SIEBEL811.S_PARTY TSP "
+				+ "FROM " + DBO + ".S_LOY_PROGRAM TP, "
+				+ DBO + ".S_ORG_EXT TCC, "
+				+ DBO + ".S_PARTY TSP "
 				+ "WHERE TP.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -35,7 +36,7 @@ public class ProgramaDAO {
 		List<Programa> cat_prog = new ArrayList<Programa>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_LOYPRO);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

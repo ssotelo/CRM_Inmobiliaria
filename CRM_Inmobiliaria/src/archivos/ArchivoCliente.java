@@ -10,7 +10,6 @@ import java.util.List;
 import com.csvreader.CsvWriter;
 
 import domain.Cliente;
-import domain.ConnSftp;
 
 public class ArchivoCliente {
 	private Date now = new Date();
@@ -20,7 +19,7 @@ public class ArchivoCliente {
 	private String outFileCif = "";
 	private String outFileCtl = "";
 
-	public void archivarClientes(List<Cliente> cli) {
+	public void archivarClientes(List<Cliente> cli, String cfg) {
 		String ruta = "C:/apps/";
 		outFileDat = "eilcis_sieb_clientes." + formateador.format(now)
 				+ ".dat";
@@ -65,17 +64,12 @@ public class ArchivoCliente {
 			salidaCif.close();
 			System.out.println(outFileDat);
 			System.out.println(outFileCif);
-			
-			ConnSftp consftp = new  ConnSftp();
-			System.out.println("archivo outFile"+ outFileDat);
-		consftp.conexionSftp(outFileDat,outFileDat);
-		
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
 	}
 	
-	public void archivarClientesCTL(List<Cliente> clictl) {
+	public void archivarClientesCTL(List<Cliente> clictl, String cfg) {
 		String ruta = "C:/apps/";
 		outFileCtl = "eilcis_sieb_clientes." + formateador.format(now)
 				+ ".ctl";
@@ -95,11 +89,6 @@ public class ArchivoCliente {
 			}
 			salidaDat.close();
 			System.out.println(outFileCtl);
-			
-			ConnSftp consftp = new  ConnSftp();
-			System.out.println("archivo outFile"+ outFileDat);
-		consftp.conexionSftp(outFileDat,outFileDat);
-		
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

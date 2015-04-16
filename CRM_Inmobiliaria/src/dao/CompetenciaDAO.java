@@ -16,11 +16,12 @@ public class CompetenciaDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<Competencia> listarCompetencias(String FecIni, String FecFin) {
+	public List<Competencia> listarCompetencias(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_COMP = "SELECT PP.DEPT_NUM, PP.NAME AS TIENDA,"
 				+ "TH.NAME AS COMPETENCIA, TH.X_ID_FB, TH.X_ID_TWITTER "
-				+ "FROM SIEBEL811.S_ORG_EXT PP, "
-				+ "SIEBEL811.S_ORG_EXT TH, SIEBEL811.S_PARTY_REL TR "
+				+ "FROM " + DBO + ".S_ORG_EXT PP, "
+				+ DBO + ".S_ORG_EXT TH, " + DBO + ".S_PARTY_REL TR "
 				+ "WHERE PP.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')"
@@ -30,7 +31,7 @@ public class CompetenciaDAO {
 		List<Competencia> competencias = new ArrayList<Competencia>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_COMP);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

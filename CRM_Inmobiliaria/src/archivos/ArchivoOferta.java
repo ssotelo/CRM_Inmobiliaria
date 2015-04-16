@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.csvreader.CsvWriter;
 
-import domain.ConnSftp;
 import domain.Oferta;
 
 public class ArchivoOferta {
@@ -20,7 +19,7 @@ public class ArchivoOferta {
 	private String outFileCif = "";
 	private String outFileCtl = "";
 
-	public void archivarOfertas(List<Oferta> ofe) {
+	public void archivarOfertas(List<Oferta> ofe, String cfg) {
 		String ruta = "C:/apps/";
 		outFileDat = "eilcis_sieb_mktoferta."
 				+ formateador.format(now) + ".dat";
@@ -61,17 +60,12 @@ public class ArchivoOferta {
 			salidaCif.close();
 			System.out.println(outFileDat);
 			System.out.println(outFileCif);
-			
-
-			ConnSftp consftp = new  ConnSftp();
-			System.out.println("archivo outFile"+ outFileDat);
-		consftp.conexionSftp(outFileDat,outFileDat);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
 	}
 	
-	public void archivarOfertasCtl(List<Oferta> ofe) {
+	public void archivarOfertasCtl(List<Oferta> ofe, String cfg) {
 		String ruta = "C:/apps/";
 		outFileCtl = "eilcis_sieb_mktoferta."
 				+ formateador.format(now) + ".ctl";
@@ -91,11 +85,6 @@ public class ArchivoOferta {
 			}
 			salidaCtl.close();
 			System.out.println(outFileCtl);
-			
-
-			ConnSftp consftp = new  ConnSftp();
-			System.out.println("archivo outFile"+ outFileDat);
-		consftp.conexionSftp(outFileDat,outFileDat);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

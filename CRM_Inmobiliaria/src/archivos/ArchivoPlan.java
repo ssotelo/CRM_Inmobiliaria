@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.csvreader.CsvWriter;
 
-import domain.ConnSftp;
 import domain.Plan;
 
 public class ArchivoPlan {
@@ -20,7 +19,7 @@ public class ArchivoPlan {
 	private String outFileCif = "";
 	private String outFileCtl = "";
 
-	public void archivarPlanes(List<Plan> cg) {
+	public void archivarPlanes(List<Plan> cg, String cfg) {
 		String ruta = "C:/apps/";
 		outFileDat = "eilcis_sieb_mktplanes."+formateador.format(now)+".dat";
 		outFileCif = "eilcis_sieb_mktplanes."+formateador.format(now)+".cif";
@@ -58,17 +57,12 @@ public class ArchivoPlan {
             salidaCif.close();
 			System.out.println(outFileDat);
 			System.out.println(outFileCif);
-			
-
-			ConnSftp consftp = new  ConnSftp();
-			System.out.println("archivo outFile"+ outFileDat);
-		consftp.conexionSftp(outFileDat,outFileDat);
         }catch(IOException ioe){
         	ioe.printStackTrace();
         }
 	}
 	
-	public void archivarPlanesCtl(List<Plan> cg) {
+	public void archivarPlanesCtl(List<Plan> cg, String cfg) {
 		String ruta = "C:/apps/";
 		outFileCtl = "eilcis_sieb_mktplanes."+formateador.format(now)+".ctl";
 		boolean alreadyExists = new File(ruta + outFileCtl).exists();
@@ -85,12 +79,6 @@ public class ArchivoPlan {
             	salidaCtl.endRecord();
             }
             salidaCtl.close();
-			System.out.println(outFileCtl);
-			
-
-			ConnSftp consftp = new  ConnSftp();
-			System.out.println("archivo outFile"+ outFileDat);
-		consftp.conexionSftp(outFileDat,outFileDat);
         }catch(IOException ioe){
         	ioe.printStackTrace();
         }

@@ -16,13 +16,17 @@ public class CampannaListaCanalDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<CampannaListaCanal> listarCampannasListasCanales(String FecIni, String FecFin) {
+	public List<CampannaListaCanal> listarCampannasListasCanales(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CATCAMLISCAN = "SELECT TC.ROW_ID, TL.ROW_ID, TT.MEDIA_TYPE_CD, "
 				+ "TO_CHAR(TRL.CREATED,'YYYYMMDD')CREATED, "
 				+ "TO_CHAR(TRL.LAST_UPD,'YYYYMMDD')LAST_UPD, "
 				+ "TT.X_ID_TREAT, TT.NAME "
-				+ "FROM SIEBEL811.S_SRC TC, SIEBEL811.S_DMND_CRTN_PRG TT, "
-				+ "SIEBEL811.S_CALL_LST TL, SIEBEL811.S_SRC_DCP TRT, SIEBEL811.S_CAMP_CALL_LST TRL "
+				+ "FROM " + DBO + ".S_SRC TC, " 
+				+ DBO + ".S_DMND_CRTN_PRG TT, "
+				+ DBO + ".S_CALL_LST TL, " 
+				+ DBO + ".S_SRC_DCP TRT, "
+				+ DBO + ".S_CAMP_CALL_LST TRL "
 				+ "WHERE TRL.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -33,7 +37,7 @@ public class CampannaListaCanalDAO {
 		List<CampannaListaCanal> clc = new ArrayList<CampannaListaCanal>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATCAMLISCAN);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -51,14 +55,15 @@ public class CampannaListaCanalDAO {
 		return clc;
 	}
 
-	public List<CampannaListaCanal> listarCampannasListasCanalesCtl(String FecIni, String FecFin) {
+	public List<CampannaListaCanal> listarCampannasListasCanalesCtl(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CATCAMLISCANCTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(TRCT.LAST_UPD),'YYYYMMDD')LAST_UPD, "
 				+ "COUNT(TRUNC(TRCT.LAST_UPD)) AS TOTAL "
-				+ "FROM SIEBEL811.S_SRC_PGROUP TRCT, "
-				+ "SIEBEL811.S_SRC TC, "
-				+ "SIEBEL811.S_PGROUP TT "
+				+ "FROM " + DBO + ".S_SRC_PGROUP TRCT, "
+				+ DBO + ".S_SRC TC, "
+				+ DBO + ".S_PGROUP TT "
 				+ "WHERE TRCT.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -72,7 +77,7 @@ public class CampannaListaCanalDAO {
 		List<CampannaListaCanal> clc = new ArrayList<CampannaListaCanal>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATCAMLISCANCTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {

@@ -16,11 +16,12 @@ public class ClienteMiembroDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<ClienteMiembro> listarClientesMiembros(String FecIni, String FecFin) {
+	public List<ClienteMiembro> listarClientesMiembros(String FecIni, String FecFin, String cfg) {
+		String DBO = "SIEBEL811";
 		String SELECT_CATMIE = "SELECT TR.PER_ID, TR.MEMBER_ID, "
 				+ "TO_CHAR(TR.LAST_UPD,'YYYYMMDD')LAST_UPD "
-				+ "FROM SIEBEL811.S_LOY_MEM_CON TR, "
-				+ "SIEBEL811.S_CONTACT TC, SIEBEL811.S_LOY_MEMBER TM "
+				+ "FROM " + DBO + ".S_LOY_MEM_CON TR, "
+				+ DBO + ".S_CONTACT TC, " + DBO + ".S_LOY_MEMBER TM "
 				+ "WHERE TR.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -29,7 +30,7 @@ public class ClienteMiembroDAO {
 		List<ClienteMiembro> clientesmiembros = new ArrayList<ClienteMiembro>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection();
+					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATMIE);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
