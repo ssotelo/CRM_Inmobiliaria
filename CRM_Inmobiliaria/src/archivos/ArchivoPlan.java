@@ -1,11 +1,14 @@
 package archivos;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import com.csvreader.CsvWriter;
 
@@ -18,9 +21,19 @@ public class ArchivoPlan {
 	private String outFileDat = "";
 	private String outFileCif = "";
 	private String outFileCtl = "";
-
+	private String ruta = null;
+	
 	public void archivarPlanes(List<Plan> cg, String cfg) {
-		String ruta = "C:/apps/";
+		
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			ruta = prop.getProperty("LOCAL_DIR");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		outFileDat = "eilcis_sieb_mktplanes."+formateador.format(now)+".dat";
 		outFileCif = "eilcis_sieb_mktplanes."+formateador.format(now)+".cif";
 		boolean alreadyExists = new File(ruta + outFileDat).exists();
@@ -63,7 +76,16 @@ public class ArchivoPlan {
 	}
 	
 	public void archivarPlanesCtl(List<Plan> cg, String cfg) {
-		String ruta = "C:/apps/";
+		
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			ruta = prop.getProperty("LOCAL_DIR");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		outFileCtl = "eilcis_sieb_mktplanes."+formateador.format(now)+".ctl";
 		boolean alreadyExists = new File(ruta + outFileCtl).exists();
         if(alreadyExists){

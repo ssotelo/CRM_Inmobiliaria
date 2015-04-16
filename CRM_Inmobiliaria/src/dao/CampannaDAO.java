@@ -1,11 +1,15 @@
 package dao;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import domain.Campanna;
 import domain.Conexion;
@@ -16,10 +20,20 @@ public class CampannaDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-
+	private String DBO = null;
+	
 	public List<Campanna> listarCampannas(String FecIni, String FecFin,
 			String cfg) {
-		String DBO = "SIEBEL811";
+		
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			DBO = prop.getProperty("DBO_BD");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		String SELECT_CAMP = "SELECT TC.ROW_ID,TC.NAME,TC.OBJECTIVE,TC.CAMP_TYPE_CD,"
 				+ "TC.CAMP_CAT_CD,TC.X_PRIORITY_NUM,TC.PAR_SRC_ID,TC.STATUS_CD, TC.X_EXEC_APPR_STAT_NUM,"
 				+ "TC.MKTG_PLAN_ID,TO_CHAR(TC.PROG_START_DT,'YYYYMMDD')PROG_START_DT,"
@@ -64,7 +78,16 @@ public class CampannaDAO {
 	}
 
 	public List<Campanna> listarCampannasCtl(String FecIni, String FecFin, String cfg) {
-		String DBO = "SIEBEL811";
+		
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			DBO = prop.getProperty("DBO_BD");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		String SELECT_CAMPCTL = "SELECT  " + "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, "
 				+ "COUNT(ROW_ID) " 

@@ -1,11 +1,14 @@
 package archivos;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import com.csvreader.CsvWriter;
 
@@ -18,15 +21,20 @@ public class ArchivoCampanaListaCanal {
 	private String outFileDat = "";
 	private String outFileCif = "";
 	private String outFileCtl = "";
+	private String ruta = null;
 
-	public void archivarCampannasListasCanales(List<CampannaListaCanal> clc, String cfg) {
-		String ruta = "C:/apps/"; 
-		
-		/*
-		 * 
-		 * Código para leer ruta
-		 * 
-		 * */
+	public void archivarCampannasListasCanales(List<CampannaListaCanal> clc,
+			String cfg) {
+
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			ruta = prop.getProperty("LOCAL_DIR");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		outFileDat = "eilcis_sieb_mktcampanalistacanal."
 				+ formateador.format(now) + ".dat";
 		outFileCif = "eilcis_sieb_mktcampanalistacanal."
@@ -42,10 +50,10 @@ public class ArchivoCampanaListaCanal {
 			ficheroCifras.delete();
 		}
 		try {
-			CsvWriter salidaDat = new CsvWriter(
-					new FileWriter(ruta + outFileDat, true), '^');
-			CsvWriter salidaCif = new CsvWriter(
-					new FileWriter(ruta + outFileCif, true), '^');
+			CsvWriter salidaDat = new CsvWriter(new FileWriter(ruta
+					+ outFileDat, true), '^');
+			CsvWriter salidaCif = new CsvWriter(new FileWriter(ruta
+					+ outFileCif, true), '^');
 			for (CampannaListaCanal cat : clc) {
 				salidaDat.write(cat.getCampanaId());
 				salidaDat.write(cat.getListaId());
@@ -70,8 +78,18 @@ public class ArchivoCampanaListaCanal {
 		}
 	}
 
-	public void archivarCampannasListasCanalesCtl(List<CampannaListaCanal> clc, String cfg) {
-		String ruta = "C:/apps/";
+	public void archivarCampannasListasCanalesCtl(List<CampannaListaCanal> clc,
+			String cfg) {
+		
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			ruta = prop.getProperty("LOCAL_DIR");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		outFileCtl = "eilcis_sieb_mktcampanalistacanal."
 				+ formateador.format(now) + ".ctl";
 		boolean alreadyExists = new File(ruta + outFileCtl).exists();
@@ -80,8 +98,8 @@ public class ArchivoCampanaListaCanal {
 			ficheroCtl.delete();
 		}
 		try {
-			CsvWriter salidaCtl = new CsvWriter(
-					new FileWriter(ruta + outFileCtl, true), '^');
+			CsvWriter salidaCtl = new CsvWriter(new FileWriter(ruta
+					+ outFileCtl, true), '^');
 			for (CampannaListaCanal cat : clc) {
 				salidaCtl.write(cat.getFecToday());
 				salidaCtl.write(cat.getFecUltAct());

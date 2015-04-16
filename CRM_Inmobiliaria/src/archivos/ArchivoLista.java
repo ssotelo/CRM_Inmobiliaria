@@ -1,11 +1,14 @@
 package archivos;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import com.csvreader.CsvWriter;
 
@@ -18,9 +21,19 @@ public class ArchivoLista {
 	private String outFileDat = "";
 	private String outFileCif = "";
 	private String outFileCtl = "";
+	private String ruta = null;
 	
 	public void archivarListas(List<Lista> lst, String cfg) {
-		String ruta = "C:/apps/";
+		
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			ruta = prop.getProperty("LOCAL_DIR");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		outFileDat = "eildim_sieb_mktlistas." + formateador.format(now)
 				+ ".dat";
 		outFileCif = "eildim_sieb_mktlistas." + formateador.format(now)
@@ -66,7 +79,16 @@ public class ArchivoLista {
 	}
 
 	public void archivarListasCtl(List<Lista> lst, String cfg) {
-		String ruta = "C:/apps/";
+	
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			ruta = prop.getProperty("LOCAL_DIR");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		outFileCtl = "eildim_sieb_mktlistas." + formateador.format(now)
 				+ ".ctl";
 		boolean alreadyExists = new File(ruta + outFileCtl).exists();

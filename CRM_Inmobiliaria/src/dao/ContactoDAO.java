@@ -1,11 +1,15 @@
 package dao;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import domain.Conexion;
 import domain.Contacto;
@@ -15,9 +19,19 @@ public class ContactoDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-
+	private String DBO = null;
+	
 	public List<Contacto> listarContactos(String FecIni, String FecFin, String cfg) {
-		String DBO = "SIEBEL811";
+		
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			DBO = prop.getProperty("DBO_BD");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		String SELECT_CATCON = "SELECT ROW_ID, SOC_SECURITY_NUM, "
 				+ "X_ATTRIB_18, X_ATTRIB_19,"
 				+ " X_ATTRIB_20, X_ATTRIB_23, X_ATTRIB_24, "
@@ -56,7 +70,16 @@ public class ContactoDAO {
 	}
 	
 	public List<Contacto> listarContactosCtl(String FecIni, String FecFin, String cfg) {
-		String DBO = "SIEBEL811";
+		
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			DBO = prop.getProperty("DBO_BD");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		String SELECT_CONCTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, "

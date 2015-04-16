@@ -1,11 +1,14 @@
 package archivos;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import com.csvreader.CsvWriter;
 
@@ -17,13 +20,23 @@ public class ArchivoCampannaLista {
 	private long cif = 0;
 	private String outFileDat = "";
 	private String outFileCif = "";
+	private String ruta = null;
 
 	public void archivarCampannasListas(List<CampannaLista> cl, String cfg) {
-		String ruta = "C:/apps/";
-		outFileDat = "eilcis_sieb_mktcampanalista."
-				+ formateador.format(now) + ".dat";
-		outFileCif = "eilcis_sieb_mktcampanalista."
-				+ formateador.format(now) + ".cif";
+		
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			ruta = prop.getProperty("LOCAL_DIR");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		outFileDat = "eilcis_sieb_mktcampanalista." + formateador.format(now)
+				+ ".dat";
+		outFileCif = "eilcis_sieb_mktcampanalista." + formateador.format(now)
+				+ ".cif";
 		boolean alreadyExists = new File(ruta + outFileDat).exists();
 		if (alreadyExists) {
 			File ficheroDatos = new File(ruta + outFileDat);
@@ -35,10 +48,10 @@ public class ArchivoCampannaLista {
 			ficheroCifras.delete();
 		}
 		try {
-			CsvWriter salidaDat = new CsvWriter(
-					new FileWriter(ruta + outFileDat, true), '^');
-			CsvWriter salidaCif = new CsvWriter(
-					new FileWriter(ruta + outFileCif, true), '^');
+			CsvWriter salidaDat = new CsvWriter(new FileWriter(ruta
+					+ outFileDat, true), '^');
+			CsvWriter salidaCif = new CsvWriter(new FileWriter(ruta
+					+ outFileCif, true), '^');
 			for (CampannaLista cat : cl) {
 				salidaDat.write(cat.getCampanaId());
 				salidaDat.write(cat.getListaId());

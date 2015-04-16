@@ -30,7 +30,7 @@ public class acceso {
 	public static void main(String[] args) {
 		String FIni = "20150201";//args[0];
 		String Ffin = "20151231";//args[1];
-		String cfg = "C:/Users/Wendy/workspace/config.cfg";//args[2];
+		String cfg = "/home/crmca/workspace/config.cfg";//args[2];
 		 
 		CampannaListaCanalService service01 = new CampannaListaCanalService();
 		service01.consultarCampannaListaCanal(FIni,Ffin,cfg);

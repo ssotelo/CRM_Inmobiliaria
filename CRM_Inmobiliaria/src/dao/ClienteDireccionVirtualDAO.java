@@ -1,11 +1,15 @@
 package dao;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import domain.ClienteDireccionVirtual;
 import domain.Conexion;
@@ -15,9 +19,19 @@ public class ClienteDireccionVirtualDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-
+	private String DBO = null;
+	
 	public List<ClienteDireccionVirtual> listarClientesDireccionesVirtuales(String FecIni, String FecFin, String cfg) {
-		String DBO = "SIEBEL811";
+		
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			DBO = prop.getProperty("DBO_BD");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		String SELECT_CATDIRV = "SELECT DISTINCT PER_ID, COMM_MEDIUM_CD, "
 				+ "ADDR, TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD "
 				+ "FROM " + DBO +".S_PER_COMM_ADDR "

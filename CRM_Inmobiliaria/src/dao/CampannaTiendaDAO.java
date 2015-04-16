@@ -1,11 +1,15 @@
 package dao;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import domain.CampannaTienda;
 import domain.Conexion;
@@ -16,9 +20,19 @@ public class CampannaTiendaDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
+	private String DBO = null;
 	
 	public List<CampannaTienda> listarCampannasTiendas(String FecIni, String FecFin, String cfg) {
-		String DBO = "SIEBEL811";
+		
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			DBO = prop.getProperty("DBO_BD");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		String SELECT_CAMTI = "SELECT TRCT.SRC_ID, TRCT.PGROUP_ID, TT.NAME,"
 				+ "TO_CHAR(TRCT.CREATED,'YYYYMMDD')CREATED ,TO_CHAR(TRCT.LAST_UPD,'YYYYMMDD')"
 				+ "LAST_UPD FROM " + DBO + ".S_SRC_PGROUP TRCT, "
@@ -51,7 +65,16 @@ public class CampannaTiendaDAO {
 	}
 
 	public List<CampannaTienda> listarCampannasTiendasCtl(String FecIni, String FecFin, String cfg) {
-		String DBO = "SIEBEL811";
+	
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			DBO = prop.getProperty("DBO_BD");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		String SELECT_CAMTICTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY,"
 				+ "TO_CHAR(TRUNC(TRCT.LAST_UPD),'YYYYMMDD')LAST_UPD, "

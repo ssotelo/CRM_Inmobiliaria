@@ -1,11 +1,15 @@
 package dao;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import domain.Conexion;
 import domain.Tarjeta;
@@ -15,14 +19,19 @@ public class TarjetaDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-
+	private String DBO = null;
+	
 	public List<Tarjeta> listarTarjetas(String FecIni, String FecFin, String cfg) {
-		String DBO ="SIEBEL811";
-		/*
-		 * Código para extraer información de *.cfg del dbo
-		 * 
-		 * */
-		
+	
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			DBO = prop.getProperty("DBO_BD");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		String SELECT_CATTAR = "SELECT TC.ROW_ID, TT.TYPE_CD, TT.IDENTITY_DOC_NUM, "
 				+ "TO_CHAR(TT.LAST_UPD,'YYYYMMDD')LAST_UPD "
 				+ "FROM "+DBO+".S_CON_IDNTY_DOC TT, "+DBO+".S_CONTACT TC "

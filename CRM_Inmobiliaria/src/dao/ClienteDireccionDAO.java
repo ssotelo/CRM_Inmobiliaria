@@ -1,5 +1,8 @@
 package dao;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +10,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import domain.ClienteDireccion;
 import domain.Conexion;
@@ -17,9 +21,19 @@ public class ClienteDireccionDAO {
 	private PreparedStatement stmt = null;	
 	private ResultSet rs = null;
 	SimpleDateFormat formateador = new SimpleDateFormat("yyyyMMdd");
-
+	private String DBO = null;
+	
 	public List<ClienteDireccion> listarClientesDirecciones(String FecIni, String FecFin, String cfg) {
-		String DBO = "SIEBEL811";
+	
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			DBO = prop.getProperty("DBO_BD");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		String SELECT_CATDIR = "SELECT TC.ROW_ID, TD.ROW_ID, "
 				+ "TD.ADDR, TD.ADDR_NUM, "
 				+ "TD.ADDR_LINE_5, TD.ADDR_LINE_3, "

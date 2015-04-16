@@ -1,11 +1,14 @@
 package archivos;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import com.csvreader.CsvWriter;
 
@@ -18,9 +21,19 @@ public class ArchivoCampannaOfertaCanal {
 	private String outFileDat = "";
 	private String outFileCif = "";
 	private String outFileCtl = "";
- 
+	private String ruta = null;
+	
 	public void archivarCampannasOfertasCanales(List<CampannaOfertaCanal> cof, String cfg) {
-		String ruta = "C:/apps/";
+		
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			ruta = prop.getProperty("LOCAL_DIR");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		outFileDat = "eilcis_sieb_mktcampofertacanal."
 				+ formateador.format(now) + ".dat";
 		outFileCif = "eilcis_sieb_mktcampofertacanal."
@@ -68,7 +81,16 @@ public class ArchivoCampannaOfertaCanal {
 	}
 	
 	public void archivarCampannasOfertasCanalesCtl(List<CampannaOfertaCanal> cof, String cfg) {
-		String ruta = "C:/apps/";
+		
+		Properties prop = new Properties();
+		InputStream configFile = null;
+		try {
+			configFile = new FileInputStream(cfg);
+			prop.load(configFile);
+			ruta = prop.getProperty("LOCAL_DIR");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 		outFileCtl = "eilcis_sieb_mktcampofertacanal."
 				+ formateador.format(now) + ".ctl";
 		boolean alreadyExists = new File(ruta + outFileCtl).exists();
