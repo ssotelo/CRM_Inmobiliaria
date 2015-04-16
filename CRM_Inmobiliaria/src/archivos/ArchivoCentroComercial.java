@@ -19,27 +19,27 @@ public class ArchivoCentroComercial {
 	private String outFileCif = "";
 
 	public void archivarCentrosComerciales(List<CentroComercial> cc) {
-		outFileDat = "C:/apps/eilcis_sieb_centrocomercial."
+		String ruta = "C:/apps/";
+		outFileDat = "eilcis_sieb_centrocomercial."
 				+ formateador.format(now) + ".dat";
-		outFileCif = "C:/apps/eilcis_sieb_centrocomercial."
+		outFileCif = "eilcis_sieb_centrocomercial."
 				+ formateador.format(now) + ".cif";
-		boolean alreadyExists = new File(outFileDat).exists();
+		boolean alreadyExists = new File(ruta + outFileDat).exists();
 		if (alreadyExists) {
-			File ficheroDatos = new File(outFileDat);
+			File ficheroDatos = new File(ruta + outFileDat);
 			ficheroDatos.delete();
 		}
-		alreadyExists = new File(outFileCif).exists();
+		alreadyExists = new File(ruta + outFileCif).exists();
 		if (alreadyExists) {
-			File ficheroCifras = new File(outFileCif);
+			File ficheroCifras = new File(ruta + outFileCif);
 			ficheroCifras.delete();
 		}
 		try {
 			CsvWriter salidaDat = new CsvWriter(
-					new FileWriter(outFileDat, true), '^');
+					new FileWriter(ruta + outFileDat, true), '^');
 			CsvWriter salidaCif = new CsvWriter(
-					new FileWriter(outFileCif, true), '^');
+					new FileWriter(ruta + outFileCif, true), '^');
 			for (CentroComercial cat : cc) {
-				System.out.println(cat);
 				salidaDat.write(cat.getCodCentroComercial());
 				salidaDat.write(cat.getName());
 				salidaDat.write(cat.getColonia());
@@ -50,7 +50,6 @@ public class ArchivoCentroComercial {
 				salidaDat.write(cat.getFecApertura());
 				salidaDat.write(cat.getFacebook());
 				salidaDat.write(cat.getTwitter());
-
 				salidaDat.endRecord();
 				cif++;
 			}
@@ -59,6 +58,8 @@ public class ArchivoCentroComercial {
 			salidaCif.write(formateador.format(now));
 			salidaCif.write(Long.toString(cif));
 			salidaCif.close();
+			System.out.println(outFileDat);
+			System.out.println(outFileCif);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

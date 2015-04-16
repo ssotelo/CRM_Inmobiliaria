@@ -17,7 +17,7 @@ public class MiembroDAO {
 	private ResultSet rs = null;
 
 
-	public List<Miembro> listarMiembros() {
+	public List<Miembro> listarMiembros(String FecIni, String FecFin) {
 		String SELECT_MEMBER = "SELECT TM.ROW_ID , TM.PROGRAM_ID, TM.PR_CON_ID,"
 				+ " TM.ACCRUAL_TYPE_CD, TC.X_BNN_SOURCE, "
 				+ "TO_CHAR(TM.START_DT,'YYYYMMDD')START_ST,"
@@ -33,8 +33,8 @@ public class MiembroDAO {
 				+ "FROM SIEBEL811.S_CONTACT TC,"
 				+ "SIEBEL811.S_LOY_MEMBER TM, SIEBEL811.S_ORG_EXT TCC "
 				+ "WHERE TM.LAST_UPD "
-				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
-				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
+				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
 				+ "AND TM.PR_CON_ID=TC.ROW_ID "
 				+ "AND TC.X_GALLERY=TCC.NAME(+)";
 		List<Miembro> miembros = new ArrayList<Miembro>();
@@ -52,13 +52,16 @@ public class MiembroDAO {
 						.getDouble(15), rs.getDouble(16), rs.getDouble(17), rs
 						.getDouble(18), rs.getString(19)));
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return miembros;
 	}
 	
-	public List<Miembro> listarMiembrosCtl() {
+	public List<Miembro> listarMiembrosCtl(String FecIni, String FecFin) {
 		String SELECT_CTLMEM = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY,"
 				+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD,"
@@ -67,8 +70,8 @@ public class MiembroDAO {
 				+ "SUM(POINT_TYPE_A_VAL+POINT_TYPE_B_VAL)AS PUNTOS "
 				+ "FROM SIEBEL811.S_LOY_MEMBER "
 				+ "WHERE LAST_UPD "
-				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
-				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
+				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
 				+ "GROUP BY PROGRAM_ID,TRUNC(LAST_UPD) "
 				+ "ORDER BY LAST_UPD";
 		List<Miembro> miembros = new ArrayList<Miembro>();
@@ -81,6 +84,9 @@ public class MiembroDAO {
 				miembros.add(new Miembro(rs.getString(1), rs.getString(2), rs
 						.getString(3), rs.getString(4), rs.getString(5)));
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

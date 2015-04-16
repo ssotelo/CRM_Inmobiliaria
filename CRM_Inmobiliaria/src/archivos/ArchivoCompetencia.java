@@ -19,27 +19,27 @@ public class ArchivoCompetencia {
 	private String outFileCif = "";
 
 	public void archivarCompetencias(List<Competencia> cmpt) {
-		outFileDat = "C:/apps/eilcis_sieb_cc_competencia."
+		String ruta = "C:/apps/";
+		outFileDat = "eilcis_sieb_cc_competencia."
 				+ formateador.format(now) + ".dat";
-		outFileCif = "C:/apps/eilcis_sieb_cc_competencia."
+		outFileCif = "eilcis_sieb_cc_competencia."
 				+ formateador.format(now) + ".cif";
-		boolean alreadyExists = new File(outFileDat).exists();
+		boolean alreadyExists = new File(ruta + outFileDat).exists();
 		if (alreadyExists) {
-			File ficheroDatos = new File(outFileDat);
+			File ficheroDatos = new File(ruta + outFileDat);
 			ficheroDatos.delete();
 		}
-		alreadyExists = new File(outFileCif).exists();
+		alreadyExists = new File(ruta + outFileCif).exists();
 		if (alreadyExists) {
-			File ficheroCifras = new File(outFileCif);
+			File ficheroCifras = new File(ruta + outFileCif);
 			ficheroCifras.delete();
 		}
 		try {
 			CsvWriter salidaDat = new CsvWriter(
-					new FileWriter(outFileDat, true), '^');
+					new FileWriter(ruta + outFileDat, true), '^');
 			CsvWriter salidaCif = new CsvWriter(
-					new FileWriter(outFileCif, true), '^');
+					new FileWriter(ruta + outFileCif, true), '^');
 			for (Competencia ccmp : cmpt) {
-				System.out.println(ccmp);
 				salidaDat.write(ccmp.getDeptNum());
 				salidaDat.write(ccmp.getNombreTienda());
 				salidaDat.write(ccmp.getNombreCompetencia());
@@ -47,16 +47,16 @@ public class ArchivoCompetencia {
 				salidaDat.write(ccmp.getTwitter());
 				salidaDat.endRecord();
 				cif++;
-
 			}
 			salidaDat.close();
 			salidaCif.write(outFileDat);
 			salidaCif.write(formateador.format(now));
 			salidaCif.write(Long.toString(cif));
 			salidaCif.close();
+			System.out.println(outFileDat);
+			System.out.println(outFileCif);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
-
 	}
 }

@@ -5,9 +5,9 @@ import dao.CampannaTiendaDAO;
 
 public class CampannaTiendaService {
 	private ArchivoCampannaTienda file = new ArchivoCampannaTienda();
-	public void consultarCampannasTiendas(){
+	public void consultarCampannasTiendas(String Ini,String Fin){
 		CampannaTiendaDAO cld = new CampannaTiendaDAO();
-		file.archivarCampannasTiendas(cld.listarCampannasTiendas());
-		file.archivarCampannasTiendasCtl(cld.listarCampannasTiendasCtl());
+		file.archivarCampannasTiendas(cld.listarCampannasTiendas(Ini,Fin));
+		file.archivarCampannasTiendasCtl(cld.listarCampannasTiendasCtl(Ini,Fin));
 		}
 }

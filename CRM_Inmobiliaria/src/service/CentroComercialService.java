@@ -6,8 +6,8 @@ import dao.CentroComercialDAO;
 public class CentroComercialService {
 	private ArchivoCentroComercial file = new ArchivoCentroComercial();
 
-	public void consultarCentrosComerciales() {
+	public void consultarCentrosComerciales(String Ini,String Fin) {
 		CentroComercialDAO ccd = new CentroComercialDAO();
-		file.archivarCentrosComerciales(ccd.listarCentrosComerciales());
+		file.archivarCentrosComerciales(ccd.listarCentrosComerciales(Ini,Fin));
 	}
 }

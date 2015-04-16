@@ -6,9 +6,9 @@ import dao.ContactoDAO;
 public class ContactoService {
 	private ArchivoContacto file = new ArchivoContacto();
 
-	public void consultarContactos() {
+	public void consultarContactos(String Ini,String Fin) {
 		ContactoDAO cgd = new ContactoDAO();
-		file.archivarContactos(cgd.listarContactos());
-		file.archivarContactosCtl(cgd.listarContactosCtl());
+		file.archivarContactos(cgd.listarContactos(Ini,Fin));
+		file.archivarContactosCtl(cgd.listarContactosCtl(Ini,Fin));
 	}
 }

@@ -16,12 +16,13 @@ public class DireccionDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<Direccion> listarDirecciones() {
+	public List<Direccion> listarDirecciones(String FecIni, String FecFin) {
 		String SELECT_CATDIR = "SELECT DISTINCT X_DES_CITY, CITY, "
 				+ "X_DES_STA, STATE, COUNTRY "
 				+ "FROM SIEBEL811.S_ADDR_PER "
-				+ "WHERE LAST_UPD BETWEEN TO_DATE('20150101','YYYYMMDD') "
-				+ "AND TO_DATE('20150101','YYYYMMDD')";
+				+ "WHERE LAST_UPD "
+				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
+				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')";
 		List<Direccion> dirs = new ArrayList<Direccion>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
@@ -33,6 +34,9 @@ public class DireccionDAO {
 						.getString(2), rs.getString(3), rs.getString(4), rs
 						.getString(5)));
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

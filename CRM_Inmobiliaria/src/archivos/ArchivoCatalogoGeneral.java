@@ -19,30 +19,28 @@ public class ArchivoCatalogoGeneral {
 	private String outFileCif = "";
 
 	public void archivarCatalogosGenerales(List<CatalogoGeneral> cg) {
-
-		outFileDat = "C:/apps/eilcis_sieb_crmcatgeneral."
+		String ruta = "C:/apps/";
+		outFileDat = "eilcis_sieb_crmcatgeneral."
 				+ formateador.format(now) + ".dat";
-		outFileCif = "C:/apps/eilcis_sieb_crmcatgeneral."
+		outFileCif = "eilcis_sieb_crmcatgeneral."
 				+ formateador.format(now) + ".cif";
-		boolean alreadyExists = new File(outFileDat).exists();
+		boolean alreadyExists = new File(ruta + outFileDat).exists();
 		if (alreadyExists) {
-			File ficheroDatos = new File(outFileDat);
+			File ficheroDatos = new File(ruta + outFileDat);
 			ficheroDatos.delete();
 		}
-		alreadyExists = new File(outFileCif).exists();
+		alreadyExists = new File(ruta + outFileCif).exists();
 		if (alreadyExists) {
-			File ficheroCifras = new File(outFileCif);
+			File ficheroCifras = new File(ruta + outFileCif);
 			ficheroCifras.delete();
 		}
 		try {
 
 			CsvWriter salidaDat = new CsvWriter(
-					new FileWriter(outFileDat, true), '^');
+					new FileWriter(ruta + outFileDat, true), '^');
 			CsvWriter salidaCif = new CsvWriter(
-					new FileWriter(outFileCif, true), '^');
+					new FileWriter(ruta + outFileCif, true), '^');
 			for (CatalogoGeneral cat : cg) {
-				System.out.println(cat);
-
 				salidaDat.write(cat.getRowId());
 				salidaDat.write(cat.getParRowId());
 				salidaDat.write(cat.getType());
@@ -59,6 +57,8 @@ public class ArchivoCatalogoGeneral {
 			salidaCif.write(formateador.format(now));
 			salidaCif.write(Long.toString(cif));
 			salidaCif.close();
+			System.out.println(outFileDat);
+			System.out.println(outFileCif);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

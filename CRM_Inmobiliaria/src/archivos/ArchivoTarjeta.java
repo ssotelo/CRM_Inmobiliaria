@@ -19,29 +19,27 @@ public class ArchivoTarjeta {
 	private String outFileCif = "";
 
 	public void archivarTarjetas(List<Tarjeta> tc) {
-
-		outFileDat = "C:/apps/eilcis_sieb_clientetarjcredito."
+		String ruta = "C:/apps/";
+		outFileDat = "eilcis_sieb_clientetarjcredito."
 				+ formateador.format(now) + ".dat";
-		outFileCif = "C:/apps/eilcis_sieb_clientetarjcredito."
+		outFileCif = "eilcis_sieb_clientetarjcredito."
 				+ formateador.format(now) + ".cif";
-		boolean alreadyExists = new File(outFileDat).exists();
+		boolean alreadyExists = new File(ruta + outFileDat).exists();
 		if (alreadyExists) {
-			File ficheroDatos = new File(outFileDat);
+			File ficheroDatos = new File(ruta + outFileDat);
 			ficheroDatos.delete();
 		}
-		alreadyExists = new File(outFileCif).exists();
+		alreadyExists = new File(ruta + outFileCif).exists();
 		if (alreadyExists) {
-			File ficheroCifras = new File(outFileCif);
+			File ficheroCifras = new File(ruta + outFileCif);
 			ficheroCifras.delete();
 		}
 		try {
 			CsvWriter salidaDat = new CsvWriter(
-					new FileWriter(outFileDat, true), '^');
+					new FileWriter(ruta + outFileDat, true), '^');
 			CsvWriter salidaCif = new CsvWriter(
-					new FileWriter(outFileCif, true), '^');
+					new FileWriter(ruta + outFileCif, true), '^');
 			for (Tarjeta cat : tc) {
-				System.out.println(cat);
-
 				salidaDat.write(cat.getCodCliente());
 				salidaDat.write(cat.getDescripcion());
 				salidaDat.write(cat.getTarjeta());
@@ -54,6 +52,8 @@ public class ArchivoTarjeta {
 			salidaCif.write(formateador.format(now));
 			salidaCif.write(Long.toString(cif));
 			salidaCif.close();
+			System.out.println(outFileDat);
+			System.out.println(outFileCif);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

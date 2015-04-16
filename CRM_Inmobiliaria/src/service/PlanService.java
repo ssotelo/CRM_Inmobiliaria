@@ -6,9 +6,9 @@ import dao.PlanDAO;
 public class PlanService {
 	private ArchivoPlan file = new ArchivoPlan();
 
-	public void consultarPlanes() {
+	public void consultarPlanes(String Ini,String Fin) {
 		PlanDAO cgd = new PlanDAO();
-		file.archivarPlanes(cgd.listarPlanes());
-		file.archivarPlanesCtl(cgd.listarPlanesCtl());
+		file.archivarPlanes(cgd.listarPlanes(Ini,Fin));
+		file.archivarPlanesCtl(cgd.listarPlanesCtl(Ini,Fin));
 	}
 }

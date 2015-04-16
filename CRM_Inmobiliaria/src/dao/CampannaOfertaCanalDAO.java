@@ -16,7 +16,7 @@ public class CampannaOfertaCanalDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<CampannaOfertaCanal> listarCampannasOfertasCanales() {
+	public List<CampannaOfertaCanal> listarCampannasOfertasCanales(String FecIni, String FecFin) {
 		String SELECT_CATCAMPOFFRCAN = "SELECT TOF.ROW_ID, TT.MEDIA_TYPE_CD, "
 				+ "TC.ROW_ID, TOF.APPR_STAT_CD, TT.COST, TO_CHAR(TT.START_DT,'YYYYMMDD')START_DT, "
 				+ "TO_CHAR(TT.END_DT,'YYYYMMDD')END_DT, "
@@ -24,8 +24,8 @@ public class CampannaOfertaCanalDAO {
 				+ "TT.X_ID_TREAT, TT.NAME FROM SIEBEL811.S_SRC TC,"
 				+ " SIEBEL811.S_MKTG_OFFR TOF, SIEBEL811.S_SRC_DCP TRT, "
 				+ "SIEBEL811.S_DMND_CRTN_PRG TT WHERE TC.LAST_UPD "
-				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
-				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
+				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
 				+ "AND TRT.SRC_ID=TC.ROW_ID(+) "
 				+ "AND TRT.DCP_ID=TT.ROW_ID AND TT.MKTG_OFFR_ID=TOF.ROW_ID "
 				+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
@@ -42,13 +42,16 @@ public class CampannaOfertaCanalDAO {
 						.getString(5), rs.getString(6), rs.getString(7), rs
 						.getString(8), rs.getString(9), rs.getString(10)));
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return campoofertac;
 	}
 
-	public List<CampannaOfertaCanal> listarCampannasOfertasCanalesCtl() {
+	public List<CampannaOfertaCanal> listarCampannasOfertasCanalesCtl(String FecIni, String FecFin) {
 		String SELECT_CATCAMPOFFRCANCTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(TR.LAST_UPD),'YYYYMMDD')LAST_UPD, "
@@ -56,8 +59,8 @@ public class CampannaOfertaCanalDAO {
 				+ "FROM SIEBEL811.S_SRC TC, SIEBEL811.S_MKTG_OFFR TOF, "
 				+ "SIEBEL811.S_SRC_DCP TR, SIEBEL811.S_DMND_CRTN_PRG TT "
 				+ "WHERE TR.LAST_UPD "
-				+ "BETWEEN TO_DATE('20140101','YYYYMMDD') "
-				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
+				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
 				+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
 				+ "AND TC.CAMP_TYPE_CD='Campaign' "
 				+ "AND TR.SRC_ID=TC.ROW_ID(+) "
@@ -75,6 +78,9 @@ public class CampannaOfertaCanalDAO {
 				campoofertac.add(new CampannaOfertaCanal(rs.getString(1), rs
 						.getString(2), rs.getString(3)));
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

@@ -20,29 +20,28 @@ public class ArchivoDireccion {
 	private String outFileCif = "";
 
 	public void archivarDirecciones(List<Direccion> cg) {
-
-		outFileDat = "C:/apps/eilcis_sieb_munestadopais."
+		String ruta = "C:/apps/";
+		outFileDat = "eilcis_sieb_munestadopais."
 				+ formateador.format(now) + ".dat";
-		outFileCif = "C:/apps/eilcis_sieb_munestadopais."
+		outFileCif = "eilcis_sieb_munestadopais."
 				+ formateador.format(now) + ".cif";
-		boolean alreadyExists = new File(outFileDat).exists();
+		boolean alreadyExists = new File(ruta + outFileDat).exists();
 		if (alreadyExists) {
-			File ficheroDatos = new File(outFileDat);
+			File ficheroDatos = new File(ruta + outFileDat);
 			ficheroDatos.delete();
 		}
-		alreadyExists = new File(outFileCif).exists();
+		alreadyExists = new File(ruta + outFileCif).exists();
 		if (alreadyExists) {
-			File ficheroCifras = new File(outFileCif);
+			File ficheroCifras = new File(ruta + outFileCif);
 			ficheroCifras.delete();
 		}
 		try {
 
 			CsvWriter salidaDat = new CsvWriter(
-					new FileWriter(outFileDat, true), '^');
+					new FileWriter(ruta + outFileDat, true), '^');
 			CsvWriter salidaCif = new CsvWriter(
-					new FileWriter(outFileCif, true), '^');
+					new FileWriter(ruta + outFileCif, true), '^');
 			for (Direccion cat : cg) {
-				System.out.println(cat);
 				salidaDat.write(cat.getCodMunicipio());
 				salidaDat.write(cat.getDescMunicipio());
 				salidaDat.write(cat.getCodEstado());
@@ -56,6 +55,8 @@ public class ArchivoDireccion {
 			salidaCif.write(formateador.format(now));
 			salidaCif.write(Long.toString(cif));
 			salidaCif.close();
+			System.out.println(outFileDat);
+			System.out.println(outFileCif);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

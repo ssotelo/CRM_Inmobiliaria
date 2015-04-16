@@ -6,10 +6,10 @@ import dao.MiembroDAO;
 public class MiembroService {
 	private ArchivoMiembro file = new ArchivoMiembro();
 
-	public void consultarMiembros() {
+	public void consultarMiembros(String Ini,String Fin) {
 		MiembroDAO mem = new MiembroDAO();
-		file.archivarMiembros(mem.listarMiembros());
-		file.archivarMiembrosCtl(mem.listarMiembrosCtl());
+		file.archivarMiembros(mem.listarMiembros(Ini,Fin));
+		file.archivarMiembrosCtl(mem.listarMiembrosCtl(Ini,Fin));
 
 	}
 }

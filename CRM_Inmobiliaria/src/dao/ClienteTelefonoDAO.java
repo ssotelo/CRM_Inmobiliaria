@@ -16,13 +16,13 @@ public class ClienteTelefonoDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<ClienteTelefono> listarClientestelefonos() {
+	public List<ClienteTelefono> listarClientestelefonos(String FecIni, String FecFin) {
 		String SELECT_CATTEL = "SELECT DISTINCT TC.ROW_ID, TN.ADDR, TN.COMM_USE_TYPE_CD,"
 				+ "TN.X_EXTENSION, TO_CHAR(TN.LAST_UPD,'YYYYMMDD')LAST_UPD "
 				+ "FROM SIEBEL811.S_CONTACT TC, SIEBEL811.S_PER_COMM_ADDR TN "
 				+ "WHERE TN.LAST_UPD "
-				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
-				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
+				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
 				+ "AND TC.ROW_ID=TN.PER_ID " 
 				+ "AND TN.COMM_MEDIUM_CD='Phone' ";
 		List<ClienteTelefono> clientestelefonos = new ArrayList<ClienteTelefono>();
@@ -36,6 +36,9 @@ public class ClienteTelefonoDAO {
 						.getString(2), rs.getString(3), rs.getString(4), rs
 						.getString(5)));
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

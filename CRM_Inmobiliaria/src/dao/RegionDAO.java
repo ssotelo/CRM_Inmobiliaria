@@ -16,13 +16,12 @@ public class RegionDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	
-
-	public List<Region> listarRegiones() {
+	public List<Region> listarRegiones(String FecIni, String FecFin) {
 		String SELECT_CATREG = "SELECT ROW_ID, NAME "
 				+ "FROM SIEBEL811.S_REGION "
 				+ "WHERE LAST_UPD "
-				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
-				+ "AND TO_DATE('20151231','YYYYMMDD')";
+				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
+				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')";
 		List<Region> regiones = new ArrayList<Region>();
 		try {
 			conn = (this.userConn != null) ? this.userConn : Conexion
@@ -32,6 +31,9 @@ public class RegionDAO {
 			while (rs.next()) {
 				regiones.add(new Region(rs.getString(1), rs.getString(2)));
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

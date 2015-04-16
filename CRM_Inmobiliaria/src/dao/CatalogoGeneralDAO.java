@@ -17,13 +17,13 @@ public class CatalogoGeneralDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<CatalogoGeneral> listarCatalogosGenerales() {
+	public List<CatalogoGeneral> listarCatalogosGenerales(String FecIni, String FecFin) {
 		String SELECT_CATGEN = "SELECT ROW_ID, PAR_ROW_ID,"
 				+ "TYPE,SUB_TYPE, VAL, NAME, DESC_TEXT, ORDER_BY "
 				+ "FROM SIEBEL811.S_LST_OF_VAL "
 				+ "WHERE LAST_UPD "
-				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
-				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
+				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
 				+ "AND ACTIVE_FLG='Y' ORDER BY TYPE ";
 		List<CatalogoGeneral> catalogosgenerales = new ArrayList<CatalogoGeneral>();
 		try {
@@ -37,6 +37,9 @@ public class CatalogoGeneralDAO {
 						.getString(5), rs.getString(6), rs.getString(7), rs
 						.getInt(8)));
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

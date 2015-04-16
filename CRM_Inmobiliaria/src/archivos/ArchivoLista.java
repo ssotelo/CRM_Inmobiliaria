@@ -20,27 +20,27 @@ public class ArchivoLista {
 	private String outFileCtl = "";
 	
 	public void archivarListas(List<Lista> lst) {
-		outFileDat = "C:/apps/eildim_sieb_mktlistas." + formateador.format(now)
+		String ruta = "C:/apps/";
+		outFileDat = "eildim_sieb_mktlistas." + formateador.format(now)
 				+ ".dat";
-		outFileCif = "C:/apps/eildim_sieb_mktlistas." + formateador.format(now)
+		outFileCif = "eildim_sieb_mktlistas." + formateador.format(now)
 				+ ".cif";
-		boolean alreadyExists = new File(outFileDat).exists();
+		boolean alreadyExists = new File(ruta + outFileDat).exists();
 		if (alreadyExists) {
-			File ficheroDatos = new File(outFileDat);
+			File ficheroDatos = new File(ruta + outFileDat);
 			ficheroDatos.delete();
 		}
-		alreadyExists = new File(outFileCif).exists();
+		alreadyExists = new File(ruta + outFileCif).exists();
 		if (alreadyExists) {
-			File ficheroCifras = new File(outFileCif);
+			File ficheroCifras = new File(ruta + outFileCif);
 			ficheroCifras.delete();
 		}
 		try {
 			CsvWriter salidaDat = new CsvWriter(
-					new FileWriter(outFileDat, true), '^');
+					new FileWriter(ruta + outFileDat, true), '^');
 			CsvWriter salidaCif = new CsvWriter(
-					new FileWriter(outFileCif, true), '^');
+					new FileWriter(ruta + outFileCif, true), '^');
 			for (Lista cat : lst) {
-				System.out.println(cat);
 				salidaDat.write(cat.getRowId());
 				salidaDat.write(cat.getName());
 				salidaDat.write(cat.getDescripcion());
@@ -58,22 +58,25 @@ public class ArchivoLista {
 			salidaCif.write(formateador.format(now));
 			salidaCif.write(Long.toString(cif));
 			salidaCif.close();
+			System.out.println(outFileDat);
+			System.out.println(outFileCif);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
 	}
 
 	public void archivarListasCtl(List<Lista> lst) {
-		outFileCtl = "C:/apps/eildim_sieb_mktlistas." + formateador.format(now)
+		String ruta = "C:/apps/";
+		outFileCtl = "eildim_sieb_mktlistas." + formateador.format(now)
 				+ ".ctl";
-		boolean alreadyExists = new File(outFileCtl).exists();
+		boolean alreadyExists = new File(ruta + outFileCtl).exists();
 		if (alreadyExists) {
-			File ficheroDatos = new File(outFileCtl);
+			File ficheroDatos = new File(ruta + outFileCtl);
 			ficheroDatos.delete();
 		}
 		try {
 			CsvWriter salidaCtl = new CsvWriter(
-					new FileWriter(outFileCtl, true), '^');
+					new FileWriter(ruta + outFileCtl, true), '^');
 			for (Lista cat : lst) {
 				salidaCtl.write(cat.getFectoday());
 				salidaCtl.write(cat.getFecUltAct());
@@ -81,6 +84,7 @@ public class ArchivoLista {
 				salidaCtl.endRecord();
 			}
 			salidaCtl.close();
+			System.out.println(outFileCtl);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

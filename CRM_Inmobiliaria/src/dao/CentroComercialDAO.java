@@ -16,7 +16,7 @@ public class CentroComercialDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<CentroComercial> listarCentrosComerciales() {
+	public List<CentroComercial> listarCentrosComerciales(String FecIni, String FecFin) {
 		String SELECT_CENCOM = "SELECT "
 				+ "TC.DEPT_NUM, TC.NAME, TD.COUNTY, "
 				+ "TD.COUNTRY, TD.STATE, TD.PROVINCE, "
@@ -25,8 +25,8 @@ public class CentroComercialDAO {
 				+ "TC.X_ID_FB,TC.X_ID_TWITTER "
 				+ "FROM SIEBEL811.S_ORG_EXT TC, SIEBEL811.S_ADDR_PER TD, SIEBEL811.S_CON_ADDR TR "
 				+ "WHERE TC.LAST_UPD "
-				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
-				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
+				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
 				+ "AND TC.ROW_ID=TR.ACCNT_ID "
 				+ "AND TR.ADDR_PER_ID=TD.ROW_ID ";
 		List<CentroComercial> centroscomerciales = new ArrayList<CentroComercial>();

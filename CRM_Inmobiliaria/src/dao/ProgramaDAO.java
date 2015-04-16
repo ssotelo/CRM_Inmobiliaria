@@ -16,7 +16,7 @@ public class ProgramaDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<Programa> listarProgramas() {
+	public List<Programa> listarProgramas(String FecIni, String FecFin) {
 		String SELECT_LOYPRO = "SELECT TP.ROW_ID, TP.NAME, TP.DESC_TEXT,"
 				+ "TO_CHAR(TP.START_DT,'YYYYMMDD')START_DT, "
 				+ "TO_CHAR(TP.END_DT,'YYYYMMDD')END_DT, "
@@ -28,8 +28,8 @@ public class ProgramaDAO {
 				+ "SIEBEL811.S_ORG_EXT TCC, "
 				+ "SIEBEL811.S_PARTY TSP "
 				+ "WHERE TP.LAST_UPD "
-				+ "BETWEEN TO_DATE('20150410','YYYYMMDD') "
-				+ "AND TO_DATE('20151213','YYYYMMDD') "
+				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
+				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
 				+ "AND TCC.ROW_ID=TP.HOST_ORG_ID "
 				+ "AND TSP.ROW_ID=TP.BU_ID";
 		List<Programa> cat_prog = new ArrayList<Programa>();
@@ -46,6 +46,9 @@ public class ProgramaDAO {
 						.getString(12), rs.getString(13), rs.getString(14), rs
 						.getString(15), rs.getString(16), rs.getString(17)));
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

@@ -20,28 +20,27 @@ public class ArchivoCampannaOferta {
 	private String outFileCtl = "";
 
 	public void archivarCampannasOfertas(List<CampannaOferta> co) {
-		outFileDat = "C:/apps/eilcis_sieb_mktcampanaoferta."
+		String ruta = "C:/apps/";
+		outFileDat = "eilcis_sieb_mktcampanaoferta."
 				+ formateador.format(now) + ".dat";
-		outFileCif = "C:/apps/eilcis_sieb_mktcampanaoferta."
+		outFileCif = "eilcis_sieb_mktcampanaoferta."
 				+ formateador.format(now) + ".cif";
-		boolean alreadyExists = new File(outFileDat).exists();
+		boolean alreadyExists = new File(ruta + outFileDat).exists();
 		if (alreadyExists) {
-			File ficheroDatos = new File(outFileDat);
+			File ficheroDatos = new File(ruta + outFileDat);
 			ficheroDatos.delete();
 		}
-		alreadyExists = new File(outFileCif).exists();
+		alreadyExists = new File(ruta + outFileCif).exists();
 		if (alreadyExists) {
-			File ficheroCifras = new File(outFileCif);
+			File ficheroCifras = new File(ruta + outFileCif);
 			ficheroCifras.delete();
 		}
 		try {
-
 			CsvWriter salidaDat = new CsvWriter(
-					new FileWriter(outFileDat, true), '^');
+					new FileWriter(ruta + outFileDat, true), '^');
 			CsvWriter salidaCif = new CsvWriter(
-					new FileWriter(outFileCif, true), '^');
+					new FileWriter(ruta + outFileCif, true), '^');
 			for (CampannaOferta cat : co) {
-				System.out.println(cat);
 				salidaDat.write(cat.getCampannaId());
 				salidaDat.write(cat.getOfertaId());
 				salidaDat.write(cat.getProducto());
@@ -67,23 +66,26 @@ public class ArchivoCampannaOferta {
 			salidaCif.write(formateador.format(now));
 			salidaCif.write(Long.toString(cif));
 			salidaCif.close();
+			System.out.println(outFileDat);
+			System.out.println(outFileCif);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
 	}
 	
 	public void archivarCampannasOfertasCtl(List<CampannaOferta> co) {
-		outFileCtl = "C:/apps/eilcis_sieb_mktcampanaoferta."
+		String ruta = "C:/apps/";
+		outFileCtl = "eilcis_sieb_mktcampanaoferta."
 				+ formateador.format(now) + ".ctl";
-		boolean alreadyExists = new File(outFileCtl).exists();
+		boolean alreadyExists = new File(ruta + outFileCtl).exists();
 		if (alreadyExists) {
-			File ficheroControl = new File(outFileCtl);
+			File ficheroControl = new File(ruta + outFileCtl);
 			ficheroControl.delete();
 		}
 		try {
 
 			CsvWriter salidaCtl = new CsvWriter(
-					new FileWriter(outFileCtl, true), '^');
+					new FileWriter(ruta + outFileCtl, true), '^');
 			for (CampannaOferta cat : co) {
 				salidaCtl.write(cat.getFecToday());
 				salidaCtl.write(cat.getFecUltAct());
@@ -92,6 +94,7 @@ public class ArchivoCampannaOferta {
 				cif++;
 			}
 			salidaCtl.close();
+			System.out.println(outFileCtl);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

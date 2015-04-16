@@ -17,7 +17,7 @@ public class RespuestaCampannaDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<RespuestaCampanna> listarRespuestasCampannas() {
+	public List<RespuestaCampanna> listarRespuestasCampannas(String FecIni, String FecFin) {
 		String SELECT_CATRCAM = "SELECT TR.SRC_ID, TT.MKTG_OFFR_ID,"
 				+ "TT.MEDIA_TYPE_CD, TR.PR_CON_ID, TR.CALL_LST_ID,"
 				+ " TR.OUTCOME_CD,TR.COMM_METHOD, "
@@ -26,8 +26,9 @@ public class RespuestaCampannaDAO {
 				+ "FROM SIEBEL811.S_COMMUNICATION TR, "
 				+ "SIEBEL811.S_DMND_CRTN_PRG TT, "
 				+ "SIEBEL811.S_SRC TC "
-				+ "WHERE TR.LAST_UPD BETWEEN TO_DATE('20140101','YYYYMMDD') "
-				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "WHERE TR.LAST_UPD "
+				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
+				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
 				+ "AND TC.ROW_ID=TR.SRC_ID "
 				+ "AND TT.ROW_ID=TR.DCP_ID "
 				+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
@@ -45,13 +46,16 @@ public class RespuestaCampannaDAO {
 								.getString(5), rs.getString(6),
 						rs.getString(7), rs.getString(8), rs.getString(9)));
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return respuestascampannas;
 	}
 	
-	public List<RespuestaCampanna> listarRespuestasCampannasCtl() {
+	public List<RespuestaCampanna> listarRespuestasCampannasCtl(String FecIni, String FecFin) {
 		String SELECT_CATRCAMCTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(TR.LAST_UPD),'YYYYMMDD')LAST_UPD, "
@@ -60,8 +64,8 @@ public class RespuestaCampannaDAO {
 				+ "SIEBEL811.S_DMND_CRTN_PRG TT, "
 				+ "SIEBEL811.S_SRC TC "
 				+ "WHERE TR.LAST_UPD "
-				+ "BETWEEN TO_DATE('20140101','YYYYMMDD') "
-				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
+				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
 				+ "AND  TC.ROW_ID=TR.SRC_ID "
 				+ "AND TT.ROW_ID=TR.DCP_ID "
 				+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
@@ -78,6 +82,9 @@ public class RespuestaCampannaDAO {
 				respuestascampannas.add(new RespuestaCampanna(rs.getString(1),
 						rs.getString(2), rs.getString(3)));
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

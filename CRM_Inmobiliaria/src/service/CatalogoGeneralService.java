@@ -6,8 +6,8 @@ import dao.CatalogoGeneralDAO;
 public class CatalogoGeneralService {
 	private ArchivoCatalogoGeneral file = new ArchivoCatalogoGeneral();
 
-	public void consultarCatalogosGenerales() {
+	public void consultarCatalogosGenerales(String Ini,String Fin) {
 		CatalogoGeneralDAO cgd = new CatalogoGeneralDAO();
-		file.archivarCatalogosGenerales(cgd.listarCatalogosGenerales());
+		file.archivarCatalogosGenerales(cgd.listarCatalogosGenerales(Ini,Fin));
 	}
 }

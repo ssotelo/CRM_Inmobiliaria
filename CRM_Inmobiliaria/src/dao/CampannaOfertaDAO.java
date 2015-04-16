@@ -16,16 +16,20 @@ public class CampannaOfertaDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<CampannaOferta> listarCampannasOfertas() {
-		String SELECT_CAMPOFFR = "SELECT TC.ROW_ID, TOF.ROW_ID, TOF.X_ATTRIB_05, TOF.X_ATTRIB_04, "
-				+ "TOF.X_ATTRIB_03, TOF.X_ATTRIB_02, TOF.X_ATTRIB_01, TOF.X_ATTRIB_10, TOF.X_ATTRIB_09,"
+	public List<CampannaOferta> listarCampannasOfertas(String FecIni, String FecFin) {
+		String SELECT_CAMPOFFR = "SELECT TC.ROW_ID, TOF.ROW_ID, "
+				+ "TOF.X_ATTRIB_05, TOF.X_ATTRIB_04, "
+				+ "TOF.X_ATTRIB_03, TOF.X_ATTRIB_02, "
+				+ "TOF.X_ATTRIB_01, TOF.X_ATTRIB_10, TOF.X_ATTRIB_09,"
 				+ "TOF.X_ATTRIB_08, TOF.X_ATTRIB_07,TOF.X_ATTRIB_06, "
-				+ "TO_CHAR(TOF.START_DT,'YYYYMMDD')START_DT, TO_CHAR(TR.LAST_UPD,'YYYYMMDD')LAST_UPD,"
+				+ "TO_CHAR(TOF.START_DT,'YYYYMMDD')START_DT, "
+				+ "TO_CHAR(TR.LAST_UPD,'YYYYMMDD')LAST_UPD,"
 				+ "TT.X_ID_TREAT, TT.NAME, TT.OFFER_NUM "
 				+ "FROM SIEBEL811.S_SRC TC, SIEBEL811.S_SRC_DCP TR, "
 				+ "SIEBEL811.S_MKTG_OFFR TOF, SIEBEL811.S_DMND_CRTN_PRG TT "
-				+ "WHERE TR.LAST_UPD BETWEEN TO_DATE('20150101','YYYYMMDD') "
-				+ "AND TO_DATE('20150101','YYYYMMDD') "
+				+ "WHERE TR.LAST_UPD "
+				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
+				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
 				+ "AND TC.ROW_ID=TR.SRC_ID AND TT.MKTG_OFFR_ID=TOF.ROW_ID "
 				+ "AND TT.ROW_ID=TR.DCP_ID AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
 				+ "AND TC.CAMP_TYPE_CD='Campaign' AND TC.MKTG_TMPL_FLG='N'";
@@ -44,13 +48,16 @@ public class CampannaOfertaDAO {
 						.getString(14), rs.getString(15), rs.getString(16), rs
 						.getString(17)));
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return campoffr;
 	}
 	
-	public List<CampannaOferta> listarCampannasOfertasCtl() {
+	public List<CampannaOferta> listarCampannasOfertasCtl(String FecIni, String FecFin) {
 		String SELECT_CAMPOFFRCTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(TR.LAST_UPD),'YYYYMMDD')LAST_UPD, "
@@ -59,8 +66,8 @@ public class CampannaOfertaDAO {
 				+ "SIEBEL811.S_MKTG_OFFR TOF, "
 				+ "SIEBEL811.S_DMND_CRTN_PRG TT "
 				+ "WHERE TR.LAST_UPD "
-				+ "BETWEEN TO_DATE('20140101','YYYYMMDD') "
-				+ "AND TO_DATE('20151231','YYYYMMDD') "
+				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
+				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
 				+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
 				+ "AND TC.CAMP_TYPE_CD='Campaign' "
 				+ "AND TC.ROW_ID=TR.SRC_ID "
@@ -78,6 +85,9 @@ public class CampannaOfertaDAO {
 				campoffr.add(new CampannaOferta(rs.getString(1), rs
 						.getString(2), rs.getString(3)));
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

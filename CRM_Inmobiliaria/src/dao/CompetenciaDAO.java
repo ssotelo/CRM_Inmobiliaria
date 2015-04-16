@@ -16,13 +16,14 @@ public class CompetenciaDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 
-	public List<Competencia> listarCompetencias() {
+	public List<Competencia> listarCompetencias(String FecIni, String FecFin) {
 		String SELECT_COMP = "SELECT PP.DEPT_NUM, PP.NAME AS TIENDA,"
 				+ "TH.NAME AS COMPETENCIA, TH.X_ID_FB, TH.X_ID_TWITTER "
 				+ "FROM SIEBEL811.S_ORG_EXT PP, "
 				+ "SIEBEL811.S_ORG_EXT TH, SIEBEL811.S_PARTY_REL TR "
-				+ "WHERE PP.LAST_UPD BETWEEN TO_DATE('20150101','YYYYMMDD') "
-				+ "AND TO_DATE('20151231','YYYYMMDD')"
+				+ "WHERE PP.LAST_UPD "
+				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
+				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')"
 				+ "AND TR.REL_PARTY_ID=PP.ROW_ID "
 				+ "AND TR.PARTY_ID=TH.ROW_ID  "
 				+ "ORDER BY PP.NAME";
@@ -37,6 +38,9 @@ public class CompetenciaDAO {
 						.getString(2), rs.getString(3), rs.getString(4), rs
 						.getString(5)));
 			}
+			rs.close();
+			stmt.close();
+			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

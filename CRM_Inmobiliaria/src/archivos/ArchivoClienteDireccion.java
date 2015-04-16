@@ -19,27 +19,27 @@ public class ArchivoClienteDireccion {
 	private String outFileCif = "";
 
 	public void archivarClienteDireccion(List<ClienteDireccion> cd) {
-		outFileDat = "C:/apps/eilcis_sieb_clientedirecc."
+		String ruta = "C:/apps/";
+		outFileDat = "eilcis_sieb_clientedirecc."
 				+ formateador.format(now) + ".dat";
-		outFileCif = "C:/apps/eilcis_sieb_clientedirecc."
+		outFileCif = "eilcis_sieb_clientedirecc."
 				+ formateador.format(now) + ".cif";
-		boolean alreadyExists = new File(outFileDat).exists();
+		boolean alreadyExists = new File(ruta + outFileDat).exists();
 		if (alreadyExists) {
-			File ficheroDatos = new File(outFileDat);
+			File ficheroDatos = new File(ruta + outFileDat);
 			ficheroDatos.delete();
 		}
-		alreadyExists = new File(outFileCif).exists();
+		alreadyExists = new File(ruta + outFileCif).exists();
 		if (alreadyExists) {
-			File ficheroCifras = new File(outFileCif);
+			File ficheroCifras = new File(ruta + outFileCif);
 			ficheroCifras.delete();
 		}
 		try {
 			CsvWriter salidaDat = new CsvWriter(
-					new FileWriter(outFileDat, true), '^');
+					new FileWriter(ruta + outFileDat, true), '^');
 			CsvWriter salidaCif = new CsvWriter(
-					new FileWriter(outFileCif, true), '^');
+					new FileWriter(ruta + outFileCif, true), '^');
 			for (ClienteDireccion ccd : cd) {
-				System.out.println(ccd);
 				salidaDat.write(ccd.getPersonId());
 				salidaDat.write(ccd.getAddressId());
 				salidaDat.write(ccd.getCalle());
@@ -60,9 +60,10 @@ public class ArchivoClienteDireccion {
 			salidaCif.write(formateador.format(now));
 			salidaCif.write(Long.toString(cif));
 			salidaCif.close();
+			System.out.println(outFileDat);
+			System.out.println(outFileCif);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
-
 	}
 }

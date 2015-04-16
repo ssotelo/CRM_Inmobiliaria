@@ -20,29 +20,27 @@ public class ArchivoCampanaListaCanal {
 	private String outFileCtl = "";
 
 	public void archivarCampannasListasCanales(List<CampannaListaCanal> clc) {
-		outFileDat = "C:/apps/eilcis_sieb_mktcampanalistacanal."
+		String ruta = "C:/apps/";
+		outFileDat = "eilcis_sieb_mktcampanalistacanal."
 				+ formateador.format(now) + ".dat";
-		outFileCif = "C:/apps/eilcis_sieb_mktcampanalistacanal."
+		outFileCif = "eilcis_sieb_mktcampanalistacanal."
 				+ formateador.format(now) + ".cif";
-		boolean alreadyExists = new File(outFileDat).exists();
+		boolean alreadyExists = new File(ruta + outFileDat).exists();
 		if (alreadyExists) {
-			File ficheroDatos = new File(outFileDat);
+			File ficheroDatos = new File(ruta + outFileDat);
 			ficheroDatos.delete();
 		}
-		alreadyExists = new File(outFileCif).exists();
+		alreadyExists = new File(ruta + outFileCif).exists();
 		if (alreadyExists) {
-			File ficheroCifras = new File(outFileCif);
+			File ficheroCifras = new File(ruta + outFileCif);
 			ficheroCifras.delete();
 		}
 		try {
-
 			CsvWriter salidaDat = new CsvWriter(
-					new FileWriter(outFileDat, true), '^');
+					new FileWriter(ruta + outFileDat, true), '^');
 			CsvWriter salidaCif = new CsvWriter(
-					new FileWriter(outFileCif, true), '^');
+					new FileWriter(ruta + outFileCif, true), '^');
 			for (CampannaListaCanal cat : clc) {
-				System.out.println(cat);
-
 				salidaDat.write(cat.getCampanaId());
 				salidaDat.write(cat.getListaId());
 				salidaDat.write(cat.getTratamientoId());
@@ -59,22 +57,25 @@ public class ArchivoCampanaListaCanal {
 			salidaCif.write(formateador.format(now));
 			salidaCif.write(Long.toString(cif));
 			salidaCif.close();
+			System.out.println(outFileDat);
+			System.out.println(outFileCif);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
 	}
 
 	public void archivarCampannasListasCanalesCtl(List<CampannaListaCanal> clc) {
-		outFileCtl = "C:/apps/eilcis_sieb_mktcampanalistacanal."
+		String ruta = "C:/apps/";
+		outFileCtl = "eilcis_sieb_mktcampanalistacanal."
 				+ formateador.format(now) + ".ctl";
-		boolean alreadyExists = new File(outFileCtl).exists();
+		boolean alreadyExists = new File(ruta + outFileCtl).exists();
 		if (alreadyExists) {
-			File ficheroCtl = new File(outFileCtl);
+			File ficheroCtl = new File(ruta + outFileCtl);
 			ficheroCtl.delete();
 		}
 		try {
 			CsvWriter salidaCtl = new CsvWriter(
-					new FileWriter(outFileCtl, true), '^');
+					new FileWriter(ruta + outFileCtl, true), '^');
 			for (CampannaListaCanal cat : clc) {
 				salidaCtl.write(cat.getFecToday());
 				salidaCtl.write(cat.getFecUltAct());
@@ -82,6 +83,7 @@ public class ArchivoCampanaListaCanal {
 				salidaCtl.endRecord();
 			}
 			salidaCtl.close();
+			System.out.println(outFileCtl);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
