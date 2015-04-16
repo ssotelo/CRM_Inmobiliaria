@@ -10,6 +10,7 @@ import java.util.List;
 import com.csvreader.CsvWriter;
 
 import domain.ClienteDireccion;
+import domain.ConnSftp;
 
 public class ArchivoClienteDireccion {
 	private Date now = new Date();
@@ -62,6 +63,10 @@ public class ArchivoClienteDireccion {
 			salidaCif.close();
 			System.out.println(outFileDat);
 			System.out.println(outFileCif);
+
+			ConnSftp consftp = new  ConnSftp();
+			System.out.println("archivo outFile"+ outFileDat);
+		consftp.conexionSftp(outFileDat,outFileDat);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

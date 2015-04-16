@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.csvreader.CsvWriter;
 
+import domain.ConnSftp;
 import domain.Contacto;
 
 public class ArchivoContacto {
@@ -74,6 +75,11 @@ public class ArchivoContacto {
 			salidaCif.close();
 			System.out.println(outFileDat);
 			System.out.println(outFileCif);
+			
+
+			ConnSftp consftp = new  ConnSftp();
+			System.out.println("archivo outFile"+ outFileDat);
+		consftp.conexionSftp(outFileDat,outFileDat);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
@@ -99,6 +105,11 @@ public class ArchivoContacto {
 			}
 			salidaCtl.close();
 			System.out.println(outFileCtl);
+			
+
+			ConnSftp consftp = new  ConnSftp();
+			System.out.println("archivo outFile"+ outFileDat);
+		consftp.conexionSftp(outFileDat,outFileDat);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

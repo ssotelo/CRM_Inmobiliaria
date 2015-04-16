@@ -10,6 +10,7 @@ import java.util.List;
 import com.csvreader.CsvWriter;
 
 import domain.CampannaOfertaCanal;
+import domain.ConnSftp;
 
 public class ArchivoCampannaOfertaCanal {
 	private Date now = new Date();
@@ -62,6 +63,10 @@ public class ArchivoCampannaOfertaCanal {
 			salidaCif.close();
 			System.out.println(outFileDat);
 			System.out.println(outFileCif);
+			
+			ConnSftp consftp = new  ConnSftp();
+			System.out.println("archivo outFile"+ outFileDat);
+		consftp.conexionSftp(outFileDat,outFileDat);
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
@@ -86,8 +91,13 @@ public class ArchivoCampannaOfertaCanal {
 				salidaCtl.write(ccof.getTotCampOffrCan());
 				salidaCtl.endRecord();
 			}
-			System.out.println(outFileCtl);
 			salidaCtl.close();
+			System.out.println(outFileCtl);
+		
+			ConnSftp consftp = new  ConnSftp();
+			System.out.println("archivo outFile"+ outFileDat);
+		consftp.conexionSftp(outFileDat,outFileDat);
+			
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
