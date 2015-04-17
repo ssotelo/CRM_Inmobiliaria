@@ -11,18 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import domain.Conexion;
 import domain.Region;
 
 public class RegionDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<Region> listarRegiones(String FecIni, String FecFin, String cfg) {
-		
+	public List<Region> listarRegiones(String FecIni, String FecFin, String cfg, Connection conn) {		
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -39,8 +35,6 @@ public class RegionDAO {
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')";
 		List<Region> regiones = new ArrayList<Region>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATREG);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -48,7 +42,6 @@ public class RegionDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

@@ -12,18 +12,13 @@ import java.util.List;
 import java.util.Properties;
 
 import domain.CampannaTienda;
-import domain.Conexion;
 
 public class CampannaTiendaDAO {
-
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<CampannaTienda> listarCampannasTiendas(String FecIni, String FecFin, String cfg) {
-		
+	public List<CampannaTienda> listarCampannasTiendas(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -46,8 +41,6 @@ public class CampannaTiendaDAO {
 				+ "AND TC.CAMP_TYPE_CD='Campaign'AND TC.MKTG_TMPL_FLG='N'";
 		List<CampannaTienda> campannastiendas = new ArrayList<CampannaTienda>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CAMTI);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -57,15 +50,13 @@ public class CampannaTiendaDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return campannastiendas;
 	}
 
-	public List<CampannaTienda> listarCampannasTiendasCtl(String FecIni, String FecFin, String cfg) {
-	
+	public List<CampannaTienda> listarCampannasTiendasCtl(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -94,8 +85,6 @@ public class CampannaTiendaDAO {
 				+ "ORDER BY LAST_UPD";
 		List<CampannaTienda> campannastiendas = new ArrayList<CampannaTienda>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CAMTICTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -104,7 +93,6 @@ public class CampannaTiendaDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

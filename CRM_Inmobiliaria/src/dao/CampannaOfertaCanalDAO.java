@@ -12,17 +12,13 @@ import java.util.List;
 import java.util.Properties;
 
 import domain.CampannaOfertaCanal;
-import domain.Conexion;
 
 public class CampannaOfertaCanalDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<CampannaOfertaCanal> listarCampannasOfertasCanales(String FecIni, String FecFin, String cfg) {
-		
+	public List<CampannaOfertaCanal> listarCampannasOfertasCanales(String FecIni, String FecFin, String cfg, Connection conn) {		
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -48,8 +44,6 @@ public class CampannaOfertaCanalDAO {
 				+ "AND TC.CAMP_TYPE_CD='Campaign' AND TC.MKTG_TMPL_FLG='N'";
 		List<CampannaOfertaCanal> campoofertac = new ArrayList<CampannaOfertaCanal>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATCAMPOFFRCAN);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -60,15 +54,13 @@ public class CampannaOfertaCanalDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return campoofertac;
 	}
 
-	public List<CampannaOfertaCanal> listarCampannasOfertasCanalesCtl(String FecIni, String FecFin, String cfg) {
-	
+	public List<CampannaOfertaCanal> listarCampannasOfertasCanalesCtl(String FecIni, String FecFin, String cfg, Connection conn) {	
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -96,8 +88,6 @@ public class CampannaOfertaCanalDAO {
 				+ "ORDER BY LAST_UPD";
 		List<CampannaOfertaCanal> campoofertac = new ArrayList<CampannaOfertaCanal>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATCAMPOFFRCANCTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -106,7 +96,6 @@ public class CampannaOfertaCanalDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

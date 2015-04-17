@@ -12,17 +12,13 @@ import java.util.List;
 import java.util.Properties;
 
 import domain.ClienteTelefono;
-import domain.Conexion;
 
 public class ClienteTelefonoDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<ClienteTelefono> listarClientestelefonos(String FecIni, String FecFin, String cfg) {
-		
+	public List<ClienteTelefono> listarClientestelefonos(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -42,8 +38,6 @@ public class ClienteTelefonoDAO {
 				+ "AND TN.COMM_MEDIUM_CD='Phone' ";
 		List<ClienteTelefono> clientestelefonos = new ArrayList<ClienteTelefono>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATTEL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -53,7 +47,6 @@ public class ClienteTelefonoDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

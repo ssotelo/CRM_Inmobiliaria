@@ -11,18 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import domain.Conexion;
 import domain.Lista;
 
 public class ListaDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<Lista> listarListas(String FecIni, String FecFin, String cfg) {
-		
+	public List<Lista> listarListas(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -43,8 +39,6 @@ public class ListaDAO {
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')";
 		List<Lista> listas = new ArrayList<Lista>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATLIS);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -55,15 +49,13 @@ public class ListaDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return listas;
 	}
 	
-	public List<Lista> listarListasCtl(String FecIni, String FecFin, String cfg) {
-	
+	public List<Lista> listarListasCtl(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -85,8 +77,6 @@ public class ListaDAO {
 				+ "ORDER BY LAST_UPD";
 		List<Lista> listas = new ArrayList<Lista>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_LISCTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -95,7 +85,6 @@ public class ListaDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

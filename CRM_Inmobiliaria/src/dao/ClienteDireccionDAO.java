@@ -13,18 +13,14 @@ import java.util.List;
 import java.util.Properties;
 
 import domain.ClienteDireccion;
-import domain.Conexion;
 
 public class ClienteDireccionDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;	
 	private ResultSet rs = null;
 	SimpleDateFormat formateador = new SimpleDateFormat("yyyyMMdd");
 	private String DBO = null;
 	
-	public List<ClienteDireccion> listarClientesDirecciones(String FecIni, String FecFin, String cfg) {
-	
+	public List<ClienteDireccion> listarClientesDirecciones(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -49,8 +45,6 @@ public class ClienteDireccionDAO {
 				+ "AND TR.ADDR_PER_ID=TD.ROW_ID";
 		List<ClienteDireccion> clientesdirecciones = new ArrayList<ClienteDireccion>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATDIR);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -63,7 +57,6 @@ public class ClienteDireccionDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

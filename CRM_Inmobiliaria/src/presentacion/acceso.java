@@ -1,5 +1,8 @@
 package presentacion;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import service.CampannaListaCanalService;
 import service.CampannaListaService;
 import service.CampannaOfertaCanalService;
@@ -25,86 +28,101 @@ import service.ProgramaService;
 import service.RegionService;
 import service.RespuestaCampannaService;
 import service.TarjetaService;
+import domain.Conexion;
 
 public class acceso {
 	public static void main(String[] args) {
-		String FIni = "20150201";//args[0];
-		String Ffin = "20151231";//args[1];
-		String cfg = "/home/crmca/workspace/config.cfg";//args[2];
-		 
-		CampannaListaCanalService service01 = new CampannaListaCanalService();
-		service01.consultarCampannaListaCanal(FIni,Ffin,cfg);
-		
-		CampannaListaService service02 = new CampannaListaService();
-		service02.consultarCampannasListas(FIni,Ffin,cfg);
-		
-		CampannaOfertaCanalService service03 = new CampannaOfertaCanalService();
-		service03.consultarCampannasOfertasCanales(FIni,Ffin,cfg);
+		Connection conn = null;
+		Connection userConn = null;
+		int numArgs = args.length;
+    	if (numArgs != 3)
+    	{
+    		System.out.println("java -jar ExtCRM.jar configFile FechaInicio FechaFin");
+    		System.exit(0); 
+    	}
+		String FIni = args[1];
+		String Ffin = args[2];
+		String cfg =  args[0];
+		try{
+			conn = (userConn != null) ? userConn : Conexion.getConnection(cfg);			
+			CampannaListaCanalService service01 = new CampannaListaCanalService();
+			service01.consultarCampannaListaCanal(FIni,Ffin,cfg,conn);
+			
+			CampannaListaService service02 = new CampannaListaService();
+			service02.consultarCampannasListas(FIni,Ffin,cfg,conn);
+			
+			CampannaOfertaCanalService service03 = new CampannaOfertaCanalService();
+			service03.consultarCampannasOfertasCanales(FIni,Ffin,cfg,conn);
 
-		CampannaOfertaService service04 = new CampannaOfertaService();
-		service04.consultarCampannaOferta(FIni,Ffin,cfg);
+			CampannaOfertaService service04 = new CampannaOfertaService();
+			service04.consultarCampannaOferta(FIni,Ffin,cfg,conn);
 
-		CampannaService service05 = new CampannaService();
-		service05.consultarCampannas(FIni,Ffin,cfg);
+			CampannaService service05 = new CampannaService();
+			service05.consultarCampannas(FIni,Ffin,cfg,conn);
 
-		CampannaTiendaService service06 = new CampannaTiendaService();
-		service06.consultarCampannasTiendas(FIni,Ffin,cfg);
+			CampannaTiendaService service06 = new CampannaTiendaService();
+			service06.consultarCampannasTiendas(FIni,Ffin,cfg,conn);
 
-		CatalogoGeneralService service07 = new CatalogoGeneralService();
-		service07.consultarCatalogosGenerales(FIni,Ffin,cfg);
-		
-		CentroComercialService service08 = new CentroComercialService();
-		service08.consultarCentrosComerciales(FIni,Ffin,cfg);
-		
-		ClienteDireccionService service09 = new ClienteDireccionService();
-		service09.consultarClientesDireccion(FIni,Ffin,cfg);
-		
-		ClienteDireccionVirtualService service10 = new ClienteDireccionVirtualService();
-		service10.consultarClientesDireccionesVirtuales(FIni,Ffin,cfg);
-		
-		ClienteMiembroService service11 = new ClienteMiembroService();
-		service11.consultarClientesMiembros(FIni,Ffin,cfg);
-		
-		ClienteService service12 = new ClienteService();
-		service12.consultarClientes(FIni,Ffin,cfg);
-		
-		ClienteTelefonoService service13 = new ClienteTelefonoService();
-		service13.consultarClientetelefono(FIni,Ffin,cfg);
+			CatalogoGeneralService service07 = new CatalogoGeneralService();
+			service07.consultarCatalogosGenerales(FIni,Ffin,cfg,conn);
+			
+			CentroComercialService service08 = new CentroComercialService();
+			service08.consultarCentrosComerciales(FIni,Ffin,cfg,conn);
+			
+			ClienteDireccionService service09 = new ClienteDireccionService();
+			service09.consultarClientesDireccion(FIni,Ffin,cfg,conn);
+			
+			ClienteDireccionVirtualService service10 = new ClienteDireccionVirtualService();
+			service10.consultarClientesDireccionesVirtuales(FIni,Ffin,cfg,conn);
+			
+			ClienteMiembroService service11 = new ClienteMiembroService();
+			service11.consultarClientesMiembros(FIni,Ffin,cfg,conn);
+			
+			ClienteService service12 = new ClienteService();
+			service12.consultarClientes(FIni,Ffin,cfg,conn);
+			
+			ClienteTelefonoService service13 = new ClienteTelefonoService();
+			service13.consultarClientetelefono(FIni,Ffin,cfg,conn);
 
-		CompetenciaService service14 = new CompetenciaService();
-		service14.consultarCompetencias(FIni,Ffin,cfg);
+			CompetenciaService service14 = new CompetenciaService();
+			service14.consultarCompetencias(FIni,Ffin,cfg,conn);
 
-		ContactoService service15 = new ContactoService();
-		service15.consultarContactos(FIni,Ffin,cfg);
+			ContactoService service15 = new ContactoService();
+			service15.consultarContactos(FIni,Ffin,cfg,conn);
 
-		DireccionService service16 = new DireccionService();
-		service16.consultarDirecciones(FIni,Ffin,cfg);
+			DireccionService service16 = new DireccionService();
+			service16.consultarDirecciones(FIni,Ffin,cfg,conn);
 
-		ListaContactoService service17 = new ListaContactoService();
-		service17.consultarListasContactos(FIni,Ffin,cfg);
+			ListaContactoService service17 = new ListaContactoService();
+			service17.consultarListasContactos(FIni,Ffin,cfg,conn);
 
-		ListaService service18 = new ListaService();
-		service18.consultarListas(FIni,Ffin,cfg);
-		
-		MiembroService service19 = new MiembroService();
-		service19.consultarMiembros(FIni,Ffin,cfg);
+			ListaService service18 = new ListaService();
+			service18.consultarListas(FIni,Ffin,cfg,conn);
+			
+			MiembroService service19 = new MiembroService();
+			service19.consultarMiembros(FIni,Ffin,cfg,conn);
 
-		OfertaService service20 = new OfertaService();
-		service20.consultarOfertas(FIni,Ffin,cfg);
-		
-		PlanService service21 = new PlanService();
-		service21.consultarPlanes(FIni,Ffin,cfg);
-		
-		ProgramaService service22 = new ProgramaService();
-		service22.consultarProgramas(FIni,Ffin,cfg);
-		
-		RegionService service23 = new RegionService();
-		service23.consultarRegiones(FIni,Ffin,cfg);
-		
-		RespuestaCampannaService service24 = new RespuestaCampannaService();
-		service24.consultarRespuestasCampannas(FIni,Ffin,cfg);
-		
-		TarjetaService service25 = new TarjetaService();
-		service25.consultarTarjetas(FIni,Ffin,cfg);
+			OfertaService service20 = new OfertaService();
+			service20.consultarOfertas(FIni,Ffin,cfg,conn);
+			
+			PlanService service21 = new PlanService();
+			service21.consultarPlanes(FIni,Ffin,cfg,conn);
+			
+			ProgramaService service22 = new ProgramaService();
+			service22.consultarProgramas(FIni,Ffin,cfg,conn);
+			
+			RegionService service23 = new RegionService();
+			service23.consultarRegiones(FIni,Ffin,cfg,conn);
+			
+			RespuestaCampannaService service24 = new RespuestaCampannaService();
+			service24.consultarRespuestasCampannas(FIni,Ffin,cfg,conn);
+			
+			TarjetaService service25 = new TarjetaService();
+			service25.consultarTarjetas(FIni,Ffin,cfg,conn);
+			
+			conn.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
 	}
 }

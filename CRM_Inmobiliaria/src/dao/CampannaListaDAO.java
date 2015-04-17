@@ -12,17 +12,13 @@ import java.util.List;
 import java.util.Properties;
 
 import domain.CampannaLista;
-import domain.Conexion;
 
 public class CampannaListaDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<CampannaLista> listarCampannasListas(String FecIni, String FecFin, String cfg) {
-		
+	public List<CampannaLista> listarCampannasListas(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -44,8 +40,6 @@ public class CampannaListaDAO {
 				+ "AND TC.CAMP_TYPE_CD='Campaign' " + "AND TC.MKTG_TMPL_FLG='N'";
 		List<CampannaLista> clc = new ArrayList<CampannaLista>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATCAMLIS);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -54,7 +48,6 @@ public class CampannaListaDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

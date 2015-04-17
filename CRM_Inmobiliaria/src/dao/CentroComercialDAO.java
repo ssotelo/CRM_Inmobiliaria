@@ -12,17 +12,13 @@ import java.util.List;
 import java.util.Properties;
 
 import domain.CentroComercial;
-import domain.Conexion;
 
 public class CentroComercialDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<CentroComercial> listarCentrosComerciales(String FecIni, String FecFin, String cfg) {
-		
+	public List<CentroComercial> listarCentrosComerciales(String FecIni, String FecFin, String cfg, Connection conn) {		
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -48,8 +44,6 @@ public class CentroComercialDAO {
 				+ "AND TR.ADDR_PER_ID=TD.ROW_ID ";
 		List<CentroComercial> centroscomerciales = new ArrayList<CentroComercial>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CENCOM);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -60,7 +54,6 @@ public class CentroComercialDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

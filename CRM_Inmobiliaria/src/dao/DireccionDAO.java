@@ -11,18 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import domain.Conexion;
 import domain.Direccion;
 
 public class DireccionDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<Direccion> listarDirecciones(String FecIni, String FecFin, String cfg) {
-		
+	public List<Direccion> listarDirecciones(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -40,8 +36,6 @@ public class DireccionDAO {
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')";
 		List<Direccion> dirs = new ArrayList<Direccion>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATDIR);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -51,7 +45,6 @@ public class DireccionDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

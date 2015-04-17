@@ -12,19 +12,14 @@ import java.util.List;
 import java.util.Properties;
 
 import domain.Campanna;
-import domain.Conexion;
 
 public class CampannaDAO {
-
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
 	public List<Campanna> listarCampannas(String FecIni, String FecFin,
-			String cfg) {
-		
+			String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -56,8 +51,6 @@ public class CampannaDAO {
 				+ "AND TC.MKTG_TMPL_FLG='N'";
 		List<Campanna> campannas = new ArrayList<Campanna>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CAMP);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -70,15 +63,13 @@ public class CampannaDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return campannas;
 	}
 
-	public List<Campanna> listarCampannasCtl(String FecIni, String FecFin, String cfg) {
-		
+	public List<Campanna> listarCampannasCtl(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -100,8 +91,6 @@ public class CampannaDAO {
 				+ "GROUP BY TRUNC(LAST_UPD) " + "ORDER BY LAST_UPD";
 		List<Campanna> campannas = new ArrayList<Campanna>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CAMPCTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -110,7 +99,6 @@ public class CampannaDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

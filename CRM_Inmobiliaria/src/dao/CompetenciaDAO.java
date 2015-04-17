@@ -12,17 +12,13 @@ import java.util.List;
 import java.util.Properties;
 
 import domain.Competencia;
-import domain.Conexion;
 
 public class CompetenciaDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<Competencia> listarCompetencias(String FecIni, String FecFin, String cfg) {
-	
+	public List<Competencia> listarCompetencias(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -44,8 +40,6 @@ public class CompetenciaDAO {
 				+ "ORDER BY PP.NAME";
 		List<Competencia> competencias = new ArrayList<Competencia>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_COMP);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -55,7 +49,6 @@ public class CompetenciaDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

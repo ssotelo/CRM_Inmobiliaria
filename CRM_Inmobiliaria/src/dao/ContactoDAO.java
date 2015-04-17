@@ -11,18 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import domain.Conexion;
 import domain.Contacto;
 
 public class ContactoDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<Contacto> listarContactos(String FecIni, String FecFin, String cfg) {
-		
+	public List<Contacto> listarContactos(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -46,8 +42,6 @@ public class ContactoDAO {
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')";
 		List<Contacto> contactos = new ArrayList<Contacto>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATCON);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -62,15 +56,13 @@ public class ContactoDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return contactos;
 	}
 	
-	public List<Contacto> listarContactosCtl(String FecIni, String FecFin, String cfg) {
-		
+	public List<Contacto> listarContactosCtl(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -92,8 +84,6 @@ public class ContactoDAO {
 				+ "ORDER BY LAST_UPD";
 		List<Contacto> contactos = new ArrayList<Contacto>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CONCTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -102,7 +92,6 @@ public class ContactoDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

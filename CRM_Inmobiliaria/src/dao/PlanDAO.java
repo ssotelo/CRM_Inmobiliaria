@@ -11,18 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import domain.Conexion;
 import domain.Plan;
 
 public class PlanDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<Plan> listarPlanes(String FecIni, String FecFin, String cfg) {
-		
+	public List<Plan> listarPlanes(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -47,8 +43,6 @@ public class PlanDAO {
 				+ "AND TC.CAMP_TYPE_CD='Marketing Plan' ";
 		List<Plan> pln = new ArrayList<Plan>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATPLN);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -59,15 +53,13 @@ public class PlanDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return pln;
 	}
 	
-	public List<Plan> listarPlanesCtl(String FecIni, String FecFin, String cfg) {
-		
+	public List<Plan> listarPlanesCtl(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -91,8 +83,6 @@ public class PlanDAO {
 				+ "ORDER BY LAST_UPD";
 		List<Plan> pln = new ArrayList<Plan>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_PLNCTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -101,7 +91,6 @@ public class PlanDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

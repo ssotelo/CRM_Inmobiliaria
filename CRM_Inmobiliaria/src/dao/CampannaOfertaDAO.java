@@ -12,17 +12,13 @@ import java.util.List;
 import java.util.Properties;
 
 import domain.CampannaOferta;
-import domain.Conexion;
 
 public class CampannaOfertaDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<CampannaOferta> listarCampannasOfertas(String FecIni, String FecFin, String cfg) {
-		
+	public List<CampannaOferta> listarCampannasOfertas(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -50,8 +46,6 @@ public class CampannaOfertaDAO {
 				+ "AND TC.CAMP_TYPE_CD='Campaign' AND TC.MKTG_TMPL_FLG='N'";
 		List<CampannaOferta> campoffr = new ArrayList<CampannaOferta>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CAMPOFFR);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -65,15 +59,13 @@ public class CampannaOfertaDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return campoffr;
 	}
 	
-	public List<CampannaOferta> listarCampannasOfertasCtl(String FecIni, String FecFin, String cfg) {
-		
+	public List<CampannaOferta> listarCampannasOfertasCtl(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -102,8 +94,6 @@ public class CampannaOfertaDAO {
 				+ "ORDER BY LAST_UPD";
 		List<CampannaOferta> campoffr = new ArrayList<CampannaOferta>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CAMPOFFRCTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -112,7 +102,6 @@ public class CampannaOfertaDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

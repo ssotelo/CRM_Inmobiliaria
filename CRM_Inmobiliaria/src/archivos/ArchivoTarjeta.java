@@ -69,8 +69,15 @@ public class ArchivoTarjeta {
 			System.out.println(outFileDat);
 			System.out.println(outFileCif);
 			ConnSftp consftp = new  ConnSftp();
-			System.out.println("archivo outFile"+ outFileDat);
 			consftp.conexionSftp(cfg);
+			File fileLocalDir = new File(ruta);
+			File[] listOfFiles = fileLocalDir.listFiles();
+			for (File file : listOfFiles) {
+				if (file.isFile()) {
+					file.getName();
+					file.delete();
+				}
+			}
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}

@@ -12,16 +12,13 @@ import java.util.List;
 import java.util.Properties;
 
 import domain.CampannaListaCanal;
-import domain.Conexion;
 
 public class CampannaListaCanalDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<CampannaListaCanal> listarCampannasListasCanales(String FecIni, String FecFin, String cfg) {
+	public List<CampannaListaCanal> listarCampannasListasCanales(String FecIni, String FecFin, String cfg, Connection conn) {
 
 		Properties prop = new Properties();
 		InputStream configFile = null;
@@ -50,8 +47,6 @@ public class CampannaListaCanalDAO {
 				+ "AND TC.CAMP_TYPE_CD='Campaign' AND TC.MKTG_TMPL_FLG='N'";
 		List<CampannaListaCanal> clc = new ArrayList<CampannaListaCanal>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATCAMLISCAN);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -62,15 +57,13 @@ public class CampannaListaCanalDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return clc;
 	}
 
-	public List<CampannaListaCanal> listarCampannasListasCanalesCtl(String FecIni, String FecFin, String cfg) {
-		
+	public List<CampannaListaCanal> listarCampannasListasCanalesCtl(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -99,8 +92,6 @@ public class CampannaListaCanalDAO {
 				+ "ORDER BY LAST_UPD";
 		List<CampannaListaCanal> clc = new ArrayList<CampannaListaCanal>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATCAMLISCANCTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -109,10 +100,6 @@ public class CampannaListaCanalDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
-			rs.close();
-			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

@@ -12,17 +12,13 @@ import java.util.List;
 import java.util.Properties;
 
 import domain.ClienteMiembro;
-import domain.Conexion;
 
 public class ClienteMiembroDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<ClienteMiembro> listarClientesMiembros(String FecIni, String FecFin, String cfg) {
-		
+	public List<ClienteMiembro> listarClientesMiembros(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -43,8 +39,6 @@ public class ClienteMiembroDAO {
 				+ "AND TM.ROW_ID = TR.MEMBER_ID";
 		List<ClienteMiembro> clientesmiembros = new ArrayList<ClienteMiembro>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATMIE);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -53,7 +47,6 @@ public class ClienteMiembroDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

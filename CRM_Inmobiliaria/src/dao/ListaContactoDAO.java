@@ -11,18 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import domain.Conexion;
 import domain.ListaContacto;
 
 public class ListaContactoDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<ListaContacto> listarListasContactos(String FecIni, String FecFin, String cfg) {
-		
+	public List<ListaContacto> listarListasContactos(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -40,8 +36,6 @@ public class ListaContactoDAO {
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')";
 		List<ListaContacto> listarlistascontactos = new ArrayList<ListaContacto>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATLISCON);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -51,15 +45,13 @@ public class ListaContactoDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return listarlistascontactos;
 	}
 	
-	public List<ListaContacto> listarListasContactosCtl(String FecIni, String FecFin, String cfg) {
-		
+	public List<ListaContacto> listarListasContactosCtl(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -81,8 +73,6 @@ public class ListaContactoDAO {
 				+ "ORDER BY LAST_UPD";	
 		List<ListaContacto> listarlistascontactos = new ArrayList<ListaContacto>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATLISCONCTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -91,7 +81,6 @@ public class ListaContactoDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

@@ -11,18 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import domain.Conexion;
 import domain.Oferta;
 
 public class OfertaDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<Oferta> listarOfertas(String FecIni, String FecFin, String cfg) {
-		
+	public List<Oferta> listarOfertas(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -42,8 +38,6 @@ public class OfertaDAO {
 
 		List<Oferta> ofertas = new ArrayList<Oferta>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATOFE);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -54,15 +48,13 @@ public class OfertaDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return ofertas;
 	}
 
-	public List<Oferta> listarOfertasCtl(String FecIni, String FecFin, String cfg) {
-		
+	public List<Oferta> listarOfertasCtl(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -82,8 +74,6 @@ public class OfertaDAO {
 				+ "GROUP BY TRUNC(LAST_UPD) " + "ORDER BY LAST_UPD";
 		List<Oferta> ofertas = new ArrayList<Oferta>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_OFECTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -92,7 +82,6 @@ public class OfertaDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

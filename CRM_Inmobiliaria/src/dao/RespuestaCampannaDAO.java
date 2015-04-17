@@ -11,19 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import domain.Conexion;
 import domain.RespuestaCampanna;
 
 public class RespuestaCampannaDAO {
-
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<RespuestaCampanna> listarRespuestasCampannas(String FecIni, String FecFin, String cfg) {
-		
+	public List<RespuestaCampanna> listarRespuestasCampannas(String FecIni, String FecFin, String cfg, Connection conn) {		
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -51,8 +46,6 @@ public class RespuestaCampannaDAO {
 
 		List<RespuestaCampanna> respuestascampannas = new ArrayList<RespuestaCampanna>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATRCAM);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -63,15 +56,13 @@ public class RespuestaCampannaDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return respuestascampannas;
 	}
 	
-	public List<RespuestaCampanna> listarRespuestasCampannasCtl(String FecIni, String FecFin, String cfg) {
-		
+	public List<RespuestaCampanna> listarRespuestasCampannasCtl(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -99,8 +90,6 @@ public class RespuestaCampannaDAO {
 				+ "ORDER BY LAST_UPD";
 		List<RespuestaCampanna> respuestascampannas = new ArrayList<RespuestaCampanna>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATRCAMCTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -109,7 +98,6 @@ public class RespuestaCampannaDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

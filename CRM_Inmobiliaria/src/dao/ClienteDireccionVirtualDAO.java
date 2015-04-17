@@ -12,17 +12,13 @@ import java.util.List;
 import java.util.Properties;
 
 import domain.ClienteDireccionVirtual;
-import domain.Conexion;
 
 public class ClienteDireccionVirtualDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<ClienteDireccionVirtual> listarClientesDireccionesVirtuales(String FecIni, String FecFin, String cfg) {
-		
+	public List<ClienteDireccionVirtual> listarClientesDireccionesVirtuales(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -56,8 +52,6 @@ public class ClienteDireccionVirtualDAO {
 				+ "AND X_ID_FB IS NOT NULL";
 		List<ClienteDireccionVirtual> clientesdireccionesvirtuales = new ArrayList<ClienteDireccionVirtual>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATDIRV);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -67,7 +61,6 @@ public class ClienteDireccionVirtualDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

@@ -11,18 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import domain.Conexion;
 import domain.Miembro;
 
 public class MiembroDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 
-	public List<Miembro> listarMiembros(String FecIni, String FecFin, String cfg) {
-	
+	public List<Miembro> listarMiembros(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -53,8 +49,6 @@ public class MiembroDAO {
 				+ "AND TC.X_GALLERY=TCC.NAME(+)";
 		List<Miembro> miembros = new ArrayList<Miembro>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_MEMBER);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -68,15 +62,13 @@ public class MiembroDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
 		return miembros;
 	}
 	
-	public List<Miembro> listarMiembrosCtl(String FecIni, String FecFin, String cfg) {
-	
+	public List<Miembro> listarMiembrosCtl(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -100,8 +92,6 @@ public class MiembroDAO {
 				+ "ORDER BY LAST_UPD";
 		List<Miembro> miembros = new ArrayList<Miembro>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CTLMEM);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -110,7 +100,6 @@ public class MiembroDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

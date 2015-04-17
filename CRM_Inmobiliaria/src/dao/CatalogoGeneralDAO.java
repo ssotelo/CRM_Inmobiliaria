@@ -12,18 +12,13 @@ import java.util.List;
 import java.util.Properties;
 
 import domain.CatalogoGeneral;
-import domain.Conexion;
 
 public class CatalogoGeneralDAO {
-
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<CatalogoGeneral> listarCatalogosGenerales(String FecIni, String FecFin, String cfg) {
-		
+	public List<CatalogoGeneral> listarCatalogosGenerales(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -42,8 +37,6 @@ public class CatalogoGeneralDAO {
 				+ "AND ACTIVE_FLG='Y' ORDER BY TYPE ";
 		List<CatalogoGeneral> catalogosgenerales = new ArrayList<CatalogoGeneral>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATGEN);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -54,7 +47,6 @@ public class CatalogoGeneralDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

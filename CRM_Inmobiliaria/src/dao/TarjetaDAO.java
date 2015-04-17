@@ -11,18 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import domain.Conexion;
 import domain.Tarjeta;
 
 public class TarjetaDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<Tarjeta> listarTarjetas(String FecIni, String FecFin, String cfg) {
-	
+	public List<Tarjeta> listarTarjetas(String FecIni, String FecFin, String cfg, Connection conn) {	
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -42,8 +38,6 @@ public class TarjetaDAO {
 
 		List<Tarjeta> tarjetas = new ArrayList<Tarjeta>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_CATTAR);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -52,7 +46,6 @@ public class TarjetaDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}

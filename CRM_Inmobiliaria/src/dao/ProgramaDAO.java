@@ -11,18 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import domain.Conexion;
 import domain.Programa;
 
 public class ProgramaDAO {
-	private Connection userConn = null;
-	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<Programa> listarProgramas(String FecIni, String FecFin, String cfg) {
-		
+	public List<Programa> listarProgramas(String FecIni, String FecFin, String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -49,8 +45,6 @@ public class ProgramaDAO {
 				+ "AND TSP.ROW_ID=TP.BU_ID";
 		List<Programa> cat_prog = new ArrayList<Programa>();
 		try {
-			conn = (this.userConn != null) ? this.userConn : Conexion
-					.getConnection(cfg);
 			stmt = conn.prepareStatement(SELECT_LOYPRO);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
@@ -63,7 +57,6 @@ public class ProgramaDAO {
 			}
 			rs.close();
 			stmt.close();
-			conn.close();
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
