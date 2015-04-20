@@ -28,7 +28,9 @@ public class ClienteTelefonoDAO {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		String SELECT_CATTEL = "SELECT DISTINCT TC.ROW_ID, TN.ADDR, TN.COMM_USE_TYPE_CD,"
+		String SELECT_CATTEL = "SELECT DISTINCT TC.ROW_ID, "
+				+ "REPLACE(REPLACE(TN.ADDR,CHR(13),''),CHR(10),'') ADDR, "
+				+ "TN.COMM_USE_TYPE_CD,"
 				+ "TN.X_EXTENSION, TO_CHAR(TN.LAST_UPD,'YYYYMMDD')LAST_UPD "
 				+ "FROM " + DBO + ".S_CONTACT TC, " + DBO + ".S_PER_COMM_ADDR TN "
 				+ "WHERE TN.LAST_UPD "

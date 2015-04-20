@@ -95,12 +95,13 @@ public class ArchivoPlan {
         try{
         	CsvWriter salidaCtl = new CsvWriter(new FileWriter(ruta + outFileCtl, true), '^');
         	for(Plan cat : cg){
-            	salidaCtl.write(cat.getRowId());
-            	salidaCtl.write(cat.getTipoPlan());
-            	salidaCtl.write(cat.getNombre());
+            	salidaCtl.write(cat.getFecToday());
+            	salidaCtl.write(cat.getFecUltAct());
+            	salidaCtl.write(cat.getTotPlanes());
             	salidaCtl.endRecord();
             }
             salidaCtl.close();
+            System.out.println(outFileCtl);
         }catch(IOException ioe){
         	ioe.printStackTrace();
         }

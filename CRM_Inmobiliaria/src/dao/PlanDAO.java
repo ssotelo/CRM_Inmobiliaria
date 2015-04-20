@@ -29,7 +29,9 @@ public class PlanDAO {
 			ex.printStackTrace();
 		}
 		String SELECT_CATPLN = "SELECT TC.ROW_ID, TC.PLAN_TYPE_CD, TC.NAME, "
-				+ "TC.EXEC_APPR_STAT_CD, TC.OBJECTIVE, TR.NAME, "
+				+ "TC.EXEC_APPR_STAT_CD, "
+				+ "REPLACE(REPLACE(TC.OBJECTIVE,CHR(13),''),CHR(10),'') OBJECTIVE, "
+				+ "TR.NAME, "
 				+ "TO_CHAR(TC.PROG_START_DT,'YYYYMMDD')PROG_START_DT, "
 				+ "TO_CHAR(TC.PROG_END_DT,'YYYYMMDD')PROG_END_DT ,"
 				+ "TO_CHAR(TRUNC(TC.LAST_UPD),'YYYYMMDD')LAST_UPD, TC.SRC_NUM "
@@ -73,11 +75,11 @@ public class PlanDAO {
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, "
 				+ "COUNT(TRUNC(LAST_UPD)) AS TOTAL "
-				+ "FROM " + DBO +".S_SRC "
-				+ "WHERE LAST_UPD "
+				+ "FROM " + DBO + ".S_SRC "
+				+ "WHERE LAST_UPD  "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
-				+ "AND SUB_TYPE ='MARKETING_CAMPAIGN'  "
+				+ "AND SUB_TYPE ='MARKETING_CAMPAIGN' "
 				+ "AND CAMP_TYPE_CD='Marketing Plan' "
 				+ "GROUP BY TRUNC(LAST_UPD) "
 				+ "ORDER BY LAST_UPD";

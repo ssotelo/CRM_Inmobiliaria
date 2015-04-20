@@ -29,7 +29,8 @@ public class ClienteDireccionVirtualDAO {
 			ex.printStackTrace();
 		}
 		String SELECT_CATDIRV = "SELECT DISTINCT PER_ID, COMM_MEDIUM_CD, "
-				+ "ADDR, TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD "
+				+ "REPLACE(REPLACE(ADDR,CHR(13),''),CHR(10),'') ADDR, "
+				+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD "
 				+ "FROM " + DBO +".S_PER_COMM_ADDR "
 				+ "WHERE LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "

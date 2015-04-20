@@ -60,7 +60,7 @@ public class CampannaListaCanalDAO {
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 		}
-		return clc;
+		return clc; 
 	}
 
 	public List<CampannaListaCanal> listarCampannasListasCanalesCtl(String FecIni, String FecFin, String cfg, Connection conn) {
@@ -75,20 +75,19 @@ public class CampannaListaCanalDAO {
 		}
 		String SELECT_CATCAMLISCANCTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
-				+ "TO_CHAR(TRUNC(TRCT.LAST_UPD),'YYYYMMDD')LAST_UPD, "
-				+ "COUNT(TRUNC(TRCT.LAST_UPD)) AS TOTAL "
-				+ "FROM " + DBO + ".S_SRC_PGROUP TRCT, "
-				+ DBO + ".S_SRC TC, "
-				+ DBO + ".S_PGROUP TT "
-				+ "WHERE TRCT.LAST_UPD "
+				+ "TO_CHAR(TRUNC(TRL.LAST_UPD),'YYYYMMDD')LAST_UPD, "
+				+ "COUNT(TRUNC(TRL.LAST_UPD)) AS TOTAL "
+				+ "FROM " + DBO + ".S_SRC TC, " + DBO + ".S_DMND_CRTN_PRG TT, "
+				+ DBO + ".S_CALL_LST TL, "
+				+ DBO + ".S_SRC_DCP TRT, " + DBO + ".S_CAMP_CALL_LST TRL "
+				+ "WHERE TRL.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
-				+ "AND TRCT.SRC_ID=TC.ROW_ID "
-				+ "AND TRCT.PGROUP_ID=TT.ROW_ID "
+				+ "AND TC.ROW_ID=TRT.SRC_ID AND TT.ROW_ID=TRT.DCP_ID "
+				+ "AND TC.ROW_ID=TRL.SRC_ID AND TL.ROW_ID=TRL.CALL_LST_ID "
 				+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
-				+ "AND TC.CAMP_TYPE_CD='Campaign' "
-				+ "AND TC.MKTG_TMPL_FLG='N' "
-				+ "GROUP BY TRUNC(TRCT.LAST_UPD) "
+				+ "AND TC.CAMP_TYPE_CD='Campaign' AND TC.MKTG_TMPL_FLG='N' "
+				+ "GROUP BY TRUNC(TRL.LAST_UPD) "
 				+ "ORDER BY LAST_UPD";
 		List<CampannaListaCanal> clc = new ArrayList<CampannaListaCanal>();
 		try {

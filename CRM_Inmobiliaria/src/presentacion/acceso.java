@@ -44,7 +44,8 @@ public class acceso {
 		String Ffin = args[2];
 		String cfg =  args[0];
 		try{
-			conn = (userConn != null) ? userConn : Conexion.getConnection(cfg);			
+			conn = (userConn != null) ? userConn : Conexion.getConnection(cfg);	
+			
 			CampannaListaCanalService service01 = new CampannaListaCanalService();
 			service01.consultarCampannaListaCanal(FIni,Ffin,cfg,conn);
 			
@@ -56,7 +57,7 @@ public class acceso {
 
 			CampannaOfertaService service04 = new CampannaOfertaService();
 			service04.consultarCampannaOferta(FIni,Ffin,cfg,conn);
-
+		
 			CampannaService service05 = new CampannaService();
 			service05.consultarCampannas(FIni,Ffin,cfg,conn);
 
@@ -80,10 +81,10 @@ public class acceso {
 			
 			ClienteService service12 = new ClienteService();
 			service12.consultarClientes(FIni,Ffin,cfg,conn);
-			
+
 			ClienteTelefonoService service13 = new ClienteTelefonoService();
 			service13.consultarClientetelefono(FIni,Ffin,cfg,conn);
-
+			
 			CompetenciaService service14 = new CompetenciaService();
 			service14.consultarCompetencias(FIni,Ffin,cfg,conn);
 
@@ -101,7 +102,7 @@ public class acceso {
 			
 			MiembroService service19 = new MiembroService();
 			service19.consultarMiembros(FIni,Ffin,cfg,conn);
-
+			
 			OfertaService service20 = new OfertaService();
 			service20.consultarOfertas(FIni,Ffin,cfg,conn);
 			

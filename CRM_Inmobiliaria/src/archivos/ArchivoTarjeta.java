@@ -23,8 +23,7 @@ public class ArchivoTarjeta {
 	private String outFileCif = "";
 	private String ruta = null;
 	
-	public void archivarTarjetas(List<Tarjeta> tc, String cfg) {
-		
+	public void archivarTarjetas(List<Tarjeta> tc, String cfg) {		
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -70,6 +69,7 @@ public class ArchivoTarjeta {
 			System.out.println(outFileCif);
 			ConnSftp consftp = new  ConnSftp();
 			consftp.conexionSftp(cfg);
+			/*
 			File fileLocalDir = new File(ruta);
 			File[] listOfFiles = fileLocalDir.listFiles();
 			for (File file : listOfFiles) {
@@ -78,6 +78,7 @@ public class ArchivoTarjeta {
 					file.delete();
 				}
 			}
+			*/
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
