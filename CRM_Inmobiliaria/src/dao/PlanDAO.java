@@ -34,7 +34,8 @@ public class PlanDAO {
 				+ "TR.NAME, "
 				+ "TO_CHAR(TC.PROG_START_DT,'YYYYMMDD')PROG_START_DT, "
 				+ "TO_CHAR(TC.PROG_END_DT,'YYYYMMDD')PROG_END_DT ,"
-				+ "TO_CHAR(TRUNC(TC.LAST_UPD),'YYYYMMDD')LAST_UPD, TC.SRC_NUM "
+				+ "TO_CHAR(TRUNC(TC.LAST_UPD),'YYYYMMDD')LAST_UPD, TC.SRC_NUM, "
+				+ "TC.X_OWNER_BU "
 				+ "FROM "+ DBO + ".S_SRC TC "
 				+ "LEFT OUTER JOIN " + DBO + ".S_REGION TR "
 				+ "ON TR.ROW_ID=TC.REGION_ID "
@@ -51,7 +52,7 @@ public class PlanDAO {
 				pln.add(new Plan(rs.getString(1), rs.getString(2), rs
 						.getString(3), rs.getString(4), rs.getString(5), rs
 						.getString(6), rs.getString(7), rs.getString(8), rs
-						.getString(9), rs.getString(10)));
+						.getString(9), rs.getString(10), rs.getString(11)));
 			}
 			rs.close();
 			stmt.close();

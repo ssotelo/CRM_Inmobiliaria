@@ -105,6 +105,7 @@ public class ArchivoCampannaOfertaCanal {
 			for (CampannaOfertaCanal ccof : cof) {
 				salidaCtl.write(ccof.getFecToday());
 				salidaCtl.write(ccof.getFecUltAct());
+				salidaCtl.write(ccof.getTipoCRM());
 				salidaCtl.write(ccof.getTotCampOffrCan());
 				salidaCtl.endRecord();
 			}

@@ -53,6 +53,7 @@ public class ArchivoPlan {
             	salidaDat.write(cat.getRowId());
             	salidaDat.write(cat.getTipoPlan());
             	salidaDat.write(cat.getNombre());
+            	salidaDat.write(cat.getTipoCRM());
             	salidaDat.write(cat.getAprobacion());
             	salidaDat.write(cat.getDescripcion());
             	salidaDat.write(cat.getRegionId());
@@ -60,7 +61,8 @@ public class ArchivoPlan {
             	salidaDat.write(cat.getFecFinPlan());
             	salidaDat.write(cat.getFecUltAct());
             	salidaDat.write(cat.getCodPlan());
-            	salidaDat.endRecord();
+				salidaDat.write(cat.getTipoCRM());
+				salidaDat.endRecord();
             	cif++;
             }
             salidaDat.close();

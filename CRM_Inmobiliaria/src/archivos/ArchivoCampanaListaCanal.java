@@ -103,6 +103,7 @@ public class ArchivoCampanaListaCanal {
 			for (CampannaListaCanal cat : clc) {
 				salidaCtl.write(cat.getFecToday());
 				salidaCtl.write(cat.getFecUltAct());
+				salidaCtl.write("Marketing");
 				salidaCtl.write(cat.getTotCampListCan());
 				salidaCtl.endRecord();
 			}

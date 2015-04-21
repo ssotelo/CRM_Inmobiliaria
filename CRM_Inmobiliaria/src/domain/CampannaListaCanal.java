@@ -11,6 +11,7 @@ public class CampannaListaCanal {
 	private String tratamientoName;
 	private String fecToday;
 	private String totCampListCan;
+	private String tipoCRM;
 	public CampannaListaCanal(String campanaId, String listaId,
 			String tratamientoId, String fecIniCam, String fecFinCam,
 			String fecUltAct, String tratamientoNum, String tratamientoName) {
@@ -24,9 +25,11 @@ public class CampannaListaCanal {
 		this.tratamientoNum = tratamientoNum;
 		this.tratamientoName = tratamientoName;
 	}
-	public CampannaListaCanal(String fecToday, String fecUltAct, String totCampListCan){
+	public CampannaListaCanal(String fecToday, String fecUltAct, String tipoCRM
+			, String totCampListCan){
 		this.fecToday = fecToday;
 		this.fecUltAct = fecUltAct;
+		this.tipoCRM = tipoCRM;
 		this.totCampListCan = totCampListCan;
 	}
 	public String getCampanaId() {
@@ -88,6 +91,12 @@ public class CampannaListaCanal {
 	}
 	public void setTotCampListCan(String totCampListCan) {
 		this.totCampListCan = totCampListCan;
+	}
+	public String getTipoCRM() {
+		return tipoCRM;
+	}
+	public void setTipoCRM(String tipoCRM) {
+		this.tipoCRM = tipoCRM;
 	}
 	@Override
 	public String toString() {

@@ -99,6 +99,7 @@ public class ArchivoCampannaTienda {
 			for (CampannaTienda ccmt : cmt) {
 				salidaCtl.write(ccmt.getFecToday());
 				salidaCtl.write(ccmt.getFecUltAct());
+				salidaCtl.write(ccmt.getTipoCRM());
 				salidaCtl.write(ccmt.getTotCampTienda());
 				salidaCtl.endRecord();
 			}

@@ -111,6 +111,7 @@ public class ArchivoCampannaOferta {
 			for (CampannaOferta cat : co) {
 				salidaCtl.write(cat.getFecToday());
 				salidaCtl.write(cat.getFecUltAct());
+				salidaCtl.write(cat.getTipoCRM());
 				salidaCtl.write(cat.getTotCampOffr());
 				salidaCtl.endRecord();
 				cif++;

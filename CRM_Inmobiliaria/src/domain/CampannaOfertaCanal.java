@@ -30,9 +30,11 @@ public class CampannaOfertaCanal {
 		this.tratamientoNum = tratamientoNum;
 		this.tratamientoName = tratamientoName;
 	}
-	public CampannaOfertaCanal(String fecToday, String fecUltAct, String totCampOffrCan){
+	public CampannaOfertaCanal(String fecToday, String fecUltAct, String tipoCRM
+			, String totCampOffrCan){
 		this.fecToday = fecToday;
 		this.fecUltAct = fecUltAct;
+		this.tipoCRM = tipoCRM;
 		this.totCampOffrCan = totCampOffrCan;
 	}
 	public String getOfertaId() {

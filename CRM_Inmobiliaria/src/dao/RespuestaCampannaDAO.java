@@ -75,26 +75,28 @@ public class RespuestaCampannaDAO {
 		String SELECT_CATRCAMCTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(TR.LAST_UPD),'YYYYMMDD')LAST_UPD, "
+				+ "'Marketing' AS X_OWNER_BU, "
 				+ "COUNT(TRUNC(TR.LAST_UPD)) AS TOTAL "
-				+ "FROM " + DBO + ".S_COMMUNICATION TR, "
-				+ DBO +".S_DMND_CRTN_PRG TT, "
-				+ DBO +".S_SRC TC "
+				+ "FROM "+ DBO + ".S_COMMUNICATION TR, "
+				+ DBO + ".S_DMND_CRTN_PRG TT, "
+				+ DBO + ".S_SRC TC "
 				+ "WHERE TR.LAST_UPD "
-				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
-				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
+				+ "BETWEEN TO_DATE('" + FecIni + "','YYYYMMDD') "
+				+ "AND TO_DATE('" + FecFin + "','YYYYMMDD') "
 				+ "AND  TC.ROW_ID=TR.SRC_ID "
 				+ "AND TT.ROW_ID=TR.DCP_ID "
 				+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
 				+ "AND TC.CAMP_TYPE_CD='Campaign' "
-				+ "GROUP BY TRUNC(TR.LAST_UPD) "
+				+ "GROUP BY TRUNC(TR.LAST_UPD), X_OWNER_BU "
 				+ "ORDER BY LAST_UPD";
+		
 		List<RespuestaCampanna> respuestascampannas = new ArrayList<RespuestaCampanna>();
 		try {
 			stmt = conn.prepareStatement(SELECT_CATRCAMCTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				respuestascampannas.add(new RespuestaCampanna(rs.getString(1),
-						rs.getString(2), rs.getString(3)));
+						rs.getString(2), rs.getString(3), rs.getString(4)));
 			}
 			rs.close();
 			stmt.close();

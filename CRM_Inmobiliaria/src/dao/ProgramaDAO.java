@@ -28,7 +28,7 @@ public class ProgramaDAO {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		String SELECT_LOYPRO = "SELECT TP.ROW_ID, TP.NAME, TP.DESC_TEXT,"
+		String SELECT_LOYPRO = "SELECT TP.ROW_ID, TP.NAME, TP.DESC_TEXT, TRX.ATTRIB_34,"
 				+ "TO_CHAR(TP.START_DT,'YYYYMMDD')START_DT, "
 				+ "TO_CHAR(TP.END_DT,'YYYYMMDD')END_DT, "
 				+ "TP.TXFR_STRT_MTH_CD, TP.PUR_STRT_MTH_CD, TP.REVRECG_PRD_TYP_CD, "
@@ -37,11 +37,13 @@ public class ProgramaDAO {
 				+ "TO_CHAR(TP.LAST_UPD,'YYYYMMDD')LAST_UPD "
 				+ "FROM " + DBO + ".S_LOY_PROGRAM TP, "
 				+ DBO + ".S_ORG_EXT TCC, "
-				+ DBO + ".S_PARTY TSP "
+				+ DBO + ".S_PARTY TSP, "
+				+ DBO + ".S_LOY_PROGRAM_X TRX "
 				+ "WHERE TP.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
 				+ "AND TCC.ROW_ID=TP.HOST_ORG_ID "
+				+ "AND TP.ROW_ID = TRX.PAR_ROW_ID "
 				+ "AND TSP.ROW_ID=TP.BU_ID";
 		List<Programa> cat_prog = new ArrayList<Programa>();
 		try {
@@ -53,7 +55,8 @@ public class ProgramaDAO {
 						.getString(6), rs.getString(7), rs.getString(8), rs
 						.getString(9), rs.getString(10), rs.getString(11), rs
 						.getString(12), rs.getString(13), rs.getString(14), rs
-						.getString(15), rs.getString(16), rs.getString(17)));
+						.getString(15), rs.getString(16), rs.getString(17), rs.
+						getString(18)));
 			}
 			rs.close();
 			stmt.close();

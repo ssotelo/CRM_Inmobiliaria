@@ -73,6 +73,8 @@ public class CampannaOfertaCanalDAO {
 		String SELECT_CATCAMPOFFRCANCTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(TR.LAST_UPD),'YYYYMMDD')LAST_UPD, "
+				+ "'Marketing' AS X_OWNER_BU, "
+				+ "TC.X_OWNER_BU, "
 				+ "COUNT(TRUNC(TR.LAST_UPD)) AS TOTAL "
 				+ "FROM " + DBO + ".S_SRC TC, " + DBO + ".S_MKTG_OFFR TOF, "
 				+ DBO + ".S_SRC_DCP TR, " + DBO + ".S_DMND_CRTN_PRG TT "
@@ -84,7 +86,7 @@ public class CampannaOfertaCanalDAO {
 				+ "AND TR.SRC_ID=TC.ROW_ID(+) "
 				+ "AND TR.DCP_ID=TT.ROW_ID "
 				+ "AND TT.MKTG_OFFR_ID=TOF.ROW_ID "
-				+ "GROUP BY TRUNC(TR.LAST_UPD) "
+				+ "GROUP BY TRUNC(TR.LAST_UPD), X_OWNER_BU "
 				+ "ORDER BY LAST_UPD";
 		List<CampannaOfertaCanal> campoofertac = new ArrayList<CampannaOfertaCanal>();
 		try {
@@ -92,7 +94,7 @@ public class CampannaOfertaCanalDAO {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				campoofertac.add(new CampannaOfertaCanal(rs.getString(1), rs
-						.getString(2), rs.getString(3)));
+						.getString(2), rs.getString(3), rs.getString(4)));
 			}
 			rs.close();
 			stmt.close();

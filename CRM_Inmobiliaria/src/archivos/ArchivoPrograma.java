@@ -56,6 +56,7 @@ public class ArchivoPrograma {
 				salidaDat.write(cpgm.getRowId());
 				salidaDat.write(cpgm.getNombre());
 				salidaDat.write(cpgm.getDescripcion());
+				salidaDat.write(cpgm.getTipoCRM());
 				salidaDat.write(cpgm.getInicioPrograma());
 				salidaDat.write(cpgm.getFinPrograma());
 				salidaDat.write(cpgm.getInicioTransferencia());

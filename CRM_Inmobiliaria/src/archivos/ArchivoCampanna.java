@@ -57,6 +57,7 @@ public class ArchivoCampanna {
 				salidaDat.write(ccmp.getRowId());
 				salidaDat.write(ccmp.getName());
 				salidaDat.write(ccmp.getDescripcion());
+				salidaDat.write(ccmp.getTipoCRM());
 				salidaDat.write(ccmp.getType());
 				salidaDat.write(ccmp.getMktgId());
 				salidaDat.write(ccmp.getPrioridad());
@@ -111,6 +112,7 @@ public class ArchivoCampanna {
 			for (Campanna ccmp : cmp) {
 				salidaCtl.write(ccmp.getFecToday());
 				salidaCtl.write(ccmp.getFecUltAct());
+				salidaCtl.write(ccmp.getTipoCRM());
 				salidaCtl.write(ccmp.getTotCamp());
 				salidaCtl.endRecord();
 			}

@@ -17,7 +17,7 @@ public class Plan {
 	public Plan(String rowId, String tipoPlan, String nombre,
 			String aprobacion, String descripcion, String regionId,
 			String fecIniPlan, String fecFinPlan, String fecUltAct,
-			String codPlan) {
+			String codPlan, String tipoCRM) {
 		super();
 		this.rowId = rowId;
 		this.tipoPlan = tipoPlan;
@@ -29,6 +29,7 @@ public class Plan {
 		this.fecFinPlan = fecFinPlan;
 		this.fecUltAct = fecUltAct;
 		this.codPlan = codPlan;
+		this.tipoCRM = tipoCRM;
 	}
 	public Plan(String fecToday, String fecUltAct, String totPlanes){
 		this.fecToday = fecToday;

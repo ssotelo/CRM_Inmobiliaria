@@ -49,9 +49,11 @@ public class CampannaOferta {
 		this.codLivTrat = codLivTrat;
 	}
 	
-	public CampannaOferta(String fecToday, String fecUltAct, String totCampOffr){
+	public CampannaOferta(String fecToday, String fecUltAct, String totCampOffr, 
+			String tipoCRM){
 		this.fecToday = fecToday;
 		this.fecUltAct = fecUltAct;
+		this.tipoCRM = tipoCRM;
 		this.totCampOffr = totCampOffr;
 	}
 
@@ -210,9 +212,11 @@ public class CampannaOferta {
 	public String getTotCampOffr() {
 		return totCampOffr;
 	}
-
 	public void setTotCampOffr(String totCampOffr) {
 		this.totCampOffr = totCampOffr;
+	}
+	public void setCampannaId(String campannaId) {
+		this.campannaId = campannaId;
 	}
 
 	@Override

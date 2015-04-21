@@ -76,10 +76,14 @@ public class CampannaListaCanalDAO {
 		String SELECT_CATCAMLISCANCTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(TRL.LAST_UPD),'YYYYMMDD')LAST_UPD, "
+				+ "'Marketing' AS X_OWNER_BU,"
+				//+ "TC.X_OWNER_BU, "
 				+ "COUNT(TRUNC(TRL.LAST_UPD)) AS TOTAL "
-				+ "FROM " + DBO + ".S_SRC TC, " + DBO + ".S_DMND_CRTN_PRG TT, "
+				+ "FROM " + DBO + ".S_SRC TC, " 
+				+ DBO + ".S_DMND_CRTN_PRG TT, "
 				+ DBO + ".S_CALL_LST TL, "
-				+ DBO + ".S_SRC_DCP TRT, " + DBO + ".S_CAMP_CALL_LST TRL "
+				+ DBO + ".S_SRC_DCP TRT, " 
+				+ DBO + ".S_CAMP_CALL_LST TRL "
 				+ "WHERE TRL.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
@@ -87,7 +91,7 @@ public class CampannaListaCanalDAO {
 				+ "AND TC.ROW_ID=TRL.SRC_ID AND TL.ROW_ID=TRL.CALL_LST_ID "
 				+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
 				+ "AND TC.CAMP_TYPE_CD='Campaign' AND TC.MKTG_TMPL_FLG='N' "
-				+ "GROUP BY TRUNC(TRL.LAST_UPD) "
+				+ "GROUP BY TRUNC(TRL.LAST_UPD),X_OWNER_BU "
 				+ "ORDER BY LAST_UPD";
 		List<CampannaListaCanal> clc = new ArrayList<CampannaListaCanal>();
 		try {
@@ -95,7 +99,7 @@ public class CampannaListaCanalDAO {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				clc.add(new CampannaListaCanal(rs.getString(1),
-						rs.getString(2), rs.getString(3)));
+						rs.getString(2), rs.getString(3), rs.getString(4)));
 			}
 			rs.close();
 			stmt.close();

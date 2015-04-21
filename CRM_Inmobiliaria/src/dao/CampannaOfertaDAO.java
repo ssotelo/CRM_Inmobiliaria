@@ -78,6 +78,8 @@ public class CampannaOfertaDAO {
 		String SELECT_CAMPOFFRCTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(TR.LAST_UPD),'YYYYMMDD')LAST_UPD, "
+				+ "'Marketing' AS X_OWNER_BU,"
+				//+ "TC.X_OWNER_BU, "
 				+ "COUNT(TC.ROW_ID) AS TOTAL "
 				+ "FROM " + DBO + ".S_SRC TC, " + DBO + ".S_SRC_DCP TR, "
 				+ DBO + ".S_MKTG_OFFR TOF, "
@@ -90,7 +92,7 @@ public class CampannaOfertaDAO {
 				+ "AND TC.ROW_ID=TR.SRC_ID "
 				+ "AND TT.MKTG_OFFR_ID=TOF.ROW_ID "
 				+ "AND TT.ROW_ID=TR.DCP_ID "
-				+ "GROUP BY TRUNC(TR.LAST_UPD) "
+				+ "GROUP BY TRUNC(TR.LAST_UPD), X_OWNER_BU "
 				+ "ORDER BY LAST_UPD";
 		List<CampannaOferta> campoffr = new ArrayList<CampannaOferta>();
 		try {
@@ -98,7 +100,8 @@ public class CampannaOfertaDAO {
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				campoffr.add(new CampannaOferta(rs.getString(1), rs
-						.getString(2), rs.getString(3)));
+						.getString(2), rs.getString(3), rs.
+						getString(4)));
 			}
 			rs.close();
 			stmt.close();

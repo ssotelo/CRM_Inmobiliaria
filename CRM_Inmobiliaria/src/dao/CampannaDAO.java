@@ -30,22 +30,17 @@ public class CampannaDAO {
 			ex.printStackTrace();
 		}
 		String SELECT_CAMP = "SELECT TC.ROW_ID,TC.NAME,TC.OBJECTIVE,TC.CAMP_TYPE_CD,"
-				+ "TC.CAMP_CAT_CD,TC.X_PRIORITY_NUM,TC.PAR_SRC_ID,TC.STATUS_CD, TC.X_EXEC_APPR_STAT_NUM,"
-				+ "TC.MKTG_PLAN_ID,TO_CHAR(TC.PROG_START_DT,'YYYYMMDD')PROG_START_DT,"
-				+ "TO_CHAR(TC.PROG_END_DT,'YYYYMMDD')PROG_END_DT, TC.BDGT_AMT, TU.LOGIN , "
+				+ "'Marketing', TC.CAMP_CAT_CD,TC.X_PRIORITY_NUM,TC.PAR_SRC_ID,"
+				+ "TC.STATUS_CD, TC.X_EXEC_APPR_STAT_NUM,TC.MKTG_PLAN_ID,"
+				+ "TO_CHAR(TC.PROG_START_DT,'YYYYMMDD')PROG_START_DT,"
+				+ "TO_CHAR(TC.PROG_END_DT,'YYYYMMDD')PROG_END_DT, "
+				+ "TC.BDGT_AMT, TU.LOGIN , "
 				+ "TO_CHAR(TC.LAST_UPD,'YYYYMMDD')LAST_UPD, TC.SRC_NUM, TC.X_ID_CAMP "
-				+ "FROM "
-				+ DBO
-				+ ".S_SRC TC, "
-				+ DBO
-				+ ".S_USER TU "
+				+ "FROM " + DBO	+ ".S_SRC TC, "
+				+ DBO + ".S_USER TU "
 				+ "WHERE TC.LAST_UPD "
-				+ "BETWEEN TO_DATE('"
-				+ FecIni
-				+ "','YYYYMMDD') "
-				+ "AND TO_DATE('"
-				+ FecFin
-				+ "','YYYYMMDD') "
+				+ "BETWEEN TO_DATE('"+ FecIni + "','YYYYMMDD') "
+				+ "AND TO_DATE('" + FecFin + "','YYYYMMDD') "
 				+ "AND TC.LAST_UPD_BY = TU.ROW_ID(+) AND "
 				+ "TC.SUB_TYPE ='MARKETING_CAMPAIGN' AND TC.CAMP_TYPE_CD='Campaign' "
 				+ "AND TC.MKTG_TMPL_FLG='N'";
@@ -59,7 +54,8 @@ public class CampannaDAO {
 						.getString(6), rs.getString(7), rs.getString(8), rs
 						.getString(9), rs.getString(10), "", rs.getString(11),
 						rs.getString(12), rs.getString(13), rs.getString(14),
-						rs.getString(15), rs.getString(16), rs.getString(17)));
+						rs.getString(15), rs.getString(16), rs.getString(17), 
+						rs.getString(18)));
 			}
 			rs.close();
 			stmt.close();
@@ -79,23 +75,28 @@ public class CampannaDAO {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		String SELECT_CAMPCTL = "SELECT  " + "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
+		String SELECT_CAMPCTL = "SELECT  " 
+				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, "
+				+ "'Marketing' AS X_OWNER_BU, "
+				//+ "TC.X_OWNER_BU,"
 				+ "COUNT(ROW_ID) " 
 				+ "FROM " + DBO + ".S_SRC "
 				+ "WHERE LAST_UPD  " 
 				+ "BETWEEN TO_DATE('" + FecIni +"','YYYYMMDD') " 
 				+ "AND TO_DATE('" + FecFin + "','YYYYMMDD') " 
 				+ "AND SUB_TYPE ='MARKETING_CAMPAIGN' "
-				+ "AND CAMP_TYPE_CD='Campaign'  " + "AND MKTG_TMPL_FLG='N' "
-				+ "GROUP BY TRUNC(LAST_UPD) " + "ORDER BY LAST_UPD";
+				+ "AND CAMP_TYPE_CD='Campaign'  " 
+				+ "AND MKTG_TMPL_FLG='N' "
+				+ "GROUP BY TRUNC(LAST_UPD),X_OWNER_BU " 
+				+ "ORDER BY LAST_UPD";
 		List<Campanna> campannas = new ArrayList<Campanna>();
 		try {
 			stmt = conn.prepareStatement(SELECT_CAMPCTL);
 			rs = stmt.executeQuery();
 			while (rs.next()) {
 				campannas.add(new Campanna(rs.getString(1), rs.getString(2), rs
-						.getString(3)));
+						.getString(3), rs.getString(4)));
 			}
 			rs.close();
 			stmt.close();

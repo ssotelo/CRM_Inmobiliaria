@@ -5,7 +5,7 @@ public class Programa {
 	private String rowId;
 	private String nombre;
 	private String descripcion;
-//	private String tipoCRM;
+	private String tipoCRM;
 	private String inicioPrograma;
 	private String finPrograma;
 	private String inicioTransferencia;
@@ -20,10 +20,8 @@ public class Programa {
 	private String nombreSocio;
 	private String codOrganizacion;
 	private String ultActualizacion;
-	
 	public Programa(String rowId, String nombre, String descripcion,
-			/*String tipoCRM*/
-		    String inicioPrograma, String finPrograma,
+			String tipoCRM, String inicioPrograma, String finPrograma,
 			String inicioTransferencia, String inicioCompra,
 			String crecimientoPuntos, String vencimientoPuntos,
 			String reglaCalculo, String reconocimientoBono, String activeFlag,
@@ -33,7 +31,7 @@ public class Programa {
 		this.rowId = rowId;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
-		//this.tipoCRM = tipoCRM;
+		this.tipoCRM = tipoCRM;
 		this.inicioPrograma = inicioPrograma;
 		this.finPrograma = finPrograma;
 		this.inicioTransferencia = inicioTransferencia;
@@ -49,7 +47,6 @@ public class Programa {
 		this.codOrganizacion = codOrganizacion;
 		this.ultActualizacion = ultActualizacion;
 	}
-
 	public String getRowId() {
 		return rowId;
 	}
@@ -68,12 +65,12 @@ public class Programa {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	/*public String getTipoCRM() {
+	public String getTipoCRM() {
 		return tipoCRM;
 	}
 	public void setTipoCRM(String tipoCRM) {
 		this.tipoCRM = tipoCRM;
-	}*/
+	}
 	public String getInicioPrograma() {
 		return inicioPrograma;
 	}

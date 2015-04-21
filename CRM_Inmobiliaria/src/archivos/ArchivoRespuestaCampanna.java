@@ -102,6 +102,7 @@ public class ArchivoRespuestaCampanna {
 			for (RespuestaCampanna crcam : rcam) {
 				salidaCtl.write(crcam.getFecToday());
 				salidaCtl.write(crcam.getFecUltAct());
+				salidaCtl.write(crcam.getTipoCRM());
 				salidaCtl.write(crcam.getTotRespCamp());
 				salidaCtl.endRecord();
 			}

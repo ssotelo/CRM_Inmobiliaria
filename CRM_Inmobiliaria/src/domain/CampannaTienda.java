@@ -9,6 +9,7 @@ public class CampannaTienda {
 	private String fecUltAct;
 	private String fecToday;
 	private String totCampTienda;
+	private String tipoCRM;
 	public CampannaTienda(String campanaId, String tiendaId,
 			String centroComercialId, String fecIniTda, String fecFinTda,
 			String fecUltAct) {
@@ -20,9 +21,11 @@ public class CampannaTienda {
 		this.fecFinTda = fecFinTda;
 		this.fecUltAct = fecUltAct;
 	}
-	public CampannaTienda(String fecToday, String fecUltAct, String totCampTienda){
+	public CampannaTienda(String fecToday, String fecUltAct, String tipoCRM,
+			String totCampTienda){
 		this.fecToday = fecToday;
 		this.fecUltAct = fecUltAct;
+		this.tipoCRM =  tipoCRM;
 		this.totCampTienda = totCampTienda;
 	}
 	public String getCampanaId() {
@@ -72,6 +75,12 @@ public class CampannaTienda {
 	}
 	public void setTotCampTienda(String totCampTienda) {
 		this.totCampTienda = totCampTienda;
+	}
+	public String getTipoCRM() {
+		return tipoCRM;
+	}
+	public void setTipoCRM(String tipoCRM) {
+		this.tipoCRM = tipoCRM;
 	}
 	@Override
 	public String toString() {

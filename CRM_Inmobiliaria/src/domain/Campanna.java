@@ -21,8 +21,9 @@ public class Campanna {
 	private String codLivCamp;
 	private String fecToday;
 	private String totCamp;
+	private String tipoCRM;
 
-	public Campanna(String rowId, String name, String descripcion, String type,
+	public Campanna(String rowId, String name, String descripcion, String tipoCRM,String type,
 			String mktgId, String prioridad, String campannaPadre,
 			String status, String aprobacion, String planMktg, String hashtag,
 			String fecIniCam, String fecFinCam, String presupuesto,
@@ -32,6 +33,7 @@ public class Campanna {
 		this.rowId = rowId;
 		this.name = name;
 		this.descripcion = descripcion;
+		this.tipoCRM =  tipoCRM;
 		this.type = type;
 		this.mktgId = mktgId;
 		this.prioridad = prioridad;
@@ -48,9 +50,11 @@ public class Campanna {
 		this.codCampanna = codCampanna;
 		this.codLivCamp = codLivCamp;
 	}
-	public Campanna(String fecToday, String fecUltAct, String totCamp){
+	public Campanna(String fecToday, String fecUltAct, String tipoCRM
+			, String totCamp){
 		this.fecToday = fecToday;
 		this.fecUltAct = fecUltAct;
+		this.tipoCRM = tipoCRM;
 		this.totCamp = totCamp;
 	}
 
@@ -208,6 +212,12 @@ public class Campanna {
 	}
 	public void setTotCamp(String totCamp) {
 		this.totCamp = totCamp;
+	}
+	public String getTipoCRM() {
+		return tipoCRM;
+	}
+	public void setTipoCRM(String tipoCRM) {
+		this.tipoCRM = tipoCRM;
 	}
 	@Override
 	public String toString() {
