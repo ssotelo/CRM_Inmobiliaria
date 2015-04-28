@@ -4,6 +4,7 @@ public class Campanna {
 	private String rowId;
 	private String name;
 	private String descripcion;
+	private String tipoCRM;
 	private String type;
 	private String mktgId;
 	private String prioridad;
@@ -21,19 +22,17 @@ public class Campanna {
 	private String codLivCamp;
 	private String fecToday;
 	private String totCamp;
-	private String tipoCRM;
-
-	public Campanna(String rowId, String name, String descripcion, String tipoCRM,String type,
-			String mktgId, String prioridad, String campannaPadre,
-			String status, String aprobacion, String planMktg, String hashtag,
-			String fecIniCam, String fecFinCam, String presupuesto,
-			String usuario, String fecUltAct, String codCampanna,
-			String codLivCamp) {
+	public Campanna(String rowId, String name, String descripcion,
+			String tipoCRM, String type, String mktgId, String prioridad,
+			String campannaPadre, String status, String aprobacion,
+			String planMktg, String hashtag, String fecIniCam,
+			String fecFinCam, String presupuesto, String usuario,
+			String fecUltAct, String codCampanna, String codLivCamp) {
 		super();
 		this.rowId = rowId;
 		this.name = name;
 		this.descripcion = descripcion;
-		this.tipoCRM =  tipoCRM;
+		this.tipoCRM = tipoCRM;
 		this.type = type;
 		this.mktgId = mktgId;
 		this.prioridad = prioridad;
@@ -50,6 +49,7 @@ public class Campanna {
 		this.codCampanna = codCampanna;
 		this.codLivCamp = codLivCamp;
 	}
+
 	public Campanna(String fecToday, String fecUltAct, String tipoCRM
 			, String totCamp){
 		this.fecToday = fecToday;

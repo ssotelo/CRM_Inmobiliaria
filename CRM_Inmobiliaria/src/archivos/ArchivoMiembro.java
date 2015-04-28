@@ -73,6 +73,7 @@ public class ArchivoMiembro {
 				salidaDat.write(Double.toString(cat.getPuntuacionD()));
 				salidaDat.write(Double.toString(cat.getCentroComercial()));
 				salidaDat.write(cat.getFecUltAct());
+				salidaDat.write(cat.getSrcId());
 				salidaDat.endRecord();
 				cif++;
 			}

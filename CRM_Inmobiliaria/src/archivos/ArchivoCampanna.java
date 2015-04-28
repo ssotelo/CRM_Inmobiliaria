@@ -34,7 +34,7 @@ public class ArchivoCampanna {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		outFileDat = "eilcis_sieb_mktcampanas" + formateador.format(now)
+		outFileDat = "eilcis_sieb_mktcampanas." + formateador.format(now)
 				+ ".dat";
 		outFileCif = "eilcis_sieb_mktcampanas." + formateador.format(now)
 				+ ".cif";
@@ -99,7 +99,7 @@ public class ArchivoCampanna {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		outFileCtl = "eilcis_sieb_mktcampanas" + formateador.format(now)
+		outFileCtl = "eilcis_sieb_mktcampanas." + formateador.format(now)
 				+ ".ctl";
 		boolean alreadyExists = new File(ruta + outFileCtl).exists();
 		if (alreadyExists) {

@@ -63,6 +63,8 @@ public class ArchivoRespuestaCampanna {
 				salidaDat.write(crcam.getMetodoRespuesta());
 				salidaDat.write(crcam.getBoleta());
 				salidaDat.write(crcam.getFecUltAct());
+				salidaDat.write(crcam.getCommUID());
+				salidaDat.write(crcam.getCommUIDC());
 				salidaDat.endRecord();
 				cif++;
 			}

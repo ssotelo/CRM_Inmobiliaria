@@ -23,12 +23,14 @@ public class Miembro {
 	private String fecToday;
 	private String totMiembros;
 	private String totPuntos;
+	private String srcId;
 	public Miembro(String rowId, String programId, String personId,
 			String tipoAcumulacion, String canalAlta, String fecAlta,
 			String fecExp, String fecCan, String numMem, String tipMem,
 			String statusMiembro, String codigoEsquema, double puntuacion,
 			double puntuacionA, double puntuacionB, double puntuacionC,
-			double puntuacionD, double centroComercial, String fecUltAct) {
+			double puntuacionD, double centroComercial, String fecUltAct,
+			String srcId) {
 		super();
 		this.rowId = rowId;
 		this.programId = programId;
@@ -49,6 +51,7 @@ public class Miembro {
 		this.puntuacionD = puntuacionD;
 		this.centroComercial = centroComercial;
 		this.fecUltAct = fecUltAct;
+		this.srcId = srcId;
 	}
 	public Miembro(String fecToday, String fecUltAct, 
 			String programId, String totMiembros, String totPuntos){
@@ -189,6 +192,12 @@ public class Miembro {
 	}
 	public void setTotPuntos(String totPuntos) {
 		this.totPuntos = totPuntos;
+	}
+	public String getSrcId() {
+		return srcId;
+	}
+	public void setSrcId(String srcId) {
+		this.srcId = srcId;
 	}
 	@Override
 	public String toString() {

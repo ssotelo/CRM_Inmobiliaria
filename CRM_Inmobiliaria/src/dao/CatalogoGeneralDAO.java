@@ -29,7 +29,7 @@ public class CatalogoGeneralDAO {
 			ex.printStackTrace();
 		}
 		String SELECT_CATGEN = "SELECT ROW_ID, PAR_ROW_ID,"
-				+ "TYPE,SUB_TYPE, VAL, NAME, DESC_TEXT, ORDER_BY "
+				+ "VAL,TYPE ,SUB_TYPE, ORDER_BY, DESC_TEXT, "
 				+ "FROM "+ DBO +".S_LST_OF_VAL "
 				+ "WHERE LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
@@ -42,8 +42,7 @@ public class CatalogoGeneralDAO {
 			while (rs.next()) {
 				catalogosgenerales.add(new CatalogoGeneral(rs.getString(1), rs
 						.getString(2), rs.getString(3), rs.getString(4), rs
-						.getString(5), rs.getString(6), rs.getString(7), rs
-						.getInt(8)));
+						.getString(5), rs.getString(6), rs.getInt(7)));
 			}
 			rs.close();
 			stmt.close();

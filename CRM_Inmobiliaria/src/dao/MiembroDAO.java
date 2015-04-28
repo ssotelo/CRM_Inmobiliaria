@@ -39,7 +39,8 @@ public class MiembroDAO {
 				+ "TM.POINT_TYPE_A_VAL, TM.POINT_TYPE_B_VAL,"
 				+ "TM.POINT_TYPE_C_VAL, TM.POINT_TYPE_D_VAL, "
 				+ "TCC.DEPT_NUM, "
-				+ "TO_CHAR(TM.LAST_UPD,'YYYYMMDD')LAST_UPD "
+				+ "TO_CHAR(TM.LAST_UPD,'YYYYMMDD')LAST_UPD,"
+				+ "TC.SRC_ID "
 				+ "FROM " + DBO + ".S_CONTACT TC,"
 				+ DBO + ".S_LOY_MEMBER TM, "+ DBO +".S_ORG_EXT TCC "
 				+ "WHERE TM.LAST_UPD "
@@ -58,7 +59,7 @@ public class MiembroDAO {
 						.getString(9), rs.getString(10), rs.getString(11), rs
 						.getString(12), rs.getDouble(13), rs.getDouble(14), rs
 						.getDouble(15), rs.getDouble(16), rs.getDouble(17), rs
-						.getDouble(18), rs.getString(19)));
+						.getDouble(18), rs.getString(19), rs.getString(20)));
 			}
 			rs.close();
 			stmt.close();

@@ -56,12 +56,11 @@ public class ArchivoCatalogoGeneral {
 			for (CatalogoGeneral cat : cg) {
 				salidaDat.write(cat.getRowId());
 				salidaDat.write(cat.getParRowId());
+				salidaDat.write(cat.getVal());
 				salidaDat.write(cat.getType());
 				salidaDat.write(cat.getSubtype());
-				salidaDat.write(cat.getVal());
-				salidaDat.write(cat.getName());
-				salidaDat.write(cat.getDescripcion());
 				salidaDat.write(Integer.toString(cat.getOrden()));
+				salidaDat.write(cat.getDescripcion());
 				salidaDat.endRecord();
 				cif++;
 			}
