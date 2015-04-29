@@ -122,6 +122,7 @@ public class acceso {
 			service25.consultarTarjetas(FIni,Ffin,cfg,conn);
 			
 			conn.close();
+
 		}catch(SQLException e){
 			e.printStackTrace();
 		}

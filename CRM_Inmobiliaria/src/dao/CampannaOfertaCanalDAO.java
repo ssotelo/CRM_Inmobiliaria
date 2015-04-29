@@ -73,7 +73,6 @@ public class CampannaOfertaCanalDAO {
 		String SELECT_CATCAMPOFFRCANCTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(TR.LAST_UPD),'YYYYMMDD')LAST_UPD, "
-				+ "'Marketing' AS X_OWNER_BU, "
 				+ "TC.X_OWNER_BU, "
 				+ "COUNT(TRUNC(TR.LAST_UPD)) AS TOTAL "
 				+ "FROM " + DBO + ".S_SRC TC, " + DBO + ".S_MKTG_OFFR TOF, "

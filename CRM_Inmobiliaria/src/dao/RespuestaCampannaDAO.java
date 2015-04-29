@@ -78,7 +78,7 @@ public class RespuestaCampannaDAO {
 		String SELECT_CATRCAMCTL = "SELECT "
 				+ "TO_CHAR(SYSDATE,'YYYYMMDD')HOY, "
 				+ "TO_CHAR(TRUNC(TR.LAST_UPD),'YYYYMMDD')LAST_UPD, "
-				+ "'Marketing' AS X_OWNER_BU, "
+				+ "X_OWNER_BU,"
 				+ "COUNT(TRUNC(TR.LAST_UPD)) AS TOTAL " + "FROM " + DBO
 				+ ".S_COMMUNICATION TR, " + DBO + ".S_DMND_CRTN_PRG TT, " + DBO
 				+ ".S_SRC TC " + "WHERE TR.LAST_UPD " + "BETWEEN TO_DATE('"
