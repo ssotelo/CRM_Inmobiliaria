@@ -1,7 +1,12 @@
 package presentacion;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import service.CampannaListaCanalService;
 import service.CampannaListaService;
@@ -29,6 +34,7 @@ import service.RegionService;
 import service.RespuestaCampannaService;
 import service.TarjetaService;
 import domain.Conexion;
+import domain.ConnSftp;
 
 public class acceso {
 	public static void main(String[] args) {
@@ -37,7 +43,7 @@ public class acceso {
 		int numArgs = args.length;
     	if (numArgs != 3)
     	{
-    		System.out.println("java -jar ExtCRM.jar configFile FechaInicio FechaFin");
+    		System.out.println("java -jar ExtraccionCRM.jar configFile FechaInicio FechaFin");
     		System.exit(0); 
     	}
 		String FIni = args[1];
@@ -122,7 +128,26 @@ public class acceso {
 			service25.consultarTarjetas(FIni,Ffin,cfg,conn);
 			
 			conn.close();
-
+			Properties prop = new Properties();
+			InputStream configFile = null;
+			String ruta;
+			try {
+				configFile = new FileInputStream(cfg);
+				prop.load(configFile);
+				ruta = prop.getProperty("LOCAL_DIR");
+				ConnSftp consftp = new  ConnSftp();
+				consftp.conexionSftp(cfg);
+				File fileLocalDir = new File(ruta);
+				File[] listOfFiles = fileLocalDir.listFiles();
+				for (File file : listOfFiles) {
+					if (file.isFile()) {
+						file.getName();
+						file.delete();
+					}
+				}
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}

@@ -12,7 +12,6 @@ import java.util.Properties;
 
 import com.csvreader.CsvWriter;
 
-import domain.ConnSftp;
 import domain.Tarjeta;
 
 public class ArchivoTarjeta {
@@ -67,18 +66,6 @@ public class ArchivoTarjeta {
 			salidaCif.close();
 			System.out.println(outFileDat);
 			System.out.println(outFileCif);
-			ConnSftp consftp = new  ConnSftp();
-			consftp.conexionSftp(cfg);
-			/*
-			File fileLocalDir = new File(ruta);
-			File[] listOfFiles = fileLocalDir.listFiles();
-			for (File file : listOfFiles) {
-				if (file.isFile()) {
-					file.getName();
-					file.delete();
-				}
-			}
-			*/
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
