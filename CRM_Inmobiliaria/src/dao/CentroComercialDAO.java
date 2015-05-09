@@ -40,8 +40,11 @@ public class CentroComercialDAO {
 				+ "WHERE TC.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
-				+ "AND TC.ROW_ID=TR.ACCNT_ID "
-				+ "AND TR.ADDR_PER_ID=TD.ROW_ID ";
+				+ "AND TC.ROW_ID=TR.ACCNT_ID(+) "
+				+ "AND TR.ADDR_PER_ID=TD.ROW_ID(+) "
+				+ "AND TC.ACCNT_TYPE_CD='Galerias' "
+				+ "AND TC.OU_TYPE_CD='Comercial'";
+		
 		List<CentroComercial> centroscomerciales = new ArrayList<CentroComercial>();
 		try {
 			stmt = conn.prepareStatement(SELECT_CENCOM);

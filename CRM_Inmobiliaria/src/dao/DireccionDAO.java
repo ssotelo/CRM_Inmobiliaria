@@ -28,8 +28,8 @@ public class DireccionDAO {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		String SELECT_CATDIR = "SELECT DISTINCT X_DES_CITY, CITY, "
-				+ "X_DES_STA, STATE, COUNTRY "
+		String SELECT_CATDIR = "SELECT DISTINCT CITY, X_DES_CITY, "
+				+ "STATE, X_DES_STA, COUNTRY "
 				+ "FROM " + DBO + ".S_ADDR_PER "
 				+ "WHERE LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "

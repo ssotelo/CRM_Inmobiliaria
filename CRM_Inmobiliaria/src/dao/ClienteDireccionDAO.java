@@ -30,7 +30,7 @@ public class ClienteDireccionDAO {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		String SELECT_CATDIR = "SELECT TC.ROW_ID, TD.ROW_ID, "
+		String SELECT_CATDIR = "SELECT DISTINCT TC.ROW_ID, TD.ROW_ID, "
 				+ "TD.ADDR, TD.ADDR_NUM, "
 				+ "TD.ADDR_LINE_5, TD.ADDR_LINE_3, "
 				+ "TD.ZIPCODE, TD.PROVINCE, TD.CITY, "

@@ -28,7 +28,9 @@ public class OfertaDAO {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		String SELECT_CATOFE = "SELECT ROW_ID, X_TYPE_NUM, NAME, COMMENTS, APPR_STAT_CD,"
+		String SELECT_CATOFE = "SELECT ROW_ID, X_TYPE_NUM, NAME,"
+				+ "REPLACE(REPLACE(COMMENTS,CHR(13),''),CHR(10),'')COMMENTS, "
+				+ "APPR_STAT_CD,"
 				+ "TO_CHAR(START_DT,'YYYYMMDD')START_DT, TO_CHAR(END_DT,'YYYYMMDD')END_DT, "
 				+ "TO_CHAR(TRUNC(LAST_UPD),'YYYYMMDD')LAST_UPD, X_ID_OFFER "
 				+ "FROM " + DBO + ".S_MKTG_OFFR "

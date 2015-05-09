@@ -30,7 +30,8 @@ public class CampannaDAO {
 			ex.printStackTrace();
 		}
 		String SELECT_CAMP = "SELECT "
-				+ "TC.ROW_ID, TC.NAME,TC.OBJECTIVE,TC.X_OWNER_BU, "
+				+ "TC.ROW_ID, TC.NAME,"
+				+ "REPLACE(REPLACE(TC.OBJECTIVE,CHR(13),''),CHR(10),'')OBJECTIVE,TC.X_OWNER_BU, "
 				+ "TC.CAMP_TYPE_CD,TC.X_CAMP_CAT_NUM,TC.X_PRIORITY_NUM, "
 				+ "TC.PAR_SRC_ID,TC.STATUS_CD,TC.X_EXEC_APPR_STAT_NUM, "
 				+ "TC.MKTG_PLAN_ID,TC.X_HASHTAG, "
@@ -39,7 +40,7 @@ public class CampannaDAO {
 				+ "TC.BDGT_AMT, TU.LOGIN , "
 				+ "TO_CHAR(TC.LAST_UPD,'YYYYMMDD')LAST_UPD, "
 				+ "TC.SRC_NUM, TC.X_ID_CAMP "
-				+ "FROM SIEBEL811.S_SRC TC, SIEBEL811.S_USER TU "
+				+ "FROM " + DBO + ".S_SRC TC, " + DBO + ".S_USER TU "
 				+ "WHERE TC.LAST_UPD_BY = TU.ROW_ID(+)  "
 				+ "AND TC.SUB_TYPE ='MARKETING_CAMPAIGN' "
 				+ "AND TC.CAMP_TYPE_CD='Campaign' "

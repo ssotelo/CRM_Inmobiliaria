@@ -128,6 +128,7 @@ public class acceso {
 			service25.consultarTarjetas(FIni,Ffin,cfg,conn);
 			
 			conn.close();
+			/*
 			Properties prop = new Properties();
 			InputStream configFile = null;
 			String ruta;
@@ -147,7 +148,7 @@ public class acceso {
 				}
 			} catch (IOException ex) {
 				ex.printStackTrace();
-			}
+			}*/
 		}catch(SQLException e){
 			e.printStackTrace();
 		}

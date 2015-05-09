@@ -56,7 +56,6 @@ public class ArchivoCampannaTienda {
 			for (CampannaTienda ccmt : cmt) {
 				salidaDat.write(ccmt.getCampanaId());
 				salidaDat.write(ccmt.getTiendaId());
-				salidaDat.write(ccmt.getCentroComercialId());
 				salidaDat.write(ccmt.getFecIniTda());
 				salidaDat.write(ccmt.getFecFinTda());
 				salidaDat.write(ccmt.getFecUltAct());

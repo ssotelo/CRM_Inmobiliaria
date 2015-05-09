@@ -37,6 +37,8 @@ public class CompetenciaDAO {
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')"
 				+ "AND TR.REL_PARTY_ID=PP.ROW_ID "
 				+ "AND TR.PARTY_ID=TH.ROW_ID  "
+				+ "AND TR.REL_TYPE_CD='Competencia' "
+				+ "AND PP.OU_TYPE_CD='Comercial' "
 				+ "ORDER BY PP.NAME";
 		List<Competencia> competencias = new ArrayList<Competencia>();
 		try {

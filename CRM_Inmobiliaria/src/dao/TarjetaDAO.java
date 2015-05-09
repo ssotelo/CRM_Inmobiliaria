@@ -34,7 +34,8 @@ public class TarjetaDAO {
 				+ "WHERE TT.LAST_UPD "
 				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
 				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
-				+ "AND TT.CONTACT_ID=TC.ROW_ID(+)";
+				+ "AND TT.CONTACT_ID=TC.ROW_ID(+) "
+				+ "AND TC.ROW_ID IS NOT NULL";
 
 		List<Tarjeta> tarjetas = new ArrayList<Tarjeta>();
 		try {

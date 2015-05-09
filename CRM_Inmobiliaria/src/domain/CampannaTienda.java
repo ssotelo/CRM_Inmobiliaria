@@ -3,7 +3,6 @@ package domain;
 public class CampannaTienda {
 	private String campanaId;
 	private String tiendaId;
-	private String centroComercialId;
 	private String fecIniTda;
 	private String fecFinTda;
 	private String fecUltAct;
@@ -11,12 +10,11 @@ public class CampannaTienda {
 	private String totCampTienda;
 	private String tipoCRM;
 	public CampannaTienda(String campanaId, String tiendaId,
-			String centroComercialId, String fecIniTda, String fecFinTda,
+			String fecIniTda, String fecFinTda,
 			String fecUltAct) {
 		super();
 		this.campanaId = campanaId;
 		this.tiendaId = tiendaId;
-		this.centroComercialId = centroComercialId;
 		this.fecIniTda = fecIniTda;
 		this.fecFinTda = fecFinTda;
 		this.fecUltAct = fecUltAct;
@@ -39,12 +37,6 @@ public class CampannaTienda {
 	}
 	public void setTiendaId(String tiendaId) {
 		this.tiendaId = tiendaId;
-	}
-	public String getCentroComercialId() {
-		return centroComercialId;
-	}
-	public void setCentroComercialId(String centroComercialId) {
-		this.centroComercialId = centroComercialId;
 	}
 	public String getFecIniTda() {
 		return fecIniTda;
@@ -81,12 +73,5 @@ public class CampannaTienda {
 	}
 	public void setTipoCRM(String tipoCRM) {
 		this.tipoCRM = tipoCRM;
-	}
-	@Override
-	public String toString() {
-		return  campanaId + "^"
-				+ tiendaId + "^" + centroComercialId
-				+ "^" + fecIniTda + "^" + fecFinTda
-				+ "^" + fecUltAct;
 	}
 }
