@@ -29,14 +29,14 @@ public class ListaDAO {
 			ex.printStackTrace();
 		}
 		String SELECT_CATLIS = "SELECT TLS.ROW_ID, NAME, TLS.DESC_TEXT, "
-				+ "TLS.X_SUBTYPE_NUM, TLS.STATUS_CD, TLS.CALL_LST_NUM, TLS.FILE_NAME, "
+				+ "TLS.SUBTYPE_CD, TLS.STATUS_CD, TLS.CALL_LST_NUM, TLS.FILE_NAME, "
 				+ "TU.LOGIN, TO_CHAR(TRUNC(TLS.LAST_UPD),'YYYYMMDD')LAST_UPD "
-				+ "FROM " + DBO + ".S_CALL_LST TLS "
-				+ "LEFT OUTER JOIN " + DBO + ".S_USER TU "
+				+ "FROM SIEBEL.S_CALL_LST TLS "
+				+ "LEFT OUTER JOIN SIEBEL.S_USER TU "
 				+ "ON TLS.LAST_UPD_BY=TU.ROW_ID "
 				+ "WHERE TLS.LAST_UPD "
-				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
-				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')";
+				+ "BETWEEN TO_DATE('20150101','YYYYMMDD') "
+				+ "AND TO_DATE('20151231','YYYYMMDD')";
 		List<Lista> listas = new ArrayList<Lista>();
 		try {
 			stmt = conn.prepareStatement(SELECT_CATLIS);

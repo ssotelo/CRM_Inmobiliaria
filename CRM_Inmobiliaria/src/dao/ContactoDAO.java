@@ -36,10 +36,7 @@ public class ContactoDAO {
 				+ "X_ATTRIB_03, X_ATTRIB_04, "
 				+ "X_ATTRIB_05, X_ATTRIB_11, X_ATTRIB_09, SUPPRESS_CALL_FLG, "
 				+ "SUPPRESS_EMAIL_FLG, SUPPRESS_MAIL_FLG, "
-				+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD FROM " + DBO + ".S_CONTACT "
-				+ "WHERE LAST_UPD "
-				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
-				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD')";
+				+ "TO_CHAR(LAST_UPD,'YYYYMMDD')LAST_UPD FROM " + DBO + ".S_CONTACT";
 		List<Contacto> contactos = new ArrayList<Contacto>();
 		try {
 			stmt = conn.prepareStatement(SELECT_CATCON);

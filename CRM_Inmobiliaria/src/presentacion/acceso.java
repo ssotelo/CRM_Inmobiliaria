@@ -71,7 +71,7 @@ public class acceso {
 			service06.consultarCampannasTiendas(FIni,Ffin,cfg,conn);
 
 			CatalogoGeneralService service07 = new CatalogoGeneralService();
-			service07.consultarCatalogosGenerales(FIni,Ffin,cfg,conn);
+			service07.consultarCatalogosGenerales(cfg,conn);
 			
 			CentroComercialService service08 = new CentroComercialService();
 			service08.consultarCentrosComerciales(FIni,Ffin,cfg,conn);
@@ -128,7 +128,7 @@ public class acceso {
 			service25.consultarTarjetas(FIni,Ffin,cfg,conn);
 			
 			conn.close();
-			/*
+			
 			Properties prop = new Properties();
 			InputStream configFile = null;
 			String ruta;
@@ -148,7 +148,7 @@ public class acceso {
 				}
 			} catch (IOException ex) {
 				ex.printStackTrace();
-			}*/
+			}
 		}catch(SQLException e){
 			e.printStackTrace();
 		}

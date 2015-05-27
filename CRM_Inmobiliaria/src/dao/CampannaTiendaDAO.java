@@ -28,7 +28,7 @@ public class CampannaTiendaDAO {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
-		String SELECT_CAMTI = "SELECT TRCT.SRC_ID, TRCT.PGROUP_ID, TT.NAME,"
+		String SELECT_CAMTI = "SELECT TRCT.SRC_ID, TT.DESC_TEXT, TT.NAME,"
 				+ "TO_CHAR(TRCT.CREATED,'YYYYMMDD')CREATED, "
 				+ "TO_CHAR(TRCT.LAST_UPD,'YYYYMMDD')LAST_UPD "
 				+ "FROM " + DBO + ".S_SRC_PGROUP TRCT, "

@@ -18,7 +18,7 @@ public class CatalogoGeneralDAO {
 	private ResultSet rs = null;
 	private String DBO = null;
 	
-	public List<CatalogoGeneral> listarCatalogosGenerales(String FecIni, String FecFin, String cfg, Connection conn) {
+	public List<CatalogoGeneral> listarCatalogosGenerales(String cfg, Connection conn) {
 		Properties prop = new Properties();
 		InputStream configFile = null;
 		try {
@@ -29,12 +29,9 @@ public class CatalogoGeneralDAO {
 			ex.printStackTrace();
 		}
 		String SELECT_CATGEN = "SELECT ROW_ID, PAR_ROW_ID,"
-				+ "VAL,TYPE ,SUB_TYPE, ORDER_BY, DESC_TEXT "
+				+ "VAL,TYPE ,SUB_TYPE, ORDER_BY, REPLACE(REPLACE(DESC_TEXT,CHR(13),''),CHR(10),'') DESC_TEXT "
 				+ "FROM "+ DBO +".S_LST_OF_VAL "
-				+ "WHERE LAST_UPD "
-				+ "BETWEEN TO_DATE('"+FecIni+"','YYYYMMDD') "
-				+ "AND TO_DATE('"+FecFin+"','YYYYMMDD') "
-				+ "AND ACTIVE_FLG='Y' ORDER BY TYPE ";
+				+ "WHERE ACTIVE_FLG='Y' ORDER BY TYPE ";
 		List<CatalogoGeneral> catalogosgenerales = new ArrayList<CatalogoGeneral>();
 		try {
 			stmt = conn.prepareStatement(SELECT_CATGEN);

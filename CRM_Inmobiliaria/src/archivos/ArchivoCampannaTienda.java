@@ -58,6 +58,7 @@ public class ArchivoCampannaTienda {
 				salidaDat.write(ccmt.getTiendaId());
 				salidaDat.write(ccmt.getFecIniTda());
 				salidaDat.write(ccmt.getFecFinTda());
+				salidaDat.write("");
 				salidaDat.write(ccmt.getFecUltAct());
 				salidaDat.endRecord();
 				cif++;

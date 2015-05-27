@@ -8,8 +8,8 @@ import dao.CatalogoGeneralDAO;
 public class CatalogoGeneralService {
 	private ArchivoCatalogoGeneral file = new ArchivoCatalogoGeneral();
 
-	public void consultarCatalogosGenerales(String Ini,String Fin, String cfg, Connection conn) {
+	public void consultarCatalogosGenerales(String cfg, Connection conn) {
 		CatalogoGeneralDAO cgd = new CatalogoGeneralDAO();
-		file.archivarCatalogosGenerales(cgd.listarCatalogosGenerales(Ini,Fin,cfg,conn),cfg);
+		file.archivarCatalogosGenerales(cgd.listarCatalogosGenerales(cfg,conn),cfg);
 	}
 }
